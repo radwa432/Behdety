@@ -1,0 +1,19 @@
+<div class="category-list mb-4">
+    <button 
+      class="btn me-2 mb-2"
+      [class.btn-primary]="selectedCategoryId === null"
+      [class.btn-outline-primary]="selectedCategoryId !== null"
+      (click)="selectCategory(null)">
+      All
+    </button>
+  
+    <button 
+      *ngFor="let category of categories" 
+      class="btn me-2 mb-2"
+      [class.btn-primary]="selectedCategoryId === category.id"
+      [class.btn-outline-primary]="selectedCategoryId !== category.id"
+      (click)="selectCategory(category.id)">
+      {{ category.name }}
+    </button>
+  </div>
+  
