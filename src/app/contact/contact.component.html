@@ -1,52 +1,76 @@
-
-<!-- Background Header -->
-<div class="header-section text-white text-center">
-  <h1 class="display-4 fw-bold">Contact</h1>
-</div>
+<!-- Header Background -->
+<section class="py-5 bg-gradient text-white text-center" style="background: linear-gradient(135deg, #274460, #3e618a);">
+  <div class="container">
+    <h1 class="display-4 fw-bold">Get in Touch</h1>
+    <p class="lead">We're here to answer any questions you have about your journey</p>
+  </div>
+</section>
 
 <!-- Contact Section -->
-<div class="contact-wrapper">
-  <div class="contact-card">
-    <div class="contact-info">
-      <div class="info-item">
-        <i class="fas fa-phone-alt"></i> <span>(+20)1554854830</span>
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+
+      <!-- Contact Info -->
+      <div class="col-lg-5">
+        <div class="bg-white p-4 shadow rounded h-100">
+          <h3 class="mb-4 text-primary">Reach Us</h3>
+          <ul class="list-unstyled fs-5">
+            <li class="mb-4 d-flex align-items-start">
+              <i class="fas fa-phone-alt text-primary me-3 mt-1"></i>
+              <span>(+20) 155 485 4830</span>
+            </li>
+            <li class="mb-4 d-flex align-items-start">
+              <i class="fab fa-whatsapp text-success me-3 mt-1"></i>
+              <span>(+20) 155 485 4830</span>
+            </li>
+            <li class="mb-4 d-flex align-items-start">
+              <i class="fas fa-envelope text-danger me-3 mt-1"></i>
+              <a href="mailto:Sales@egyptvacationtours.com" class="text-dark text-decoration-none">
+                Salesegyptvacationtours.com
+              </a>
+            </li>
+            <li class="d-flex align-items-start">
+              <i class="fas fa-clock text-warning me-3 mt-1"></i>
+              <span>Mon - Sat: 10:00 AM – 8:00 PM</span>
+            </li>
+          </ul>
+          <div class="mt-4">
+            <div class="d-flex gap-3">
+              <a href="https://facebook.com" class="text-primary fs-4"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://instagram.com" class="text-danger fs-4"><i class="fab fa-instagram"></i></a>
+              <a href="https://twitter.com" class="text-info fs-4"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="info-item">
-        <i class="fab fa-whatsapp"></i> <span>(+20)1554854830</span>
+
+      <!-- Contact Form -->
+      <div class="col-lg-7">
+        <div class="bg-white p-4 shadow rounded">
+          <h3 class="mb-4 text-primary">Send Us a Message</h3>
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <input type="text" class="form-control form-control-lg" formControlName="name" placeholder="Your Name">
+              </div>
+              <div class="col-md-6">
+                <input type="email" class="form-control form-control-lg" formControlName="email" placeholder="Email Address">
+              </div>
+              <div class="col-12">
+                <input type="tel" class="form-control form-control-lg" formControlName="phone" placeholder="Phone Number">
+              </div>
+              <div class="col-12">
+                <textarea rows="5" class="form-control form-control-lg" formControlName="message" placeholder="Your Message"></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-lg w-100">Send Message</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="info-item">
-        <i class="fas fa-envelope"></i>
-        <a href="mailto:Sales&#64;egyptvacationtours.com">Sales&#64;egyptvacationtours.com</a>
-      </div>
-      <div class="info-item">
-        <i class="fas fa-clock"></i> <span>Mon - Sat: 10:00 AM - 20:00 PM</span>
-      </div>
+
     </div>
   </div>
-
-  <div class="contact-form-section">
-    <h2>Send us a message</h2>
-    <p>Contact us today! Our team is ready to help you with tour details, bookings, and any inquiries.</p>
-    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-      <input type="text" formControlName="name" placeholder="Name" />
-      <input type="email" formControlName="email" placeholder="Email Address" />
-      <input type="tel" formControlName="phone" placeholder="Phone Number" />
-      <textarea formControlName="message" placeholder="Your Message"></textarea>
-      <button type="submit">Submit Form</button>
-    </form>
-  </div>
-</div>
-
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-content">
-    <a href="tel:+201554854830"><i class="fas fa-phone-alt"></i> (+20)1554854830</a>
-    <a href="mailto:Sales&#64;egyptvacationtours.com"><i class="fas fa-envelope"></i> Sales&#64;egyptvacationtours.com</a>
-    <div class="social-icons">
-      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-
-    </div>
-  </div>
-</footer>
+</section>

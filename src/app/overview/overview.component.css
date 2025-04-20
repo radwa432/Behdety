@@ -184,3 +184,11 @@
     }
   }
 }
+.accordion-button {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.accordion-body {
+  background-color: #f8f9fa;
+}

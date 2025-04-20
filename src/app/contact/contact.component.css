@@ -121,3 +121,12 @@
 .social-icons a:hover {
   color: #f26522;
 }
+
+input, textarea {
+  border-radius: 0.5rem;
+}
+
+input:focus, textarea:focus {
+  box-shadow: 0 0 0 0.2rem rgba(39, 68, 96, 0.25);
+  border-color: #274460;
+}

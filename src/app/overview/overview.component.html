@@ -37,161 +37,93 @@
     </div>
 
   </div>
-
-  <div class="overview-content me-0">
-  <div class="row gx-2">
-     <!-- First Column -->
-     <div class="col-md-2 col-sm-6 mb-3">
-      <div class="d-flex align-items-center h-100">
-        <p class="mb-0">
-          <i class="bi bi-currency-dollar me-2"></i>
-          Price varies by group size.<br>
-                  From {{10 | currency}}
-        </p>
+  <!-- Overview Info -->
+  <div class="overview-content mb-5">
+    <div class="row gx-4 gy-3">
+      <div class="col-md-2 col-sm-6">
+        <p class="mb-0"><i class="bi bi-currency-dollar me-2"></i>Price varies by group size.<br>From {{10 | currency}}</p>
+      </div>
+      <div class="col-md-2 col-sm-6">
+        <p class="mb-0"><i class="bi bi-calendar me-2"></i>Duration<br><i class="fa-regular fa-clock"></i> 3 Days</p>
+      </div>
+      <div class="col-md-2 col-sm-6">
+        <p class="mb-0"><i class="bi bi-person-fill me-2"></i>Max People<br><i class="fa-solid fa-users"></i> 17</p>
+      </div>
+      <div class="col-md-2 col-sm-6">
+        <p class="mb-0"><i class="bi bi-clock me-2"></i>Tour Type<br><i class="fa-solid fa-user"></i> Private</p>
+      </div>
+      <div class="col-md-2 col-sm-6">
+        <p class="mb-0"><i class="bi bi-globe me-2"></i>Location<br><i class="fa-solid fa-location-dot"></i></p>
+      </div>
+      <div class="col-md-2 col-sm-6">
+        <p class="mb-0"><i class="bi bi-star me-2"></i>Reviews<br>No reviews yet</p>
       </div>
     </div>
-    <!-- Second Column -->
-    <div class="col-md-2 col-sm-6 mb-3">
-      <div class="d-flex align-items-center h-100">
-        <p class="mb-0">
-          <i class="bi bi-calendar me-2"></i>
-          Duration<br>
-          <i class="fa-regular fa-clock"></i>  3 Days<br>
-        </p>
-      </div>
-
-
-
   </div>
-    <!-- Third Column -->
-    <div class="col-md-2 col-sm-6 mb-3">
-      <div class="d-flex align-items-center h-100">
-        <p class="mb-0">
-          <i class="bi bi-person-fill me-2"></i>
-          Max People<br>
-          <i class="fa-solid fa-users"></i> 17<br>
-        </p>
-      </div>
-    </div>
 
-    <!-- Fourth Column -->
-    <div class="col-md-2 col-sm-6 mb-3">
-      <div class="d-flex align-items-center h-100">
-        <p class="mb-0">
-          <i class="bi bi-clock me-2"></i>
-          Tour Type<br>
-          <i class="fa-solid fa-user"></i> Private<br>
-        </p>
-      </div>
-    </div>
-    <!--fifth  -->
-    <div class="col-md-2 col-sm-6 mb-3">
-      <div class="d-flex align-items-center h-100">
-        <p class="mb-0">
-          <i class="bi bi-globe me-2"></i>
+  <!-- Overview and Highlights -->
+  <div class="row gx-4 gy-4">
+    <div class="col-md-8">
+      <h2 class="mb-5">Overview</h2>
+      <h4 class="fw-bold mb-3">2 Nights 3 Days White and Black Desert</h4>
+      <p class="overview-text mb-4">With Egypt Vacation Tours team, you will be able to enjoy Bahariya Oasis and discover the White Desert, the Black Desert, and the Crystal Mountains in 3 days. Enjoy Western Desert Safari packages of Egypt Vacation Tours.</p>
 
-Location<br>
-          <i class="fa-solid fa-location-dot"></i>
-        </p>
-      </div>
-  </div>
-  <!-- sixth -->
-  <div class="col-md-2 col-sm-6 mb-3">
-    <div class="d-flex align-items-center h-100">
-      <p class="mb-0">
-        <i class="bi bi-globe me-2"></i>
+      <h3 class="mb-3">Highlights</h3>
+      <ul class="list-group list-group-flush mb-4">
+        <li class="list-group-item">Explore the Black Desert and the White Desert.</li>
+        <li class="list-group-item">Visit the Crystal Mountain.</li>
+        <li class="list-group-item">Enjoy a night in the desert.</li>
+        <li class="list-group-item">Experience the local culture.</li>
+        <li class="list-group-item">Enjoy a delicious Bedouin dinner.</li>
+      </ul>
 
+      <h3 class="mb-3">Included/Excluded</h3>
+      <ul class="list-unstyled">
+        @for (item of includedItems; track item) {
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-check me-2"></i><span>{{item}}</span>
+          </li>
+        }
+        @for (item of excludedItems; track item) {
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-xmark me-2"></i><span>{{item}}</span>
+          </li>
+        }
 
-        Reviews<br>
-             No reviews yet <br>
-      </p>
-    </div>
-</div>
-</div>
+      </ul>
 
-<div class="comtainer mb-3">
-  <div class ="row">
-    <div class="col-md-8 col-sm-12 mb-3">
-      <h2>Overview</h2>
-      <h1>2 Nights 3 Days White and Black Desert</h1>
-      <p class="overview-text">With Egypt Vacation Tours team, you will be able to enjoy Bahariya Oasis and discover the White Desert, the Black Desert, and the Crystal Mountains in 3 days. Enjoy Western Desert Safari packages of Egypt Vacation Tours.</p>
-      <div>
-        <h1>Highlights</h1>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Explore the Black Desert and the White Desert.</li>
-          <li class="list-group-item">Visit the Crystal Mountain.</li>
-          <li class="list-group-item">Enjoy a night in the desert.</li>
-          <li class="list-group-item">Experience the local culture.</li>
-          <li class="list-group-item">Enjoy a delicious Bedouin dinner.</li>
-          </ul>
+      <div class="my-4">
+        <h2 class="text-center fw-bold text-primary mb-3">Tour Plans</h2>
+        <div class="accordion" id="tourPlanAccordion">
+          @for (plan of tourPlans; let i = $index; track i) {
+            <div class="accordion-item">
+              <h2 class="accordion-header" [id]="'planHeading' + i">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        [attr.data-bs-target]="'#planCollapse' + i" aria-expanded="false"
+                        [attr.aria-controls]="'planCollapse' + i">
+                  {{ plan.name }}
+                </button>
+              </h2>
+              <div [id]="'planCollapse' + i" class="accordion-collapse collapse"
+                   [attr.aria-labelledby]="'planHeading' + i" data-bs-parent="#tourPlanAccordion">
+                <div class="accordion-body fs-5">
+                  {{ plan.description }}
+                </div>
+              </div>
+            </div>
+          }
 
-      </div>
-      <hr class="my-4" />
-      <div>
-        <h1>Included/Excluded</h1>
-        <ul class="list-unstyled">
-          <li class="d-flex align-items-center mb-2">
-            <i class="fa-regular fa-circle-check me-2"></i>
-            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
-          </li>
-          <li class="d-flex align-items-center mb-2">
-            <i class="fa-regular fa-circle-check me-2"></i>
-            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
-          </li>
-          <li class="d-flex align-items-center mb-2">
-            <i class="fa-regular fa-circle-check me-2"></i>
-            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
-          </li>
-          <li class="d-flex align-items-center mb-2">
-            <i class="fa-regular fa-circle-check me-2"></i>
-            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
-          </li>
-          <li class="d-flex align-items-center mb-2">
-            <i class="fa-regular fa-circle-check me-2"></i>
-            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
-          </li>
-          <li class="d-flex align-items-center mb-2">
-            <i class="fa-regular fa-circle-xmark me-2"></i>
-            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
-          </li>
-          <li class="d-flex align-items-center mb-2">
-            <i class="fa-regular fa-circle-xmark me-2"></i>
-            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
-          </li>
-          <li class="d-flex align-items-center mb-2">
-            <i class="fa-regular fa-circle-xmark me-2"></i>
-            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
-          </li>
-          <li class="d-flex align-items-center mb-2">
-            <i class="fa-regular fa-circle-xmark me-2"></i>
-            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
-          </li>
-          <li class="d-flex align-items-center mb-2">
-            <i class="fa-regular fa-circle-xmark me-2"></i>
-            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
-          </li>
-          <li class="d-flex align-items-center mb-2">
-            <i class="fa-regular fa-circle-xmark me-2"></i>
-            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
-          </li>
-        </ul>
-      </div>
-      <hr class="my-4" />
-      <div>
-        <h1>
-          Tour Plan
-        </h1>
-        <div class="dropdown-menu">
-            kjkjk
         </div>
       </div>
     </div>
-    <div class="col-md-4 col-sm-12 mb-3">
-      <div class=" shadow-sm p-4 container-fluid">
-        <h2>Book This Tour</h2>
+
+    <!-- Booking Form -->
+    <div class="col-md-4">
+      <div class="shadow-sm p-4 border rounded">
+        <h3 class="mb-4">Book This Tour</h3>
         <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
           <div class="mb-3">
-            <label for="name" class="form-label ">Name</label>
+            <label for="name" class="form-label">Name</label>
             <input type="text" id="name" formControlName="name" class="form-control" required>
           </div>
           <div class="mb-3">
@@ -202,9 +134,7 @@ Location<br>
             <label for="phone" class="form-label">Phone</label>
             <input type="tel" id="phone" formControlName="phone" class="form-control" required>
           </div>
-
           <div class="mb-3">
-
             <label for="groupSize" class="form-label">Group Size</label>
             <input type="number" id="groupSize" formControlName="groupSize" class="form-control" required min="1">
           </div>
@@ -212,45 +142,17 @@ Location<br>
             <label for="message" class="form-label">Message</label>
             <textarea id="message" formControlName="message" class="form-control"></textarea>
           </div>
-          <div class ="mb-3">
-            <label for ="nationality" class="form-label">Nationality</label>
-            <select class="" id="nationality" formControlName="nationality" required>
-              <option value="" disabled selected>Select your Nationality</option>
+          <div class="mb-3">
+            <label for="nationality" class="form-label">Nationality</label>
+            <select id="nationality" formControlName="nationality" class="form-select" required>
+              <option value="" disabled selected>Select your nationality</option>
               <option value="Egyptian">Egyptian</option>
-              <option value="American">American</option>
-              <option value="British">British</option>
-              <option value="Canadian">Canadian</option>
-              <option value="Australian">Australian</option>
-              </select>
-          </div>
-          <div class="mb-3">
-            <label for="date" class="form-label">Travel Date</label>
-            <input type="date" id="date" formControlName="date" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label for="paymentMethod" class="form-label
-">Payment Method</label>
-            <select class="form-select" id="paymentMethod" formControlName="paymentMethod" required>
-              <option value="" disabled selected>Select payment method</option>
-              <option value="creditCard">Credit Card</option>
-              <option value="paypal">PayPal</option>
-              <option value="bankTransfer">Bank Transfer</option>
+
             </select>
           </div>
-          <button type="submit" class="btn btn-primary">Book Now</button>
-          <!-- <div *ngIf="bookingSuccess" class="alert alert-success mt-3" role="alert">
-            Booking successful! We will contact you soon.
-          </div>
-          <div *ngIf="bookingError" class="alert alert-danger mt-3" role="alert">
-            An error occurred while booking. Please try again.
-          </div> -->
-
-
+          <button type="submit" class="btn btn-primary w-100">Submit</button>
         </form>
       </div>
-
-
     </div>
   </div>
-
 </div>
