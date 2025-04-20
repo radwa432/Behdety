@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div class="container p-4 bg-light border border-light-subtle rounded-3 shadow-sm" style="max-width: 400px;">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <h2 class="text-center mb-4">Login</h2>
+      <div class="mb-4">
+        <label for="username" class="form-label">User Name</label>
+        <input type="text" id="username" formControlName="username" class="form-control" required>
+        <div>
+          @if(loginForm.controls["username"].invalid && (loginForm.controls["username"].dirty || loginForm.controls["username"].touched)) {
+          <div class="form-text text-danger">
+            @if(loginForm.controls["username"].errors?.['required']) {
+              <span>Username is required</span>
+            }
+            @if(loginForm.controls["username"].errors?.['minlength']) {
+              <span>Username must be at least 3 characters long</span>
+            }
+          </div>
+          }
+        </div>
+      </div>
+      <div class="mb-4">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" formControlName="password" class="form-control" required>
+        <div>
+          @if(loginForm.controls["password"].invalid && (loginForm.controls["password"].dirty || loginForm.controls["password"].touched)) {
+          <div class="form-text text-danger">
+            @if(loginForm.controls["password"].errors?.['required']) {
+              <span>Password is required</span>
+            }
+            @if(loginForm.controls["password"].errors?.['minlength']) {
+              <span>Password must be at least 6 characters long</span>
+            }
+          </div>
+          }
+        </div>
+      </div>
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

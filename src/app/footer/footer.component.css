@@ -1,0 +1,133 @@
+/* Footer */
+footer {
+  background-color: #5a3e36;
+  color: white;
+  padding: 50px 0;
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.footer-section {
+  flex: 1 1 200px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+  color: white;
+  margin-bottom: 15px;
+}
+
+.footer-section p,
+.footer-section li {
+  line-height: 1.8;
+  margin: 5px 0;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-section a:hover {
+  color: #c89f74;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  border-top: 1px solid #7a5b4a;
+  padding-top: 20px;
+}
+
+.highlight {
+  color: #c89f74;
+  font-weight: bold;
+}
+/* Phone hover */
+p:nth-child(2) .contact-link:hover {
+  background-color: #f0541d;
+  color: white;
+}
+
+/* WhatsApp hover */
+p:nth-child(3) .contact-link:hover {
+  background-color: #25D366;
+  color: white;
+}
+
+/* Email hover */
+p:nth-child(4) .contact-link:hover {
+  background-color: #f0541d;
+  color: white;
+}
+
+
+
+/* Social Icons */
+.social-icons {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.social-icons a {
+  background-color: #a47148;
+  color: white;
+  font-size: 20px;
+  padding: 12px;
+  border-radius: 50%;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  background-color: #c89f74;
+  transform: scale(1.1);
+}
+
+/* Scroll to Top Button */
+#scrollTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #c89f74;
+  border: none;
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  color: white;
+  display: none;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+#scrollTopBtn:hover {
+  background-color: #a47148;
+}
+.copyright {
+  text-align: center;
+  margin: 0 auto;
+  width: fit-content;
+  color: white;
+  padding: 20px 0;
+}

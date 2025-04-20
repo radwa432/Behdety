@@ -1,0 +1,256 @@
+<div class="overview-container">
+  <h1 class="m-4">2 Nights & 3 Days White and Black Desert Tour</h1>
+  <div class="row gallery-section gx-2">
+
+    <!-- Main Image (3/4 width) -->
+    <div class="col-lg-9 col-md-8 main-image-col">
+      <div class="main-image-wrapper" #mainImageContainer>
+        <img [src]="currentImage.main" class="img-fluid main-image" alt="Main image">
+        <div class="image-navigation">
+          <button class="btn nav-arrow prev-arrow" (click)="prevImage()">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <button class="btn nav-arrow next-arrow" (click)="nextImage()">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thumbnails (1/4 width) matching main image height -->
+    <div class="col-lg-3 col-md-4 thumbnails-col">
+      <div class="thumbnails-wrapper" [style.height.px]="mainImageHeight">
+        @for (image of visibleThumbnails(); track image; let i = $index; let last = $last) {
+          <div class="thumbnail-item"
+               [class.active]="images.indexOf(image) === currentImageIndex"
+               (click)="selectImage(images.indexOf(image))">
+            <img [src]="image.thumb" class="thumbnail-img" alt="Thumbnail">
+            @if (last && hiddenThumbnailsCount() > 0 && !showAllThumbnails()) {
+              <div class="more-overlay">+{{hiddenThumbnailsCount()}}</div>
+            }
+          </div>
+        }
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+  <div class="overview-content me-0">
+  <div class="row gx-2">
+     <!-- First Column -->
+     <div class="col-md-2 col-sm-6 mb-3">
+      <div class="d-flex align-items-center h-100">
+        <p class="mb-0">
+          <i class="bi bi-currency-dollar me-2"></i>
+          Price varies by group size.<br>
+                  From {{10 | currency}}
+        </p>
+      </div>
+    </div>
+    <!-- Second Column -->
+    <div class="col-md-2 col-sm-6 mb-3">
+      <div class="d-flex align-items-center h-100">
+        <p class="mb-0">
+          <i class="bi bi-calendar me-2"></i>
+          Duration<br>
+          <i class="fa-regular fa-clock"></i>  3 Days<br>
+        </p>
+      </div>
+
+
+
+  </div>
+    <!-- Third Column -->
+    <div class="col-md-2 col-sm-6 mb-3">
+      <div class="d-flex align-items-center h-100">
+        <p class="mb-0">
+          <i class="bi bi-person-fill me-2"></i>
+          Max People<br>
+          <i class="fa-solid fa-users"></i> 17<br>
+        </p>
+      </div>
+    </div>
+
+    <!-- Fourth Column -->
+    <div class="col-md-2 col-sm-6 mb-3">
+      <div class="d-flex align-items-center h-100">
+        <p class="mb-0">
+          <i class="bi bi-clock me-2"></i>
+          Tour Type<br>
+          <i class="fa-solid fa-user"></i> Private<br>
+        </p>
+      </div>
+    </div>
+    <!--fifth  -->
+    <div class="col-md-2 col-sm-6 mb-3">
+      <div class="d-flex align-items-center h-100">
+        <p class="mb-0">
+          <i class="bi bi-globe me-2"></i>
+
+Location<br>
+          <i class="fa-solid fa-location-dot"></i>
+        </p>
+      </div>
+  </div>
+  <!-- sixth -->
+  <div class="col-md-2 col-sm-6 mb-3">
+    <div class="d-flex align-items-center h-100">
+      <p class="mb-0">
+        <i class="bi bi-globe me-2"></i>
+
+
+        Reviews<br>
+             No reviews yet <br>
+      </p>
+    </div>
+</div>
+</div>
+
+<div class="comtainer mb-3">
+  <div class ="row">
+    <div class="col-md-8 col-sm-12 mb-3">
+      <h2>Overview</h2>
+      <h1>2 Nights 3 Days White and Black Desert</h1>
+      <p class="overview-text">With Egypt Vacation Tours team, you will be able to enjoy Bahariya Oasis and discover the White Desert, the Black Desert, and the Crystal Mountains in 3 days. Enjoy Western Desert Safari packages of Egypt Vacation Tours.</p>
+      <div>
+        <h1>Highlights</h1>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Explore the Black Desert and the White Desert.</li>
+          <li class="list-group-item">Visit the Crystal Mountain.</li>
+          <li class="list-group-item">Enjoy a night in the desert.</li>
+          <li class="list-group-item">Experience the local culture.</li>
+          <li class="list-group-item">Enjoy a delicious Bedouin dinner.</li>
+          </ul>
+
+      </div>
+      <hr class="my-4" />
+      <div>
+        <h1>Included/Excluded</h1>
+        <ul class="list-unstyled">
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-check me-2"></i>
+            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
+          </li>
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-check me-2"></i>
+            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
+          </li>
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-check me-2"></i>
+            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
+          </li>
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-check me-2"></i>
+            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
+          </li>
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-check me-2"></i>
+            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
+          </li>
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-xmark me-2"></i>
+            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
+          </li>
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-xmark me-2"></i>
+            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
+          </li>
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-xmark me-2"></i>
+            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
+          </li>
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-xmark me-2"></i>
+            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
+          </li>
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-xmark me-2"></i>
+            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
+          </li>
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-xmark me-2"></i>
+            <span>Entrance fees to all sites mentioned in the itinerary tour</span>
+          </li>
+        </ul>
+      </div>
+      <hr class="my-4" />
+      <div>
+        <h1>
+          Tour Plan
+        </h1>
+        <div class="dropdown-menu">
+            kjkjk
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12 mb-3">
+      <div class=" shadow-sm p-4 container-fluid">
+        <h2>Book This Tour</h2>
+        <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="name" class="form-label ">Name</label>
+            <input type="text" id="name" formControlName="name" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" formControlName="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="tel" id="phone" formControlName="phone" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+
+            <label for="groupSize" class="form-label">Group Size</label>
+            <input type="number" id="groupSize" formControlName="groupSize" class="form-control" required min="1">
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea id="message" formControlName="message" class="form-control"></textarea>
+          </div>
+          <div class ="mb-3">
+            <label for ="nationality" class="form-label">Nationality</label>
+            <select class="" id="nationality" formControlName="nationality" required>
+              <option value="" disabled selected>Select your Nationality</option>
+              <option value="Egyptian">Egyptian</option>
+              <option value="American">American</option>
+              <option value="British">British</option>
+              <option value="Canadian">Canadian</option>
+              <option value="Australian">Australian</option>
+              </select>
+          </div>
+          <div class="mb-3">
+            <label for="date" class="form-label">Travel Date</label>
+            <input type="date" id="date" formControlName="date" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="paymentMethod" class="form-label
+">Payment Method</label>
+            <select class="form-select" id="paymentMethod" formControlName="paymentMethod" required>
+              <option value="" disabled selected>Select payment method</option>
+              <option value="creditCard">Credit Card</option>
+              <option value="paypal">PayPal</option>
+              <option value="bankTransfer">Bank Transfer</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Book Now</button>
+          <!-- <div *ngIf="bookingSuccess" class="alert alert-success mt-3" role="alert">
+            Booking successful! We will contact you soon.
+          </div>
+          <div *ngIf="bookingError" class="alert alert-danger mt-3" role="alert">
+            An error occurred while booking. Please try again.
+          </div> -->
+
+
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
