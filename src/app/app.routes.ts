@@ -4,20 +4,7 @@ import { BlogListComponent } from './components/blog-list/blog-list.component';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
 import { AuthorPostsComponent } from './pages/author-posts/author-posts.component';
 
-
-export const routes: Routes = [
-{
-  path: 'login',
-  loadComponent: () => import('./login/login.component').then(c => c.LoginComponent)
-},
-
-{
-  path: 'signup',
-  loadComponent: () => import('./sign-up/sign-up.component').then(c => c.SignUpComponent)
-
-},
-
-
+const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./components/blog-list/blog-list.component').then(m => m.BlogListComponent)
@@ -43,4 +30,3 @@ export const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
