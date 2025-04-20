@@ -1,0 +1,169 @@
+<div class="position-relative vh-100">
+  <!-- Image Gallery -->
+  <div id="tourGallery" class="carousel slide w-100 h-100" data-bs-ride="carousel">
+    <div class="carousel-inner h-100">
+      <div class="carousel-item active h-100">
+        <img src="assets/images/tour.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Tour cover 1">
+      </div>
+      <div class="carousel-item h-100">
+        <img src="assets/images/1.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Tour cover 2">
+      </div>
+      <div class="carousel-item h-100">
+        <img src="assets/images/tour.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Tour cover 3">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#tourGallery" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#tourGallery" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+
+  <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-3">
+    <h1 class="display-1 fw-bold mb-4 animate__animated animate__fadeInDown">Tour</h1>
+  </div>
+</div>
+
+<div class="container-fluid mt-4">
+  <div class="row">
+    <!-- Tours Count -->
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="m-0">10 tours available</h4>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="col-lg-9 order-lg-1 order-2">
+      <hr class="m-5" style="height: 1px; background-color: #007bff; border: none;">
+
+      <!-- Single column layout with bigger cards -->
+      <div class="row row-cols-1 g-4">
+
+        @for(i of [0,1,2,3,4,5,6,7,8,9,10,11,12,13]; track i) {
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="row g-0 h-100">
+              <!-- Bigger image section -->
+              <div class="col-md-5">
+                <img src="assets/images/1.jpg" class="img-fluid rounded-start h-100 w-100 object-fit-cover" alt="Tour image">
+              </div>
+              <!-- Bigger content section -->
+              <div class="col-md-7">
+                <div class="card-body d-flex flex-column h-100">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <h3 class="card-title mb-3">Premium Tour Destination</h3>
+                    <span class="badge bg-success fs-6">Featured</span>
+                  </div>
+                  <div class="mb-3">
+                    <span class="text-warning">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star-half-alt"></i>
+                    </span>
+                    <span class="ms-2">4.5 (128 reviews)</span>
+                  </div>
+                  <p class="card-text flex-grow-1 fs-5">
+                    This is an expanded description of the premium tour package with more details about the itinerary,
+                    accommodations, and special features that make this tour unique.
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <div>
+                      <small class="text-muted d-block"><i class="fas fa-calendar-alt me-2"></i>5 days / 4 nights</small>
+                      <small class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Multiple destinations</small>
+                    </div>
+                    <div class="text-end">
+                      <div class="text-decoration-line-through text-muted">$1,299</div>
+                      <div class="h4 text-primary mb-0">$999</div>
+                      <small class="text-success">Save $300!</small>
+                    </div>
+                  </div>
+                  <div class="d-grid mt-3">
+                    <a routerLink="/Overview" class=" btn-lg text-decoration-none">Explore <i class="fa-solid fa-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- Pagination -->
+      <nav class="mt-5">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1"><<</a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">>></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Search Sidebar (unchanged) -->
+    <div class="col-lg-3 order-lg-2 order-1 mb-4 mb-lg-0" style="box-shadow:gray; z-index: 1000;">
+      <div class="sticky-top" style="top: 20px;">
+        <div class="card shadow-sm border-0">
+          <div class="card-body p-4">
+            <h5 class="card-title mb-4 text-center">Search Tours</h5>
+            <form class="search-form">
+              <!-- Destination Dropdown -->
+              <div class="mb-3">
+                <label class="form-label">Destination</label>
+                <select class="form-select">
+                  <option selected>Choose destination</option>
+                  <option>Paris, France</option>
+                  <option>Rome, Italy</option>
+                  <option>Tokyo, Japan</option>
+                </select>
+              </div>
+
+              <!-- Tour Type Dropdown -->
+              <div class="mb-3">
+                <label class="form-label">Tour Type</label>
+                <select class="form-select">
+                  <option selected>Select tour type</option>
+                  <option>Adventure</option>
+                  <option>Cultural</option>
+                  <option>Beach</option>
+                </select>
+              </div>
+
+              <!-- Date Picker -->
+              <div class="mb-4">
+                <label class="form-label">Travel Date</label>
+                <input type="date" class="form-control">
+              </div>
+
+              <!-- Price Range -->
+              <div class="mb-4">
+                <label class="form-label">Price Range</label>
+                <input type="range" class="form-range" min="0" max="5000" step="100">
+                <div class="d-flex justify-content-between">
+                  <small>$0</small>
+                  <small>$5000</small>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-search me-2"></i> Search Tours
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

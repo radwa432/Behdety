@@ -14,12 +14,12 @@ export class BlogService {
     let params = new HttpParams()
       .set('pageNumber', pageNumber)
       .set('pageSize', pageSize);
-  
+
     if (search) params = params.set('search', search);
     if (categoryId != null) {
       params = params.set('categoryId', categoryId.toString());
     }
-  
+
     return this.http.get(`${this.apiUrl}/BlogPost`, { params });
   }
 

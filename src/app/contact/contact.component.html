@@ -1,0 +1,52 @@
+
+<!-- Background Header -->
+<div class="header-section text-white text-center">
+  <h1 class="display-4 fw-bold">Contact</h1>
+</div>
+
+<!-- Contact Section -->
+<div class="contact-wrapper">
+  <div class="contact-card">
+    <div class="contact-info">
+      <div class="info-item">
+        <i class="fas fa-phone-alt"></i> <span>(+20)1554854830</span>
+      </div>
+      <div class="info-item">
+        <i class="fab fa-whatsapp"></i> <span>(+20)1554854830</span>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:Sales&#64;egyptvacationtours.com">Sales&#64;egyptvacationtours.com</a>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-clock"></i> <span>Mon - Sat: 10:00 AM - 20:00 PM</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form-section">
+    <h2>Send us a message</h2>
+    <p>Contact us today! Our team is ready to help you with tour details, bookings, and any inquiries.</p>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+      <input type="text" formControlName="name" placeholder="Name" />
+      <input type="email" formControlName="email" placeholder="Email Address" />
+      <input type="tel" formControlName="phone" placeholder="Phone Number" />
+      <textarea formControlName="message" placeholder="Your Message"></textarea>
+      <button type="submit">Submit Form</button>
+    </form>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <a href="tel:+201554854830"><i class="fas fa-phone-alt"></i> (+20)1554854830</a>
+    <a href="mailto:Sales&#64;egyptvacationtours.com"><i class="fas fa-envelope"></i> Sales&#64;egyptvacationtours.com</a>
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+
+    </div>
+  </div>
+</footer>

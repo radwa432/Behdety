@@ -1,0 +1,35 @@
+<!-- Search input -->
+<input
+  type="text"
+  [(ngModel)]="search"
+  class="form-control mb-3"
+  placeholder="Search..."
+  (keydown.enter)="onSearchEnter()" />
+
+<!-- Categories -->
+<ul class="list-group mb-4">
+  <li 
+    class="list-group-item" 
+    [class.active]="selectedCategoryId === null"
+    (click)="onCategorySelect(null)">
+    All
+  </li>
+  <li 
+    class="list-group-item"
+    *ngFor="let category of categories"
+    [class.active]="selectedCategoryId === category.id"
+    (click)="onCategorySelect(category.id)">
+    {{ category.name }}
+  </li>
+</ul>
+
+<!-- Last posts -->
+<h5>Last Posts</h5>
+<ul class="list-group">
+  <li 
+    class="list-group-item"
+    *ngFor="let post of lastPosts"
+    (click)="goToPost(post.id)">
+    {{ post.title }}
+  </li>
+</ul>

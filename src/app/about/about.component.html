@@ -1,1 +1,130 @@
-<p>about works!</p>
+<!-- Background Header -->
+<div class="header-section text-white text-center">
+  <h1 class="display-4 fw-bold">AboutUs</h1>
+</div>
+
+<div class="about-hero">
+  <div class="about-hero-content">
+    <div class="hero-grid">
+      <div class="hero-image">
+        <img src="assets/images/2.jpg" alt="Egypt Travel" class="about-img">
+      </div>
+      <div class="hero-text">
+        <h1 class="about-title">We Help You Planning<br>Your Journey</h1>
+        <p class="about-description">
+          Ultimate guide to exploring the beauty and history of Egypt! We are passionate about creating unforgettable travel experiences, helping visitors discover the magic of this ancient land.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="vision-mission-section">
+  <div class="vm-container">
+    <div class="vm-content">
+      <div class="vm-item">
+        <div class="icon-title-wrapper">
+          <i class="fas fa-binoculars vm-icon"></i>
+          <h2 class="vm-title">Our Vision</h2>
+        </div>
+        <p class="vm-text">
+          Egypt Vocation Tours Team about giving you an experience that you will never forget, whether it be a classic tour, adventure tour, spending a night under the stars in a luxury Dahabiya Nile Cruise, Safari desert camp in our spiralling desert or honeymooners tour. Egypt Vocation Tours offers for you the best work for your money. It is the tour operator which is able to convert the impossible to be possible for the interests of its guests to relay on experience is definitely you relay on honesty, reliability, credibility and financial stability.
+        </p>
+      </div>
+
+      <div class="vm-item">
+        <div class="icon-title-wrapper">
+          <i class="fas fa-bullseye vm-icon"></i>
+          <h2 class="vm-title">Our Mission</h2>
+        </div>
+        <p class="vm-text">
+          Egypt Vocation Tours is beyond just indulgence and appearances; we are giving luxury experience that is more than a holiday. With authenticity becoming a rare commodity worldwide, we strive to offer you a genuine and inspirational experience of Egypt. An experience that makes you feel the same wonder as you experienced as a child, when the world was still new to them.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="stats-section">
+  <div class="stats-container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-icon">
+          <i class="fas fa-map-marked-alt"></i>
+        </div>
+        <h3 class="stat-number">154</h3>
+        <p class="stat-label">Destinations</p>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-icon">
+          <i class="fas fa-route"></i>
+        </div>
+        <h3 class="stat-number">2,165</h3>
+        <p class="stat-label">Avoiding Edge</p>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-icon">
+          <i class="fas fa-check-double"></i>
+        </div>
+        <h3 class="stat-number">98</h3>
+        <p class="stat-label">Test Type</p>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-icon">
+          <i class="fas fa-smile-beam"></i>
+        </div>
+        <h3 class="stat-number">117,259</h3>
+        <p class="stat-label">Happy customers</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="reviews-section">
+  <div class="reviews-container">
+    <h2 class="section-title">Customer Reviews</h2>
+
+    <div class="carousel-container">
+      <div class="carousel-track" [style.transform]="'translateX(' + currentPosition + '%)'">
+        @for (review of reviews; track review.name; let i = $index) {
+          <div class="review-card" [class.active]="i === currentIndex">
+            <p class="review-text">{{ review.text }}</p>
+            <div class="review-author">
+              <img [src]="review.avatar" alt="Customer" class="avatar">
+              <span class="author-name">{{ review.name }}</span>
+              <div class="stars">
+                @for (star of [1, 2, 3, 4, 5]; track star) {
+                  <i class="fas fa-star"></i>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="carousel-dots">
+        @for (dot of [0, 1, 2]; track dot; let i = $index) {
+          <span [class.active]="i === currentIndex" (click)="goToReview(i)"></span>
+        }
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <a href="tel:+201554854830"><i class="fas fa-phone-alt"></i> (+20)1554854830</a>
+    <a href="mailto:Sales&#64;egyptvacationtours.com"><i class="fas fa-envelope"></i> Sales&#64;egyptvacationtours.com</a>
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+    </div>
+  </div>
+</footer>
