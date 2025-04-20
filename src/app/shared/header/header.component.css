@@ -1,0 +1,42 @@
+.header-container {
+    width: 100%;
+    position: relative;
+  }
+  
+  .header-image {
+    background-image: url(https://egyptvacationtours.com/wp-content/uploads/2020/11/enq.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 450px; 
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+  }
+  .small-header {
+    height: 250px !important; 
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(28 28 28 / 23%);
+  }
+  
+  .page-title {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .page-title h1 {
+    font-size: 4.5rem;
+    font-weight: bold;
+    
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }

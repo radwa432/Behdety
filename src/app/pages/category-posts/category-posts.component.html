@@ -1,0 +1,22 @@
+<app-header [pageTitle]="categoryName" [isSmall]="false"></app-header>
+<div class="container mt-4">
+  
+    <div *ngFor="let post of posts" class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img [src]="post.imageUrl || 'https://via.placeholder.com/300'" class="img-fluid rounded-start" alt="..." />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text text-truncate">{{ post.content }}</p>
+            <p class="card-text">
+              <small class="text-muted">{{ post.createdAt | date: 'mediumDate' }}</small>
+            </p>
+            <a [routerLink]="['/post', post.id]" class="btn btn-primary btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
