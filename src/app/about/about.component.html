@@ -1,118 +1,136 @@
-
-
-<div class="about-hero">
-  <div class="about-hero-content">
-    <div class="hero-grid">
-      <div class="hero-image">
-        <img src="assets/images/2.jpg" alt="Egypt Travel" class="about-img">
-      </div>
-      <div class="hero-text">
-        <h1 class="about-title">We Help You Planning<br>Your Journey</h1>
-        <p class="about-description">
-          Ultimate guide to exploring the beauty and history of Egypt! We are passionate about creating unforgettable travel experiences, helping visitors discover the magic of this ancient land.
-        </p>
-      </div>
+<!-- Background Header -->
+<div class="header-section text-white text-center">
+  <h1 class="display-4 fw-bold">About Us</h1>
+</div>
+<div class="about-us">
+  <div class="about-section">
+    <img src="assets/images/11.jpg" alt="About Image" class="about-image">
+    <div class="about-content">
+      <h3 class="about-title">
+        <i class="fas fa-id-badge"></i> Who We Are
+      </h3>
+      <p class="about-text">
+        We are a team of travel enthusiasts dedicated to delivering unforgettable experiences. From the Pyramids to the Nile, we ensure every detail is perfect.
+      </p>
+      <p class="about-text">
+        Our passion for travel and commitment to quality service drives us to go the extra mile.
+      </p>
     </div>
   </div>
 </div>
 
-<div class="vision-mission-section">
-  <div class="vm-container">
-    <div class="vm-content">
-      <div class="vm-item">
-        <div class="icon-title-wrapper">
-          <i class="fas fa-binoculars vm-icon"></i>
-          <h2 class="vm-title">Our Vision</h2>
+  <div class="about-us">
+    <div class="vision-mission">
+      <div class="vision">
+        <div class="section-icon">
+          <i class="fas fa-eye"></i>
         </div>
-        <p class="vm-text">
-          Egypt Vocation Tours Team about giving you an experience that you will never forget, whether it be a classic tour, adventure tour, spending a night under the stars in a luxury Dahabiya Nile Cruise, Safari desert camp in our spiralling desert or honeymooners tour. Egypt Vocation Tours offers for you the best work for your money. It is the tour operator which is able to convert the impossible to be possible for the interests of its guests to relay on experience is definitely you relay on honesty, reliability, credibility and financial stability.
-        </p>
+        <h2>Our Vision</h2>
+        <p>Egypt Vocation Team is about giving you an experience that you will never forget, whether it is a creative or constructive. It is spending a night under time and is to build up our people into China. Based on their camp in the opening district, a two-membered tour of Egypt Vocation Team offers for you the best value to be carrying it as the four separate which I think is current. The impossible is the possible for the interests of us guided to relay on experiences in durability, nurturing creativity, reliability, credibility and financial stability.</p>
       </div>
 
-      <div class="vm-item">
-        <div class="icon-title-wrapper">
-          <i class="fas fa-bullseye vm-icon"></i>
-          <h2 class="vm-title">Our Mission</h2>
+      <div class="mission">
+        <div class="section-icon">
+          <i class="fas fa-bullseye"></i>
         </div>
-        <p class="vm-text">
-          Egypt Vocation Tours is beyond just indulgence and appearances; we are giving luxury experience that is more than a holiday. With authenticity becoming a rare commodity worldwide, we strive to offer you a genuine and inspirational experience of Egypt. An experience that makes you feel the same wonder as you experienced as a child, when the world was still new to them.
-        </p>
+        <h2>Our Mission</h2>
+        <p>Egypt Vocation Team is beyond just intelligence and approaches we are giving upon experiences that it involves creating with customers becoming a one-community workplace, we realize agile in your world and integration experiences of Egypt. An experience that makes you feel the same wonder for you experienced! (Grads when the world was still mine from).</p>
       </div>
     </div>
   </div>
-</div>
 
-<div class="stats-section">
-  <div class="stats-container">
-    <div class="stats-grid">
+ <!-- Stats Section -->
+<div class="about-us">
+  <div class="stats-section">
+    <div class="stats">
       <div class="stat-item">
         <div class="stat-icon">
-          <i class="fas fa-map-marked-alt"></i>
+          <i class="fas fa-calendar-alt"></i>
         </div>
-        <h3 class="stat-number">154</h3>
-        <p class="stat-label">Destinations</p>
+        <h5 class="stat-number">15+</h5>
+        <p class="stat-label">Years of Experience</p>
       </div>
 
       <div class="stat-item">
         <div class="stat-icon">
-          <i class="fas fa-route"></i>
+          <i class="fas fa-suitcase-rolling"></i>
         </div>
-        <h3 class="stat-number">2,165</h3>
-        <p class="stat-label">Avoiding Edge</p>
-      </div>
-
-      <div class="stat-item">
-        <div class="stat-icon">
-          <i class="fas fa-check-double"></i>
-        </div>
-        <h3 class="stat-number">98</h3>
-        <p class="stat-label">Test Type</p>
+        <h5 class="stat-number">500+</h5>
+        <p class="stat-label">Tours Organized</p>
       </div>
 
       <div class="stat-item">
         <div class="stat-icon">
           <i class="fas fa-smile-beam"></i>
         </div>
-        <h3 class="stat-number">117,259</h3>
-        <p class="stat-label">Happy customers</p>
+        <h5 class="stat-number">1000+</h5>
+        <p class="stat-label">Happy Clients</p>
       </div>
     </div>
   </div>
 </div>
+<!-- Customer Reviews Section -->
+<div class="reviews-section mb-3">
+  <h2 class="section-title">Customer Reviews</h2>
 
-<div class="reviews-section">
-  <div class="reviews-container">
-    <h2 class="section-title">Customer Reviews</h2>
-
-    <div class="carousel-container">
-      <div class="carousel-track" [style.transform]="'translateX(' + currentPosition + '%)'">
-        @for (review of reviews; track review.name; let i = $index) {
-          <div class="review-card" [class.active]="i === currentIndex">
-            <p class="review-text">{{ review.text }}</p>
-            <div class="review-author">
-              <img [src]="review.avatar" alt="Customer" class="avatar">
-              <span class="author-name">{{ review.name }}</span>
-              <div class="stars">
-                @for (star of [1, 2, 3, 4, 5]; track star) {
-                  <i class="fas fa-star"></i>
-                }
-              </div>
-            </div>
+  <div class="carousel-container">
+    <div class="carousel-track" [style.transform]="'translateX(' + currentPosition + '%)'">
+      <!-- Review 1 -->
+      <div class="review-card">
+        <p class="review-text">"Exploring Egypt with this tour was a dream come true! The itinerary was well-planned, covering iconic sites like Luxor, Aswan, and the Red Sea. The accommodations were top-notch, and the local cuisine was amazing. I can't wait to visit again!"</p>
+        <div class="review-footer">
+          <div class="review-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
           </div>
-        }
+          <div class="review-author">Sarah Johnson</div>
+        </div>
       </div>
 
-      <div class="carousel-dots">
-        @for (dot of [0, 1, 2]; track dot; let i = $index) {
-          <span [class.active]="i === currentIndex" (click)="goToReview(i)"></span>
-        }
+      <!-- Review 2 -->
+      <div class="review-card">
+        <p class="review-text">"The attention to detail was incredible. Our guide was so knowledgeable about Egyptian history. The Nile cruise was the highlight of our trip - waking up to those views every morning was magical!"</p>
+        <div class="review-footer">
+          <div class="review-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="review-author">Michael Chen</div>
+        </div>
       </div>
 
+      <!-- Review 3 -->
+      <div class="review-card">
+        <p class="review-text">"As a solo female traveler, I felt completely safe and cared for throughout my journey. The team went above and beyond to make sure I had an authentic Egyptian experience. Highly recommend!"</p>
+        <div class="review-footer">
+          <div class="review-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="review-author">Emma Rodriguez</div>
+        </div>
+      </div>
     </div>
+  </div>
 
+  <div class="carousel-controls">
+    <div class="carousel-dots">
+      <span *ngFor="let dot of [0,1,2]; let i = index"
+            [class.active]="i === currentIndex"
+            (click)="goToReview(i)"></span>
+    </div>
+    <div class="review-stats">66</div>
   </div>
 </div>
-
 <!-- Footer -->
 <footer class="footer">
   <div class="footer-content">
@@ -122,6 +140,7 @@
       <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
       <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
       <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+
     </div>
   </div>
 </footer>
