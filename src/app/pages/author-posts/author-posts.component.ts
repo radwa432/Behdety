@@ -18,6 +18,7 @@ export class AuthorPostsComponent implements OnInit {
   posts: BlogPost[] = [];
   authorId!: number;
   author?: Author;
+ 
 
 
   constructor(private route: ActivatedRoute, private blogService: BlogService) {}
@@ -26,6 +27,7 @@ export class AuthorPostsComponent implements OnInit {
     this.authorId = Number(this.route.snapshot.paramMap.get('id'));
     this.loadAuthorData();
     this.loadAuthorPosts();
+  
   }
 
   loadAuthorPosts() {
@@ -43,6 +45,6 @@ export class AuthorPostsComponent implements OnInit {
     });
 
   }
-
+  
 
 }
