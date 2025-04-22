@@ -13,6 +13,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { OverviewComponent } from './overview/overview.component';
+import { PaymentComponent } from './payment/payment.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -42,6 +43,10 @@ export const routes: Routes = [
   loadComponent: () => import('./pages/category-posts/category-posts.component').then(m => m.CategoryPostsComponent)
 }
 ,
+{
+  path: 'checkout',
+  component: PaymentComponent
+}
 
 
 ];
