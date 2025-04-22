@@ -1,21 +1,116 @@
 <app-header [pageTitle]="author?.name || ''" [isSmall]="false"></app-header>
-<div class="container mt-4">
-    <h2 class="mb-4">Author's Posts</h2>
-  
-    <div *ngFor="let post of posts" class="card mb-3">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img [src]="post.imageUrl || 'https://via.placeholder.com/300'" class="img-fluid rounded-start" alt="...">
+
+<div class="author-posts-container">
+  <!-- Breadcrumb Navigation -->
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/authors">Authors</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{author?.name || 'Author'}}</li>
+    </ol>
+  </nav>
+
+  <div class="container">
+    <div class="author-header mb-5">
+      <div class="author-avatar">
+        <img [src]="author?.imageUrl" alt="Author avatar" class="avatar-img">
+      </div>
+      <div class="author-info">
+        <h1>{{author?.name || 'Author'}}</h1>
+        <p class="author-bio">{{author?.bio || 'No biography available'}}</p>
+        <div class="author-meta">
+          <span class="posts-count"><i class="fas fa-pen-fancy"></i> {{posts.length}} Posts</span>
         </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">{{ post.title }}</h5>
-            <p class="card-text text-truncate">{{ post.content }}</p>
-            <p class="card-text"><small class="text-muted">{{ post.createdAt | date:'mediumDate' }}</small></p>
-            <a [routerLink]="['/post', post.id]" class="btn btn-primary btn-sm">Read More</a>
+      </div>
+    </div>
+
+    <div class="posts-filter mb-4">
+      <div class="search-box">
+        <div class="input-group">
+          <input type="text" 
+                 class="form-control" 
+                 placeholder="Search in author's posts..."
+                 [(ngModel)]="searchQuery"
+                 (keyup)="searchPosts()">
+          <button class="btn btn-search" type="button" (click)="searchPosts()">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8">
+        
+        <!-- Loading Indicator -->
+        <div *ngIf="isLoading" class="text-center my-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+
+        <!-- No Results Message -->
+         
+        <div *ngIf="hasSearchResults()" class="alert alert-info">
+          No posts found matching "{{searchQuery}}"
+        </div>
+
+        <!-- Posts List -->
+        <div *ngFor="let post of filteredPosts" class="card post-card mb-4">
+          <div class="row g-0">
+            <div class="col-md-5">
+              <div class="post-badge">Featured</div>
+              <img [src]="post.imageUrl || 'https://via.placeholder.com/300'" class="img-fluid post-image" alt="Post image">
+            </div>
+            <div class="col-md-7">
+              <div class="card-body">
+                <div class="post-category">{{post.blogCategoryName}}</div>
+                <h3 class="post-title">{{ post.title }}</h3>
+                <p class="post-excerpt">{{ post.content|truncate:30  }}</p>
+                <div class="post-meta">
+                  <span class="post-date"><i class="far fa-clock"></i> {{ post.createdAt | date:'mediumDate' }}</span>
+                  <span class="post-read-time"><i class="fas fa-book-open"></i> 5 min read</span>
+                </div>
+                <a [routerLink]="['/post', post.id]" class="btn btn-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+      
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <div class="author-sidebar">
+          <div class="sidebar-widget">
+            <h4 class="widget-title">About Author</h4>
+            <p>{{author?.bio || 'No biography available'}}</p>
+            <div class="social-links">
+              <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+
+          <div class="sidebar-widget">
+            <h4 class="widget-title">Popular Posts</h4>
+            <div class="popular-post" *ngFor="let post of posts.slice(0, 3)">
+              <a [routerLink]="['/post', post.id]" class="popular-post-link">
+                <div class="popular-post-img">
+                  <img [src]="post.imageUrl || 'https://via.placeholder.com/80'" alt="Popular post">
+                </div>
+                <div class="popular-post-info">
+                  <h5>{{post.title}}</h5>
+                  <span>{{post.createdAt | date:'shortDate'}}</span>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

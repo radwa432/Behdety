@@ -47,7 +47,30 @@ export class BlogService {
   }
 
   //categories
-  getPostsByCategory(categoryId: number): Observable<BlogPost[]> {
+ /* getPostsByCategory(categoryId: number): Observable<BlogPost[]> {
     return this.http.get<BlogPost[]>(`${this.apiUrl}/BlogCategory/${categoryId}/posts`);
+  }*/
+  
+
+
+  getPostsByCategory(categoryId: number, pageNumber = 1, pageSize = 5): Observable<any> {
+    let params = new HttpParams()
+      .set('pageNumber', pageNumber)
+      .set('pageSize', pageSize);
+
+    return this.http.get(`${this.apiUrl}/BlogCategory/${categoryId}/posts`, { params });
   }
+
+  searchPosts(search: string, pageNumber = 1, pageSize = 5): Observable<any> {
+    let params = new HttpParams()
+      .set('pageNumber', pageNumber)
+      .set('pageSize', pageSize)
+      .set('search', search);
+
+    return this.http.get(`${this.apiUrl}/BlogPost/search`, { params });
+  }
+
+  getrelatedposts(postId:number, categoryId: number, pageSize = 2): Observable<BlogPost[]> {
+    return this.http.get<BlogPost[]>(`${this.apiUrl}/BlogCategory/${categoryId}/posts`, { params: { postId, pageSize } });
+}
 }
