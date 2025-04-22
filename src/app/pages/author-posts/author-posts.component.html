@@ -1,24 +1,3 @@
-<!--<app-header [pageTitle]="author?.name || ''" [isSmall]="false"></app-header>
-<div class="container mt-4">
-    <h2 class="mb-4">Author's Posts</h2>
-  
-    <div *ngFor="let post of posts" class="card mb-3">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img [src]="post.imageUrl || 'https://via.placeholder.com/300'" class="img-fluid rounded-start" alt="...">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">{{ post.title }}</h5>
-            <p class="card-text text-truncate">{{ post.content }}</p>
-            <p class="card-text"><small class="text-muted">{{ post.createdAt | date:'mediumDate' }}</small></p>
-            <a [routerLink]="['/post', post.id]" class="btn btn-primary btn-sm">Read More</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
--->
 <app-header [pageTitle]="author?.name || ''" [isSmall]="false"></app-header>
 
 <div class="author-posts-container">
@@ -41,28 +20,43 @@
         <p class="author-bio">{{author?.bio || 'No biography available'}}</p>
         <div class="author-meta">
           <span class="posts-count"><i class="fas fa-pen-fancy"></i> {{posts.length}} Posts</span>
-         
         </div>
       </div>
     </div>
 
     <div class="posts-filter mb-4">
-      <div class="filter-options">
-        <button class="btn btn-filter active">Latest</button>
-        <button class="btn btn-filter">Popular</button>
-        <button class="btn btn-filter">Featured</button>
-      </div>
       <div class="search-box">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search posts...">
-          <button class="btn btn-search" type="button"><i class="fas fa-search"></i></button>
+          <input type="text" 
+                 class="form-control" 
+                 placeholder="Search in author's posts..."
+                 [(ngModel)]="searchQuery"
+                 (keyup)="searchPosts()">
+          <button class="btn btn-search" type="button" (click)="searchPosts()">
+            <i class="fas fa-search"></i>
+          </button>
         </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-lg-8">
-        <div *ngFor="let post of posts" class="card post-card mb-4">
+        
+        <!-- Loading Indicator -->
+        <div *ngIf="isLoading" class="text-center my-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+
+        <!-- No Results Message -->
+         
+        <div *ngIf="hasSearchResults()" class="alert alert-info">
+          No posts found matching "{{searchQuery}}"
+        </div>
+
+        <!-- Posts List -->
+        <div *ngFor="let post of filteredPosts" class="card post-card mb-4">
           <div class="row g-0">
             <div class="col-md-5">
               <div class="post-badge">Featured</div>
@@ -72,7 +66,7 @@
               <div class="card-body">
                 <div class="post-category">{{post.blogCategoryName}}</div>
                 <h3 class="post-title">{{ post.title }}</h3>
-                <p class="post-excerpt">{{ post.content }}</p>
+                <p class="post-excerpt">{{ post.content|truncate:30  }}</p>
                 <div class="post-meta">
                   <span class="post-date"><i class="far fa-clock"></i> {{ post.createdAt | date:'mediumDate' }}</span>
                   <span class="post-read-time"><i class="fas fa-book-open"></i> 5 min read</span>
@@ -83,20 +77,8 @@
           </div>
         </div>
 
-        <!-- Pagination -->
-        <nav aria-label="Posts pagination" class="posts-pagination">
-          <ul class="pagination">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-            </li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
-        </nav>
+       
+      
       </div>
 
       <!-- Sidebar -->
@@ -121,21 +103,11 @@
                   <img [src]="post.imageUrl || 'https://via.placeholder.com/80'" alt="Popular post">
                 </div>
                 <div class="popular-post-info">
-                  <h5>{{post.title }}</h5>
+                  <h5>{{post.title}}</h5>
                   <span>{{post.createdAt | date:'shortDate'}}</span>
                 </div>
               </a>
             </div>
-          </div>
-
-          <div class="sidebar-widget">
-            <h4 class="widget-title">Categories</h4>
-            <ul class="categories-list">
-              <li><a href="#">Travel <span>(12)</span></a></li>
-              <li><a href="#">Food <span>(8)</span></a></li>
-              <li><a href="#">Culture <span>(5)</span></a></li>
-              <li><a href="#">Tips <span>(7)</span></a></li>
-            </ul>
           </div>
         </div>
       </div>

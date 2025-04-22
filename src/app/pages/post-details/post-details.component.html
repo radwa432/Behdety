@@ -1,85 +1,156 @@
+
+
 <app-header [pageTitle]="''" [isSmall]="true"></app-header>
+
+<nav aria-label="breadcrumb" class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item"><a routerLink="/blog">Blog</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/category', post.blogCategoryId]">{{ post.blogCategoryName }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ post.title | truncate:30 }}</li>
+  </ol>
+</nav>
+
+
 <div class="container mt-4">
-  <div class="row">
+  <div class="row gx-4">
     <!-- Main Post Content -->
-    <div class="col-md-8">
-      <div *ngIf="isLoading" class="text-center">
-        <p>Loading post...</p>
+    <div class="col-lg-8">
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2 text-muted">Loading post content...</p>
       </div>
 
-      <div *ngIf="!isLoading && post">
-        <h2>{{ post.title }}</h2>
-       
-        <p class="text-muted">
-          By 
-          <a [routerLink]="['/author', post.authorId]">{{ post.authorName }}</a>
-          | <a [routerLink]="['/category', post.blogCategoryId]">{{ post.blogCategoryName }}</a>  | 
-          {{ post.createdAt | date: 'mediumDate' }}
-        </p>
-        <img [src]="post.imageUrl" class="img-fluid mb-3" *ngIf="post.imageUrl" alt="Post Image">
-        <p [innerHTML]="post.content"></p>
+      <!-- Post Content -->
+      <div *ngIf="!isLoading && post" class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+          <h1 class="post-title mb-3">{{ post.title }}</h1>
+          
+          <div class="post-meta d-flex flex-wrap align-items-center gap-3 mb-4">
+            <span class="author">
+              <i class="fas fa-user me-1"></i>
+              <a [routerLink]="['/author', post.authorId]" class="text-decoration-none">
+                {{ post.authorName }}
+              </a>
+            </span>
+            <span class="category">
+              <i class="fas fa-tag me-1"></i>
+              <a [routerLink]="['/category', post.blogCategoryId]" class="text-decoration-none">
+                {{ post.blogCategoryName }}
+              </a>
+            </span>
+            <span class="date">
+              <i class="far fa-calendar-alt me-1"></i>
+              {{ post.createdAt | date: 'mediumDate' }}
+            </span>
+            
+          </div>
+
+          <img *ngIf="post.imageUrl" 
+               [src]="post.imageUrl" 
+               class="post-image img-fluid rounded mb-4 w-100" 
+               alt="Post Image">
+
+          <div class="post-content" [innerHTML]="post.content"></div>
+        </div>
+      </div>
+
+      <!-- Not Found State -->
+      <div *ngIf="!isLoading && !post" class="alert alert-warning">
+        <i class="fas fa-exclamation-circle me-2"></i>
+        Post not found!
       </div>
     </div>
 
     <!-- Sidebar -->
-    <div class="col-md-4">
-     <!-- Search Bar --> 
-      <div class="mb-4">
-        <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="search" (keyup.enter)="onSearchChange()" />
-      </div>
+    <div class="col-lg-4">
+ 
 
-     <!-- Categories List --> 
-      <div class="mb-4">
-        <h5>Categories</h5>
-        <ul class="list-group">
-          <li 
-            class="list-group-item" 
-            [class.active]="selectedCategoryId === null" 
-            (click)="onCategorySelect(null)">
-            All
-          </li>
-          <li 
-            *ngFor="let category of categories"
-            class="list-group-item"
-            [class.active]="selectedCategoryId === category.id">
-            <a [routerLink]="['/category', category.id]" class="text-decoration-none text-dark">
-              {{ category.name }}
+      <!-- Recent Posts Widget -->
+      <div class="related-posts mt-5">
+   
+       <div class="card shadow-sm">
+        <div class="card-body">
+          <h4 class="mb-4 section-title">
+            <i class="fas fa-random me-2"></i>You Might Also Like
+          </h4>
+          <div class="list-group list-group-flush">
+            <a *ngFor="let post of lastPosts"
+               class="list-group-item list-group-item-action"
+             (click)="goToPost(post.id)"
+               style="cursor: pointer">
+              <div class="d-flex align-items-center">
+                <img [src]="post.imageUrl || 'https://via.placeholder.com/60'"
+                     class="rounded me-3"
+                     width="60"
+                     height="60"
+                     alt="Post thumbnail">
+                <div>
+                  <h6 class="mb-1">{{ post.title | truncate:40 }}</h6>
+                  <small class="text-muted">
+                    {{ post.createdAt | date: 'shortDate' }}
+                  </small>
+                </div>
+              </div>
             </a>
-           
-          </li>
-        </ul>
+          </div>
+        </div>
+      </div>
+      </div>
+ 
+      <div class="share-widget mb-4 card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <i class="fas fa-share-alt me-2"></i>Share this post:
+          </h5>
+          
+          <div class="social-share d-flex flex-wrap gap-2">
+            <!-- Facebook -->
+            <button *ngIf="shareOptions.facebook" 
+                    (click)="shareOnFacebook(); trackShareEvent('facebook')"
+                    class="btn btn-outline-primary">
+              <i class="fab fa-facebook-f me-2"></i>Facebook
+            </button>
+            
+            <!-- Twitter -->
+            <button *ngIf="shareOptions.twitter" 
+                    (click)="shareOnTwitter(); trackShareEvent('twitter')"
+                    class="btn btn-outline-info">
+              <i class="fab fa-twitter me-2"></i>Twitter
+            </button>
+            
+            <!-- Pinterest -->
+            <button *ngIf="shareOptions.pinterest && post?.imageUrl" 
+                    (click)="shareOnPinterest(); trackShareEvent('pinterest')"
+                    class="btn btn-outline-danger">
+              <i class="fab fa-pinterest-p me-2"></i>Pinterest
+            </button>
+
+            <!-- Copy Link -->
+            <button (click)="copyToClipboard(); trackShareEvent('copy')"
+                    class="btn btn-outline-secondary">
+              <i class="fas fa-link me-2"></i>Copy Link
+            </button>
+          </div>
+          
+          <!-- رسالة نجاح النسخ -->
+          <div *ngIf="showCopySuccess" class="alert alert-success mt-3 py-2 d-flex align-items-center">
+            <i class="fas fa-check-circle me-2"></i>
+            <span>Link copied to clipboard!</span>
+          </div>
+        </div>
       </div>
 
-      <!--Last Posts -->
-      <h5>Recent Posts</h5>
-      <ul class="list-group">
-    <li
-        *ngFor="let post of lastPosts"
-        class="list-group-item d-flex align-items-start"
-        (click)="goToPost(post.id)"
-        style="cursor: pointer"
-      >
-        <img
-          [src]="post.imageUrl || 'https://via.placeholder.com/60'"
-          alt=""
-          width="60"
-          height="60"
-          class="me-2 rounded"
-        />
-        <div>
-          <div class="fw-semibold">{{ post.title }}</div>
-          <small class="text-muted">{{ post.createdAt | date: 'longDate' }}</small>
-        </div>
-     </li>
-      </ul>
 
 
-      
-      
+      <span class="reading-time">
+        <i class="far fa-clock me-1"></i>
+        {{ calculateReadingTime() }} min read
+      </span>
 
-    
-
-    
+    </div>
   </div>
 </div>
-

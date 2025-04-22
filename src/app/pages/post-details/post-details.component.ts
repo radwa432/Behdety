@@ -7,11 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { HeaderComponent } from "../../shared/header/header.component";
+import { TruncatePipe } from '../../pipe/truncate.pipe';
 
 @Component({
   selector: 'app-post-details',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, HeaderComponent],
+  imports: [CommonModule, FormsModule, RouterModule, HeaderComponent, TruncatePipe],
   templateUrl: './post-details.component.html',
   styleUrls: ['./post-details.component.css']
 })
@@ -25,7 +26,17 @@ export class PostDetailsComponent implements OnInit {
 
   search: string = '';
   selectedCategoryId: number | null = null;
+  postUrl: string = '';
+  shareTitle: string = '';
+  showCopySuccess: boolean = false;
+  shareOptions = {
+    facebook: true,
+    twitter: true,
+    pinterest: true,
+ 
+  };
 
+  
   constructor(
     private route: ActivatedRoute,
     private blogService: BlogService,
@@ -36,9 +47,53 @@ export class PostDetailsComponent implements OnInit {
     this.loadPost();
     this.loadCategories();
     this.loadLastPosts();
-    this.loadPosts();
+    
+    this.generateShareLinks();
   }
 
+
+  generateShareLinks() {
+    if (this.post) {
+      this.postUrl = encodeURIComponent(window.location.href);
+      this.shareTitle = encodeURIComponent(this.post.title);
+    }
+  }
+
+  shareOnFacebook() {
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${this.postUrl}`;
+    this.openSharePopup(url);
+  }
+
+  shareOnTwitter() {
+    const url = `https://twitter.com/intent/tweet?url=${this.postUrl}&text=${this.shareTitle}`;
+    this.openSharePopup(url);
+  }
+
+  shareOnPinterest() {
+    const media = this.post.imageUrl ? encodeURIComponent(this.post.imageUrl) : '';
+    const url = `https://pinterest.com/pin/create/button/?url=${this.postUrl}&media=${media}&description=${this.shareTitle}`;
+    this.openSharePopup(url);
+  }
+  copyToClipboard() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      this.showCopySuccess = true;
+      setTimeout(() => this.showCopySuccess = false, 3000);
+    });
+  }
+
+  private openSharePopup(url: string) {
+    window.open(url, '_blank', 'width=600,height=400');
+  }
+
+
+  trackShareEvent(platform: string) {
+    
+    console.log(`Shared on ${platform}`);}
+    
+
+
+
+//////////
   loadPost() {
     const postId = Number(this.route.snapshot.paramMap.get('id'));
     if (postId) {
@@ -55,16 +110,7 @@ export class PostDetailsComponent implements OnInit {
     }
   }
 
-  loadPosts() {
-    this.blogService
-      .getPosts(1, 5, this.search, this.selectedCategoryId ?? undefined)
-      .subscribe({
-        next: (res) => {
-          this.blogPosts = res.data;
-        },
-        error: (err) => console.error('Error loading posts:', err)
-      });
-  }
+
 
   loadCategories() {
     this.blogService.getCategories().subscribe({
@@ -80,21 +126,26 @@ export class PostDetailsComponent implements OnInit {
     });
   }
 
-  onSearchChange() {
-    this.router.navigate(['/blogs'], { queryParams: { search: this.search } });
-  }
+  
+///estimated time to read
+calculateReadingTime() {
+  const words = this.post.content.split(/\s+/).length;
+  return Math.ceil(words / 200); }
   
 
-  onCategorySelect(categoryId: number | null) {
-    const queryParams: any = {};
-    if (categoryId !== null) {
-      queryParams.categoryId = categoryId;
-    }
-    this.router.navigate(['/blogs'], { queryParams:{selectedCategoryId:this.selectedCategoryId} });
+
+  goToPost( postId: number) {
+    if (postId) {
+      this.blogService.getPostById(postId).subscribe({
+        next: (res) => {
+          this.post = res;
+          this.router.navigate(['/post', postId]);
+        }
+       
+      });
+   
   }
+}
 
 
-  goToPost(postId: number) {
-    this.router.navigate(['/post', postId], { queryParams: {LastPosts: this.lastPosts } });
-  }
 }
