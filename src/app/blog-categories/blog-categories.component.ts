@@ -3,10 +3,11 @@ import { Category } from '../models/blog-post.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BlogService } from '../services/blog.service';
+import { ContactComponent } from "../shared/contact/contact.component";
 
 @Component({
   selector: 'app-blog-categories',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ContactComponent],
   templateUrl: './blog-categories.component.html',
   styleUrls: ['./blog-categories.component.css']
 })

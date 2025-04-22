@@ -5,11 +5,12 @@ import { BlogPost  } from '../../models/blog-post.model';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from "../../shared/header/header.component";
+import { ContactComponent } from "../../shared/contact/contact.component";
 
 @Component({
   selector: 'app-category-posts',
   standalone: true,
-  imports: [CommonModule, RouterModule, HeaderComponent],
+  imports: [CommonModule, RouterModule, HeaderComponent, ContactComponent],
   templateUrl: './category-posts.component.html',
   styleUrls: ['./category-posts.component.css']
 })
