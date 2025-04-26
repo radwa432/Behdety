@@ -1,0 +1,64 @@
+<div class="container">
+    <h2 class="my-3">category dashboard </h2>
+  
+    <!-- البحث -->
+    <div class="input-group mb-3">
+      <input [(ngModel)]="searchTerm" (input)="applyFilter()" type="text" placeholder=" search..." class="form-control" />
+    </div>
+  
+    <!--  Validation -->
+    <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()" novalidate class="mb-3 needs-validation">
+      <div class="input-group">
+        <input formControlName="name" placeholder="Category Name" class="form-control"
+          [class.is-invalid]="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched" />
+  
+        <button class="btn btn-primary" type="submit" [disabled]="categoryForm.invalid">
+          {{ editingCategory ? 'Update' : 'Add' }}
+        </button>
+        <button *ngIf="editingCategory" class="btn btn-secondary" type="button" (click)="cancelEdit()">Cancel</button>
+      </div>
+  
+      <!-- error message -->
+      <div *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched" class="invalid-feedback d-block">
+       category name must be at least 3 characters long
+      </div>
+    </form>
+  
+    <!--  category table -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>Process</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of paginatedCategories">
+          <td>{{ category.name }}</td>
+          <td>
+            <button class="btn btn-sm btn-info me-2" (click)="editCategory(category)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteCategory(category.id!)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- pagination  -->
+    <nav *ngIf="totalPages > 1" class="mt-3">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button class="page-link" (click)="goToPage(currentPage - 1)">Pre</button>
+        </li>
+  
+        <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+            [class.active]="currentPage === (i + 1)">
+          <button class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</button>
+        </li>
+  
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <button class="page-link" (click)="goToPage(currentPage + 1)">Post</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  

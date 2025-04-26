@@ -97,7 +97,7 @@
 
           <div class="sidebar-widget">
             <h4 class="widget-title">Popular Posts</h4>
-            <div class="popular-post" *ngFor="let post of posts.slice(0, 3)">
+            <div class="popular-post" *ngFor="let post of posts.slice(2, 5)">
               <a [routerLink]="['/post', post.id]" class="popular-post-link">
                 <div class="popular-post-img">
                   <img [src]="post.imageUrl || 'https://via.placeholder.com/80'" alt="Popular post">
@@ -114,3 +114,5 @@
     </div>
   </div>
 </div>
+
+<app-contact></app-contact>

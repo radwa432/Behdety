@@ -6,11 +6,12 @@ import { RouterModule } from '@angular/router';
 import { BlogService } from '../services/blog.service';
 import { BlogPost, Category } from '../models/blog-post.model';
 import { HeaderComponent } from '../header/header.component';
+import { ContactComponent } from '../shared/contact/contact.component'
 
 @Component({
   selector: 'app-blog-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, HeaderComponent],
+  imports: [CommonModule, FormsModule, RouterModule, HeaderComponent,ContactComponent ],
   templateUrl: './blog-list.component.html',
   styleUrls: ['./blog-list.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

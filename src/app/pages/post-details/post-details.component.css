@@ -95,9 +95,8 @@
   background-color: #f8f9fa;
 }
 
-/* comment  Styles */
 
-/* أنماط المشاركة */
+
 .share-widget {
   background-color: #f8f9fa;
   border-radius: 10px;
@@ -121,7 +120,6 @@
   font-size: 1rem;
 }
 
-/* ألوان خاصة بكل شبكة */
 .btn-facebook {
   background-color: #3b5998;
   color: white;
@@ -152,8 +150,8 @@
   color: white;
 }
 
-/*
-/* أنماط التعليقات */
+
+
 .leave-reply {
   background-color: #f8f9fa;
   border-radius: 10px;
@@ -165,7 +163,7 @@
   border-radius: 50px;
 }
 
-/* أنماط البوستات المقترحة */
+
 .related-posts {
   border-top: 1px solid #eee;
   padding-top: 2rem;

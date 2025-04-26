@@ -8,11 +8,12 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from "../../shared/header/header.component";
 import { TruncatePipe } from '../../pipe/truncate.pipe';
+import { ContactComponent } from "../../shared/contact/contact.component";
 
 @Component({
   selector: 'app-author-posts',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, HeaderComponent, TruncatePipe], 
+  imports: [CommonModule, FormsModule, RouterModule, HeaderComponent, TruncatePipe, ContactComponent], 
   templateUrl: './author-posts.component.html',
   styleUrls: ['./author-posts.component.css']
 })

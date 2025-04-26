@@ -78,7 +78,7 @@
             <i class="fas fa-random me-2"></i>You Might Also Like
           </h4>
           <div class="list-group list-group-flush">
-            <a *ngFor="let post of lastPosts"
+            <a *ngFor="let post of lastPosts.slice(1,2)"
                class="list-group-item list-group-item-action"
              (click)="goToPost(post.id)"
                style="cursor: pointer">
@@ -154,3 +154,5 @@
     </div>
   </div>
 </div>
+
+<app-contact></app-contact>

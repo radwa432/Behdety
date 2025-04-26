@@ -22,12 +22,7 @@ export class BlogService {
 
     return this.http.get(`${this.apiUrl}/BlogPost`, { params });
   }
-
-
-  getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.apiUrl}/BlogCategory`);
-  }
-
+  
   getLastPosts(): Observable<BlogPost[]> {
     return this.http.get<BlogPost[]>(`${this.apiUrl}/BlogPost/last`);
   }
@@ -35,6 +30,7 @@ export class BlogService {
   getPostById(id: number): Observable<BlogPost> {
     return this.http.get<BlogPost>(`${this.apiUrl}/BlogPost/${id}`);
   }
+
 
 
 //author posts
@@ -45,22 +41,13 @@ export class BlogService {
   getAuthorById(authorId: number): Observable<Author> {
     return this.http.get<Author>(`${this.apiUrl}/Author/${authorId}`);
   }
-
-  //categories
- /* getPostsByCategory(categoryId: number): Observable<BlogPost[]> {
-    return this.http.get<BlogPost[]>(`${this.apiUrl}/BlogCategory/${categoryId}/posts`);
-  }*/
-  
-
-
-  getPostsByCategory(categoryId: number, pageNumber = 1, pageSize = 5): Observable<any> {
-    let params = new HttpParams()
-      .set('pageNumber', pageNumber)
-      .set('pageSize', pageSize);
-
-    return this.http.get(`${this.apiUrl}/BlogCategory/${categoryId}/posts`, { params });
+  getAuthors(): Observable<Author[]> {
+    return this.http.get<Author[]>(`${this.apiUrl}/Author`);
   }
 
+
+
+  //search posts
   searchPosts(search: string, pageNumber = 1, pageSize = 5): Observable<any> {
     let params = new HttpParams()
       .set('pageNumber', pageNumber)
@@ -73,4 +60,51 @@ export class BlogService {
   getrelatedposts(postId:number, categoryId: number, pageSize = 2): Observable<BlogPost[]> {
     return this.http.get<BlogPost[]>(`${this.apiUrl}/BlogCategory/${categoryId}/posts`, { params: { postId, pageSize } });
 }
+
+//dashboard postmethod
+deletePost(postId: number): Observable<void> {
+  return this.http.delete<void>(`${this.apiUrl}/BlogPost/${postId}`);
+}
+
+createPost(post: any): Observable<any> {
+  return this.http.post(`${this.apiUrl}/BlogPost`, post, {
+    headers: { 'Content-Type': 'application/json' }
+  });
+}
+
+updatePost(postId: number, post: any): Observable<any> {
+  return this.http.put(`${this.apiUrl}/BlogPost/${postId}`, post, {
+    headers: { 'Content-Type': 'application/json' }
+  });
+
+}
+  //dashboard category method
+  
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.apiUrl}/BlogCategory`);
+  }
+
+ 
+  getPostsByCategory(categoryId: number, pageNumber = 1, pageSize = 5): Observable<any> {
+    let params = new HttpParams()
+      .set('pageNumber', pageNumber)
+      .set('pageSize', pageSize);
+
+    return this.http.get(`${this.apiUrl}/BlogCategory/${categoryId}/posts`, { params });
+  }
+  
+  createCategory(category: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/BlogCategory`, category);
+  }
+  
+  updateCategory(id: number, category: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/BlogCategory/${id}`, category);
+  }
+  
+  deleteCategory(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/BlogCategory/${id}`);
+  }
+
+
+
 }

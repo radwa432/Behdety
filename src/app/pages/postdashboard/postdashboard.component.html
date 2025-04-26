@@ -1,0 +1,78 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4">📋posts dashboard</h1>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="🔍 search"
+        [(ngModel)]="searchText"
+        (input)="onSearchChange()"
+      />
+    </div>
+    <div class="col-md-6">
+      <select class="form-select" [(ngModel)]="selectedCategoryId" (change)="loadPosts()">
+        <option [ngValue]="null">📂 all categories</option>
+        <option *ngFor="let category of categories" [ngValue]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>process</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of posts">
+        <td>{{ post.title }}</td>
+        <td>{{ post.authorName }}</td>
+        <td>{{ post.blogCategoryName }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary me-2" (click)="editPost(post.id)">✏️ edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deletePost(post.id)">🗑️ delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <nav *ngIf="totalPages > 1" class="d-flex justify-content-center mt-3">
+    <ul class="pagination">
+      <li
+        class="page-item"
+        [class.disabled]="pageNumber === 1"
+        (click)="changePage(pageNumber - 1)"
+      >
+        <a class="page-link">pre</a>
+      </li>
+
+      <li
+        *ngFor="let page of [].constructor(totalPages); let i = index"
+        class="page-item"
+        [class.active]="pageNumber === i + 1"
+        (click)="changePage(i + 1)"
+      >
+        <a class="page-link">{{ i + 1 }}</a>
+      </li>
+
+      <li
+        class="page-item"
+        [class.disabled]="pageNumber === totalPages"
+        (click)="changePage(pageNumber + 1)"
+      >
+        <a class="page-link">post</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="text-end mt-4">
+    <button routerLink="/create-post" class="btn btn-success">➕ create </button>
+  </div>
+</div>
