@@ -1,4 +1,4 @@
-import { PaymentComponent } from './payment/payment.component';
+
 
 import { Component } from '@angular/core';
 //import { RouterOutlet } from '@angular/router';
@@ -10,9 +10,10 @@ import { TourComponent } from './components/tour/tour.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
+
 @Component({
   selector: 'app-root',
-imports:[HeaderComponent,FooterComponent,RouterOutlet],
+imports:[RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

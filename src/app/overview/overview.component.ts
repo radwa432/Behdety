@@ -15,7 +15,7 @@ export class OverviewComponent implements AfterViewInit {
   bookingForm:FormGroup
   currentImageIndex = 0;
   showAllThumbnails = signal(false);
-  maxVisibleThumbnails = 4; 
+  maxVisibleThumbnails = 4;
 
   constructor() {
     this.bookingForm = new FormGroup({});

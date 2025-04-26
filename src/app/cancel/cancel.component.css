@@ -1,0 +1,22 @@
+/* src/app/components/cancel/cancel.component.css */
+.cancel-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.home-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #6772e5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.home-link:hover {
+  text-decoration: underline;
+}

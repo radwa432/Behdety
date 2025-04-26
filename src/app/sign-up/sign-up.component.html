@@ -1,101 +1,108 @@
 <div class="d-flex justify-content-center align-items-center min-vh-100">
   <div class="container p-4 bg-light border border-light-subtle rounded-3 shadow-sm" style="max-width: 400px;">
-     <form [formGroup]="signupForm" (ngSubmit)="onsubmit()">
-    <div class ="mb-3">
-      <label for ="username" class="form-label">Username</label>
-      <input type="text" id="username" formControlName="username" class="form-control" required>
-      <div>
-        @if(signupForm.controls["username"].invalid && (signupForm.controls["username"].dirty || signupForm.controls["username"].touched)) {
-        <div class="form-text text-danger">
-          @if(signupForm.controls["username"].errors?.['required']) {
-            <span>Username is required</span>
-          }
-          @if(signupForm.controls["username"].errors?.['minlength']) {
-            <span>Username must be at least 3 characters long</span>
-          }
+    @if (isLoading) {
+      <div class="text-center py-4">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Creating your account...</p>
       </div>
     }
-    </div>
+    @else {
+      @if (errorMessage) {
+        <div class="alert alert-danger">{{ errorMessage }}</div>
+      }
+      @if (successMessage) {
+        <div class="alert alert-success">{{ successMessage }}</div>
+      }
 
-    </div>
-    <div class ="mb-3">
-      <label for ="name" class="form-label">Name</label>
-      <input type="text" id="name" formControlName="name" class="form-control" required>
-      <div>
-        @if(signupForm.controls["name"].invalid && (signupForm.controls["name"].dirty || signupForm.controls["name"].touched)) {
-        <div class="form-text text-danger">
-          @if(signupForm.controls["name"].errors?.['required']) {
-            <span>Name is required</span>
-          }
-          @if(signupForm.controls["name"].errors?.['minlength']) {
-            <span>Name must be at least 3 characters long</span>
-          }
-        </div>
-      }
-      </div>
-    </div>
-    <div class ="mb-3">
-      <label for ="phone" class="form-label">Phone</label>
-      <input type="text" id="phone" formControlName="phone" class="form-control" required>
-      <div>
-        @if(signupForm.controls["phone"].invalid && (signupForm.controls["phone"].dirty || signupForm.controls["phone"].touched)) {
-        <div class="form-text text-danger">
-          @if(signupForm.controls["phone"].errors?.['required']) {
-            <span>Phone is required</span>
-          }
-          @if(signupForm.controls["phone"].errors?.['minlength']) {
-            <span>Phone must be at least 10 characters long</span>
+      <form [formGroup]="signupForm" (ngSubmit)="onsubmit()">
+        <div class="mb-3">
+          <label for="firstName" class="form-label">First Name</label>
+          <input type="text" id="firstName" formControlName="firstName" class="form-control" required>
+          @if(signupForm.controls["firstName"].invalid && (signupForm.controls["firstName"].dirty || signupForm.controls["firstName"].touched)) {
+            <div class="form-text text-danger">
+              @if(signupForm.controls["firstName"].errors?.['required']) {
+                <span>First name is required</span>
+              }
+              @if(signupForm.controls["firstName"].errors?.['minlength']) {
+                <span>First name must be at least 2 characters long</span>
+              }
+            </div>
           }
         </div>
-      }
-      </div>
-    </div>
-    <div class ="mb-3">
-      <label for ="email" class="form-label">Email</label>
-      <input type="email" id="email" formControlName="email" class="form-control" required>
-      <div>
-        @if(signupForm.controls["email"].invalid && (signupForm.controls["email"].dirty || signupForm.controls["email"].touched)) {
-        <div class="form-text text-danger">
-          @if(signupForm.controls["email"].errors?.['required']) {
-            <span>Email is required</span>
-          }
-          @if(signupForm.controls["email"].errors?.['email']) {
-            <span>Invalid email format</span>
-          }
-        </div>
-      }
-      </div>
-    </div>
-    <div class ="mb-3">
-      <label for ="password" class="form-label">Password</label>
-      <input type="password" id="password" formControlName="password" class="form-control" required>
-      <div>
-        @if(signupForm.controls["password"].invalid && (signupForm.controls["password"].dirty || signupForm.controls["password"].touched)) {
-        <div class="form-text text-danger">
-          @if(signupForm.controls["password"].errors?.['required']) {
-            <span>Password is required</span>
-          }
-          @if(signupForm.controls["password"].errors?.['minlength']) {
-            <span>Password must be at least 6 characters long</span>
-          }
-        </div>
-      }
-      </div>
-    </div>
-<div>
-  <div class="d-grid">
-      <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Sign Up</button>
-    </div>
-    <div class="text-center mt-3">
-      <p>Already have an account? <a routerLink ="/login">Login</a></p>
-    </div>
-    <div class="text-center mt-3">
-      <p>Or sign up with:</p>
-      <button class="btn btn-outline-primary me-2"><i class="fa-brands fa-google"></i></button>
-      <button class="btn btn-outline-primary"><i class="fa-brands fa-facebook"></i></button>
 
-</div>
-</div>
-  </form>
-</div>
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input type="text" id="lastName" formControlName="lastName" class="form-control" required>
+          @if(signupForm.controls["lastName"].invalid && (signupForm.controls["lastName"].dirty || signupForm.controls["lastName"].touched)) {
+            <div class="form-text text-danger">
+              @if(signupForm.controls["lastName"].errors?.['required']) {
+                <span>Last name is required</span>
+              }
+              @if(signupForm.controls["lastName"].errors?.['minlength']) {
+                <span>Last name must be at least 2 characters long</span>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" formControlName="email" class="form-control" required>
+          @if(signupForm.controls["email"].invalid && (signupForm.controls["email"].dirty || signupForm.controls["email"].touched)) {
+            <div class="form-text text-danger">
+              @if(signupForm.controls["email"].errors?.['required']) {
+                <span>Email is required</span>
+              }
+              @if(signupForm.controls["email"].errors?.['email']) {
+                <span>Invalid email format</span>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="country" class="form-label">Country</label>
+          <input type="text" id="country" formControlName="country" class="form-control" required>
+          @if(signupForm.controls["country"].invalid && (signupForm.controls["country"].dirty || signupForm.controls["country"].touched)) {
+            <div class="form-text text-danger">
+              @if(signupForm.controls["country"].errors?.['required']) {
+                <span>Country is required</span>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" formControlName="password" class="form-control" required>
+          @if(signupForm.controls["password"].invalid && (signupForm.controls["password"].dirty || signupForm.controls["password"].touched)) {
+            <div class="form-text text-danger">
+              @if(signupForm.controls["password"].errors?.['required']) {
+                <span>Password is required</span>
+              }
+              @if(signupForm.controls["password"].errors?.['minlength']) {
+                <span>Password must be at least 8 characters long</span>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Sign Up</button>
+        </div>
+
+        <div class="text-center mt-3">
+          <p>Already have an account? <a routerLink="/login">Login</a></p>
+        </div>
+
+        <div class="text-center mt-3">
+          <p>Or sign up with:</p>
+          <button class="btn btn-outline-primary me-2"><i class="fa-brands fa-google"></i></button>
+          <button class="btn btn-outline-primary"><i class="fa-brands fa-facebook"></i></button>
+        </div>
+      </form>
+    }
+  </div>
 </div>

@@ -12,7 +12,10 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { OverviewComponent } from './overview/overview.component';
-import { PaymentComponent } from './payment/payment.component';
+
+import { SuccessComponent } from './success/success.component';
+import { CancelComponent } from './cancel/cancel.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -39,10 +42,11 @@ export const routes: Routes = [
   loadComponent: () => import('./pages/category-posts/category-posts.component').then(m => m.CategoryPostsComponent)
 }
 ,
-{
-  path: 'checkout',
-  component: PaymentComponent
-}
+
+
+{ path: 'success', component: SuccessComponent },
+{ path: 'cancel', component: CancelComponent },
+{ path: '', redirectTo: '/payment', pathMatch: 'full' }
 
 
 ];
