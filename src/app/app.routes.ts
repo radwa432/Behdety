@@ -12,6 +12,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { OverviewComponent } from './overview/overview.component';
+import { CategoryDashboardComponent } from './pages/category-dashboard/category-dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -38,6 +39,22 @@ export const routes: Routes = [
   loadComponent: () => import('./pages/category-posts/category-posts.component').then(m => m.CategoryPostsComponent)
 }
 ,
-
-
+//dashboard route
+{
+  path: 'dashboard',
+  loadComponent: () => import('./pages/postdashboard/postdashboard.component').then(m => m.DashboardComponent)
+}
+,
+{
+  path: 'create-post',
+  loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent)
+},
+{
+  path: 'edit-post/:id',
+  loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent)
+},
+{
+  path: 'dashboard/categories',
+  component: CategoryDashboardComponent
+}
 ];

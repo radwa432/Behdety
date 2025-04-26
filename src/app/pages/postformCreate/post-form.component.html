@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <h2>Create New Blog Post</h2>
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label>Title</label>
+      <input formControlName="title" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label>Content</label>
+      <textarea formControlName="content" rows="5" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label>Image URL</label>
+      <input formControlName="imageUrl" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label>Category</label>
+      <select formControlName="blogCategoryId" class="form-select">
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label>Author</label>
+      <select formControlName="authorId" class="form-select">
+        <option *ngFor="let author of authors" [value]="author.id">{{ author.name }}</option>
+      </select>
+    </div>
+
+    <button class="btn btn-success" type="submit" [disabled]="postForm.invalid">Save Post</button>
+  </form>
+</div>
