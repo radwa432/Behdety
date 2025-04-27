@@ -1,0 +1,80 @@
+<div class="container mt-5 mb-5" style="max-width: 800px;">
+  <h2 class="mb-4 text-primary fw-bold border-bottom pb-2">Driver</h2>
+
+  <form [formGroup]="driverForm" (ngSubmit)="submitDriver()" class="mb-4 p-4 bg-light rounded-3 shadow-sm">
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Driver Name</label>
+      <input type="text" formControlName="name" class="form-control py-2"
+             [ngClass]="{'is-invalid': driverForm.get('name')?.invalid && driverForm.get('name')?.touched}">
+      <div *ngIf="driverForm.get('name')?.invalid && driverForm.get('name')?.touched" class="invalid-feedback">
+        Driver name is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Transportation</label>
+      <select formControlName="transportationId" class="form-select py-2"
+              [ngClass]="{'is-invalid': driverForm.get('transportationId')?.invalid && driverForm.get('transportationId')?.touched}">
+        <option value="">Select Transportation</option>
+        <option *ngFor="let transport of allTransportations" [value]="transport.id">
+          {{ transport.name }}
+        </option>
+      </select>
+
+      <div *ngIf="driverForm.get('transportationId')?.errors?.['required'] && driverForm.get('transportationId')?.touched" class="invalid-feedback">
+        Transportation is required.
+      </div>
+
+      <div *ngIf="driverForm.get('transportationId')?.errors?.['transportationTaken'] && driverForm.get('transportationId')?.touched" class="invalid-feedback">
+        This transportation is already assigned to another driver.
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center">
+      <button type="submit" class="btn btn-success px-4 py-2">
+        {{ editingDriverId ? 'Update' : 'Add' }}
+      </button>
+      <button *ngIf="editingDriverId" type="button" (click)="cancelEditDriver()" class="btn btn-outline-secondary ms-2 px-4 py-2">
+        Cancel
+      </button>
+    </div>
+  </form>
+
+  <div class="mb-3">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search drivers..." class="form-control py-2">
+  </div>
+
+  <table class="table table-hover table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Transportation</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let driver of drivers">
+        <td>{{ driver.name }}</td>
+        <td>{{ driver.transportationName }}</td>
+        <td>
+          <button (click)="editDriver(driver)" class="btn btn-sm btn-warning me-2">Edit</button>
+          <button (click)="deleteDriver(driver.id)" class="btn btn-sm btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<!-- Pagination Buttons -->
+<div class="pagination">
+  <button 
+    *ngFor="let page of getTotalPages()" 
+    (click)="changePage(page)" 
+    [class.active]="page === currentPage">
+    {{ page }}
+  </button>
+</div>
+
+</div>
+<div class="alert alert-info mt-3">
+  Total Drivers: {{ drivers.length }}
+</div>

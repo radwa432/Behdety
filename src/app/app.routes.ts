@@ -13,6 +13,8 @@ import { ContactComponent } from './contact/contact.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { OverviewComponent } from './overview/overview.component';
 import { CategoryDashboardComponent } from './pages/category-dashboard/category-dashboard.component';
+import { TransportationsComponent } from './pages/transportations-dashboard/transportations-dashboard.component';
+import { DriversDashboardComponent } from './pages/drivers-dashboard/drivers-dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -41,7 +43,7 @@ export const routes: Routes = [
 ,
 //dashboard route
 {
-  path: 'dashboard',
+  path: 'dashboard/posts',
   loadComponent: () => import('./pages/postdashboard/postdashboard.component').then(m => m.DashboardComponent)
 }
 ,
@@ -56,5 +58,16 @@ export const routes: Routes = [
 {
   path: 'dashboard/categories',
   component: CategoryDashboardComponent
+},
+{
+  path: 'dashboard/transportations',
+  component: TransportationsComponent,
+  title: 'Transportations Dashboard'
+},
+
+{
+  path: 'dashboard/drivers',
+  component: DriversDashboardComponent,
+  title: 'drivers Dashboard'
 }
 ];
