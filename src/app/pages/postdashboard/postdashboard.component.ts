@@ -8,16 +8,18 @@ import { RouterModule } from '@angular/router';
 import{FormsModule} from '@angular/forms'
 import { Category } from '../../models/blog-post.model';
 import { debounceTime, Subject } from 'rxjs';
+import { TruncatePipe } from "../../pipe/truncate.pipe";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './postdashboard.component.html',
-  imports: [CommonModule, RouterModule,FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, TruncatePipe],
+  styleUrls: ['./postdashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
   posts: BlogPost[] = [];
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 8;
   totalPages = 0;
   totalCount = 0;
   searchText = '';

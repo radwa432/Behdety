@@ -19,6 +19,8 @@ export class CreatePostComponent implements OnInit {
   authors: Author[] = [];
   isEditMode: boolean = false;
   postId!: number;
+
+  
   constructor(
     private fb: FormBuilder,
     private blogService: BlogService,
@@ -87,11 +89,14 @@ export class CreatePostComponent implements OnInit {
 
       if (this.isEditMode) {
         this.blogService.updatePost(this.postId, formData).subscribe(() => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard/posts']);
         });
       } else {
         this.blogService.createPost(formData).subscribe(() => {
-          this.router.navigate(['/dashboard']);
+        
+          this.router.navigate(['/dashboard/posts']);
+       
+          
         });
       }
     }

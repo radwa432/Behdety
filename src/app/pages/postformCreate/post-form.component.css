@@ -1,25 +1,4 @@
-/* يمكنك إضافة أنماط مخصصة هنا إذا لزم الأمر */
-.card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-header {
-    padding: 1rem 1.5rem;
-  }
-  
-  .form-label {
-    font-weight: 500;
-  }
-  
-  .btn {
-    min-width: 100px;
-  }
-  
-  .invalid-feedback {
-    display: block;
-  }
-  
-  .img-thumbnail {
-    max-width: 100%;
-    height: auto;
-  }
+.card{
+    margin-top: 5.2rem !important;
+    margin-bottom: 5.2rem !important;
+}

@@ -12,6 +12,9 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { OverviewComponent } from './overview/overview.component';
+import { CategoryDashboardComponent } from './pages/category-dashboard/category-dashboard.component';
+import { TransportationsComponent } from './pages/transportations-dashboard/transportations-dashboard.component';
+import { DriversDashboardComponent } from './pages/drivers-dashboard/drivers-dashboard.component';
 
 import { BookingConfirmationComponent } from './booking-confirmation/booking-confirmation.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
@@ -45,6 +48,12 @@ export const routes: Routes = [
   loadComponent: () => import('./pages/category-posts/category-posts.component').then(m => m.CategoryPostsComponent)
 }
 ,
+//dashboard route
+{
+  path: 'dashboard/posts',
+  loadComponent: () => import('./pages/postdashboard/postdashboard.component').then(m => m.DashboardComponent)
+}
+,
 { path: 'payment/:bookingId', component: PaymentComponent },
 
 { path: 'payment', component: PaymentComponent },
@@ -65,6 +74,19 @@ export const routes: Routes = [
   component: BookingConfirmationComponent
 },
 {
+  path: 'dashboard/categories',
+  component: CategoryDashboardComponent
+},
+{
+  path: 'dashboard/transportations',
+  component: TransportationsComponent,
+  title: 'Transportations Dashboard'
+},
+
+{
+  path: 'dashboard/drivers',
+  component: DriversDashboardComponent,
+  title: 'drivers Dashboard'
   path: 'booking-canceled',
   component: BookingCanceledComponent
 }
