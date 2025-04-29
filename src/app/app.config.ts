@@ -15,8 +15,7 @@ export const appConfig: ApplicationConfig = {
 
     importProvidersFrom(
       BrowserAnimationsModule,
-      ToastrModule.forRoot(),
-      NgxStripeModule.forRoot('sk_test_51RFbJC4bfO2JAI0zNr40KDwraBxM8JkQPvv9jXkZeHoPkvyhleb73nOpLZkJKA1dc3yzHmeuVFHj90GXHXVm7HQE00et58MqKB')
+      ToastrModule.forRoot()
     )
   ],
 };
