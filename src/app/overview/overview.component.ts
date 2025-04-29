@@ -1,7 +1,13 @@
+import { BookService } from './../services/book.service';
 
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, computed, signal, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PaymentService } from '../services/payment.service';
+import { BookingResponse, PaymentIntentResponse } from '../models/book';
+
+
 @Component({
   selector: 'app-overview',
   standalone: true,
@@ -16,10 +22,117 @@ export class OverviewComponent implements AfterViewInit {
   currentImageIndex = 0;
   showAllThumbnails = signal(false);
   maxVisibleThumbnails = 4;
+tourName:string = '2 Nights 3 Days White and Black Desert';
+constructor(
+  private bookService: BookService,
+  private router: Router,
+  private paymentService: PaymentService,
+) {
+  this.bookingForm = new FormGroup({
+    tourName: new FormControl({ value: this.tourName, disabled: true }, [Validators.required]),
+    startDate: new FormControl('', [Validators.required]),
+    endDate: new FormControl('', [Validators.required, this.endDateAfterStartDateValidator('startDate')]),
+    groupSize: new FormControl('', [Validators.required, Validators.min(1)]),
+    numberOfDays: new FormControl('', [Validators.required, Validators.min(1)]),
+    price: new FormControl('', [Validators.required, Validators.min(1)]),
+  });
 
-  constructor() {
-    this.bookingForm = new FormGroup({});
+  // Calculate number of days when dates change
+  this.bookingForm.get('startDate')?.valueChanges.subscribe(() => this.calculateDays());
+  this.bookingForm.get('endDate')?.valueChanges.subscribe(() => this.calculateDays());
+}
+
+
+calculateDays() {
+  const startDate = this.bookingForm.get('startDate')?.value;
+  const endDate = this.bookingForm.get('endDate')?.value;
+
+  if (startDate && endDate) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const diffTime = Math.abs(end.getTime() - start.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    this.bookingForm.patchValue({
+      numberOfDays: diffDays
+    });
   }
+}
+
+// overview.component.ts
+onSubmit() {
+  if (this.bookingForm.invalid) {
+    this.markFormGroupTouched(this.bookingForm);
+    return;
+  }
+
+  if (this.dateControle()) {
+    return;
+  }
+
+  const formData = {
+    tripName: this.bookingForm.get('tourName')?.value,
+    startComingDate: this.formatDate(this.bookingForm.get('startDate')?.value),
+    endComingDate: this.formatDate(this.bookingForm.get('endDate')?.value),
+    numberPeople: this.bookingForm.get('groupSize')?.value,
+    numberDays: this.bookingForm.get('numberOfDays')?.value,
+    amountMoney: this.bookingForm.get('price')?.value
+  };
+
+  this.bookService.createBooking(formData).subscribe({
+    next: (bookingResponse: BookingResponse) => {
+      const baseUrl = window.location.origin;
+
+      this.paymentService.createCheckoutSession(
+        bookingResponse.bookId,
+        bookingResponse.tripId,
+        bookingResponse.amountMoney,
+        baseUrl
+      ).subscribe({
+        next: (response) => {
+          // Redirect to Stripe Checkout
+          window.location.href = response.url;
+        },
+        error: (paymentError) => {
+          console.error('Payment error:', paymentError);
+          alert('Error creating payment session. Please try again.');
+        }
+      });
+    },
+    error: (bookingError) => {
+      this.bookingError(bookingError);
+    }
+  });
+}
+bookingSuccess(response: any) {
+  // Show success message
+  alert('Booking created successfully!');
+
+  // Optionally navigate to confirmation page
+  // this.router.navigate(['/booking-confirmation', response.bookId]);
+
+  // Reset form
+  this.bookingForm.reset({
+    tourName: this.tourName
+  });
+}
+
+bookingError(error: any) {
+  console.error('Booking error:', error);
+  alert('Error creating booking. Please try again.');
+}
+
+markFormGroupTouched(formGroup: FormGroup) {
+  Object.values(formGroup.controls).forEach(control => {
+    control.markAsTouched();
+
+    if (control instanceof FormGroup) {
+      this.markFormGroupTouched(control);
+    }
+  });
+}
+
+
   images = [
     { main: 'assets/images/1.jpg', thumb: 'assets/images/1.jpg' },
     { main: 'assets/images/tour.jpg', thumb: 'assets/images/tour.jpg' },
@@ -54,8 +167,12 @@ export class OverviewComponent implements AfterViewInit {
   ];
 
   ngAfterViewInit() {
-    this.updateMainImageHeight();
-    window.addEventListener('resize', this.updateMainImageHeight.bind(this));
+    setTimeout(() => {
+      this.updateMainImageHeight();
+      window.addEventListener('resize', () => {
+        this.updateMainImageHeight();
+      });
+    });
   }
 
   updateMainImageHeight() {
@@ -92,9 +209,41 @@ export class OverviewComponent implements AfterViewInit {
       this.showAllThumbnails.set(true);
     }
   }
-  onSubmit(){
+
+  private formatDate(date: string): string {
+    // Format date to YYYY-MM-DD for API
+    return new Date(date).toISOString().split('T')[0];
+  }
+
+
+
+  dateControle(){
+    const startDate = this.bookingForm.get('startDate')?.value;
+    const endDate = this.bookingForm.get('endDate')?.value;
+    if (startDate && endDate) {
+      return new Date(startDate) > new Date(endDate);
+    }
+    if(startDate<endDate){
+      alert('Start date should be less than end date.');
+      return false;
+    }
+    alert('Please select both start and end dates.');
+    return false;
+  }
+
+   endDateAfterStartDateValidator(startDateControlName: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const startDate = control.parent?.get(startDateControlName)?.value;
+      const endDate = control.value;
+
+      if (!startDate || !endDate) {
+        return null; // Don't validate if either date is empty
+      }
+
+      return new Date(endDate) < new Date(startDate)
+        ? { endDateBeforeStart: true }
+        : null;
+    };
 
   }
-  bookingSuccess(){}
-  bookingError(){}
 }

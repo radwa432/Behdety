@@ -1,7 +1,8 @@
-// src/app/models/book.model.ts
+// book.model.ts
 export interface Book {
   bookId: string;
   tripId: string;
+  tripName: string;
   applicationUserId: string;
   dateBook?: Date;
   startComingDate: Date;
@@ -9,12 +10,28 @@ export interface Book {
   numberDays: number;
   numberPeople: number;
   amountMoney: number;
+  // Add any other properties your booking might have
 }
 
-export interface BookCreateDto {
+// Create these interfaces in a shared models file (e.g., models/booking.ts)
+
+export interface BookingResponse {
+  bookId: string;
   tripId: string;
+  tripName: string;
+  applicationUserId: string;
+  dateBook: string;
   startComingDate: string;
   endComingDate: string;
+  numberDays: number;
   numberPeople: number;
   amountMoney: number;
+}
+
+export interface PaymentIntentResponse {
+  clientSecret: string;
+  paymentIntentId: string;
+  amount: number;
+  currency: string;
+  status: string;
 }

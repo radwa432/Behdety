@@ -1,0 +1,49 @@
+<form [formGroup]="siteForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="container mt-4">
+
+  <!-- Site Name -->
+ <div class="mb-3">
+   <label class="form-label">Site Name</label>
+   <input type="text" class="form-control" formControlName="name" placeholder="Enter site name">
+   <div class="text-danger" *ngIf="f['name'].touched && f['name'].invalid">
+     <div *ngIf="f['name'].errors?.['required']">Name is required.</div>
+     <div *ngIf="f['name'].errors?.['minlength']">Name is too short.</div>
+     <div *ngIf="f['name'].errors?.['pattern']">Name is invalid.</div>
+   </div>
+ </div>
+
+ <!-- Description -->
+ <div class="mb-3">
+   <label class="form-label">Description</label>
+   <textarea class="form-control" rows="3" formControlName="description" placeholder="Enter description"></textarea>
+   <div class="text-danger" *ngIf="f['description'].touched && f['description'].invalid">
+     <div *ngIf="f['description'].errors?.['required']">Description is required.</div>
+     <div *ngIf="f['description'].errors?.['minlength']">Description is too short.</div>
+     <div *ngIf="f['description'].errors?.['pattern']">Description is invalid.</div>
+   </div>
+ </div>
+
+ <!-- Government Select -->
+ <div class="mb-3">
+   <label class="form-label">Select Government</label>
+   <select class="form-select" formControlName="governmentId">
+     <option value="">-- Choose Government --</option>
+     <option *ngFor="let gov of governments" [value]="gov.id">{{ gov.name }}</option>
+   </select>
+   <div class="text-danger" *ngIf="f['governmentId'].touched && f['governmentId'].invalid">
+     Government is required.
+   </div>
+ </div>
+
+ <!-- Image Upload -->
+ <div class="mb-3">
+   <label class="form-label">Upload Images</label>
+   <input type="file" class="form-control" (change)="onFileChange($event)" multiple>
+   <div class="text-danger" *ngIf="f['images'].touched && f['images'].invalid">
+     At least one image is required.
+   </div>
+ </div>
+
+
+   <!-- Submit Button -->
+   <button type="submit" class="btn btn-primary" [disabled]="siteForm.invalid">Submit</button>
+ </form>

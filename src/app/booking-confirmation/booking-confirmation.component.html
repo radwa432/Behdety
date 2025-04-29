@@ -1,0 +1,36 @@
+<!-- booking-confirmation.component.html -->
+<div class="confirmation-container">
+  @if (loading) {
+    <div class="loading-spinner">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p>Loading your booking details...</p>
+    </div>
+  }
+
+  @if (error) {
+    <div class="alert alert-danger">
+      {{ error }}
+    </div>
+    <button class="btn btn-primary" (click)="loadBookingDetails()">Try Again</button>
+  }
+
+  @if (bookingDetails && !loading) {
+    <div class="confirmation-card">
+      <h2>Booking Confirmation</h2>
+      <div class="confirmation-details">
+        <p><strong>Booking ID:</strong> {{ bookingDetails.bookId }}</p>
+        <p><strong>Trip:</strong> {{ bookingDetails.tripName }}</p>
+        <p><strong>Start Date:</strong> {{ bookingDetails.startComingDate | date }}</p>
+        <p><strong>End Date:</strong> {{ bookingDetails.endComingDate | date }}</p>
+        <p><strong>Number of People:</strong> {{ bookingDetails.numberPeople }}</p>
+        <p><strong>Total Amount:</strong> {{ bookingDetails.amountMoney | currency }}</p>
+      </div>
+      <div class="confirmation-actions">
+        <button class="btn btn-primary" (click)="printConfirmation()">Print Confirmation</button>
+        <button class="btn btn-secondary" routerLink="/">Back to Home</button>
+      </div>
+    </div>
+  }
+</div>

@@ -1,21 +1,23 @@
-// src/app/services/book.service.ts
-import { Injectable, inject } from '@angular/core';
+// book.service.ts
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Book, BookCreateDto } from '../models/book';
+import { Book, BookingResponse } from '../models/book';
 import { Observable } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class BookService {
-  private http = inject(HttpClient);
-  private apiUrl = `${environment.apiUrl}/books`;
+  private apiUrl = `${environment.apiUrl}/api/Books`;
 
-  createBook(book: BookCreateDto): Observable<Book> {
-    return this.http.post<Book>(this.apiUrl, book);
-  }
+  constructor(private http: HttpClient) { }
 
-  calculateAmount(days: number, people: number): number {
-    // Your pricing calculation logic
-    return days * people * 100; // Example calculation
+  createBooking(bookingData: any): Observable<BookingResponse> {
+    return this.http.post<BookingResponse>(this.apiUrl, bookingData);
   }
+  getBooking(bookingId: string): Observable<Book> {
+    return this.http.get<Book>(`${this.apiUrl}/${bookingId}`);
+  }
+  
 }

@@ -13,6 +13,13 @@ import { ContactComponent } from './contact/contact.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { OverviewComponent } from './overview/overview.component';
 
+import { BookingConfirmationComponent } from './booking-confirmation/booking-confirmation.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminAddTripComponent } from './admin-add-trip/admin-add-trip.component';
+import { AdminAddSiteComponent } from './admin-add-site/admin-add-site.component';
+import { PaymentComponent } from './payment/payment.component';
+import { BookingCanceledComponent } from './booking-canceled/booking-canceled.component';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -38,6 +45,27 @@ export const routes: Routes = [
   loadComponent: () => import('./pages/category-posts/category-posts.component').then(m => m.CategoryPostsComponent)
 }
 ,
+{ path: 'payment/:bookingId', component: PaymentComponent },
 
+{ path: 'payment', component: PaymentComponent },
 
+{
+  path: 'admin-main',
+  loadComponent: () => import('./admin-main/admin-main.component').then(m => m.AdminMainComponent),
+  children: [
+    { path: 'home', component: AdminHomeComponent },
+    { path: 'trips/add', component: AdminAddTripComponent },
+    { path: 'sites/add', component: AdminAddSiteComponent },
+    { path: '', redirectTo: 'home', pathMatch: 'full' }
+  ],
+},
+
+{
+  path: 'booking-confirmation/:id',
+  component: BookingConfirmationComponent
+},
+{
+  path: 'booking-canceled',
+  component: BookingCanceledComponent
+}
 ];

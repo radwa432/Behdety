@@ -20,7 +20,7 @@ export interface Site {
   providedIn: 'root'
 })
 export class SiteService {
-  private apiUrl = 'https://localhost:44334/api/Site';
+  private apiUrl = 'https://localhost:7028/api/Site';
 
   constructor(private http: HttpClient) {}
 

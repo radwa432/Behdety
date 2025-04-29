@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Site, SiteService } from '../services/site.service';
+import { Site, SiteService } from '../services/site-2.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 

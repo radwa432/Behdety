@@ -1,0 +1,21 @@
+<div class="mt-5 mb-5">
+  <h2>Payment</h2>
+  <p>Complete your payment to proceed.</p>
+<div *ngIf="error" class="error">
+  {{ error }}
+</div>
+
+<div *ngIf="paymentData; else loading">
+  <!-- Show payment form -->
+</div>
+
+<ng-template #loading>
+  <p>Loading payment form...</p>
+</ng-template>
+
+
+<form *ngIf="!loading && !error" (submit)="handleSubmit(); $event.preventDefault()">
+  <div id="payment-element"></div>
+  <button type="submit" [disabled]="loading">Pay</button>
+</form>
+</div>

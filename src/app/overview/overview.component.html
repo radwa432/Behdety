@@ -65,7 +65,7 @@
   <div class="row gx-4 gy-4">
     <div class="col-md-8">
       <h2 class="mb-5">Overview</h2>
-      <h4 class="fw-bold mb-3">2 Nights 3 Days White and Black Desert</h4>
+      <h4 class="fw-bold mb-3">{{tourName}}</h4>
       <p class="overview-text mb-4">With Egypt Vacation Tours team, you will be able to enjoy Bahariya Oasis and discover the White Desert, the Black Desert, and the Crystal Mountains in 3 days. Enjoy Western Desert Safari packages of Egypt Vacation Tours.</p>
 
       <h3 class="mb-3">Highlights</h3>
@@ -124,34 +124,114 @@
         <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" id="name" formControlName="name" class="form-control" required>
+            <input type="text"  id="name" formControlName="tourName" class="form-control"   required>
+            @if(bookingForm.controls["tourName"].invalid && bookingForm.controls["tourName"].touched)
+            {
+               @if(bookingForm.controls["tourName"].errors?.['required'])
+               {
+                 <div class="text-danger">Tour name is required.</div>
+               }
+            }
           </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" formControlName="email" class="form-control" required>
+
+          <!-- Dates Side by Side -->
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="startDate" class="form-label">Start Date</label>
+              <input type="date"  id="startDate" formControlName="startDate" class="form-control" required>
+              @if(bookingForm.controls["startDate"].invalid && bookingForm.controls["startDate"].touched)
+              {
+                 @if(bookingForm.controls["startDate"].errors?.['required'])
+                 {
+                   <div class="text-danger">Start date is required.</div>
+                 }
+              }
+            </div>
+            <div class="col-md-6">
+              <label for="endDate" class="form-label">End Date</label>
+              <input
+                type="date"
+                id="endDate"
+                formControlName="endDate"
+                class="form-control"
+                required
+              >
+
+              @if (bookingForm.controls["endDate"].invalid && bookingForm.controls["endDate"].touched) {
+                @if (bookingForm.controls["endDate"].errors?.['required']) {
+                  <div class="text-danger">End date is required.</div>
+                }
+                @if (bookingForm.controls["endDate"].errors?.['endDateBeforeStart']) {
+                  <div class="text-danger">End date must be after start date.</div>
+                }
+              }
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="phone" class="form-label">Phone</label>
-            <input type="tel" id="phone" formControlName="phone" class="form-control" required>
-          </div>
+
           <div class="mb-3">
             <label for="groupSize" class="form-label">Group Size</label>
             <input type="number" id="groupSize" formControlName="groupSize" class="form-control" required min="1">
-          </div>
-          <div class="mb-3">
-            <label for="message" class="form-label">Message</label>
-            <textarea id="message" formControlName="message" class="form-control"></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="nationality" class="form-label">Nationality</label>
-            <select id="nationality" formControlName="nationality" class="form-select" required>
-              <option value="" disabled selected>Select your nationality</option>
-              <option value="Egyptian">Egyptian</option>
+            @if(bookingForm.controls["groupSize"].invalid && bookingForm.controls["groupSize"].touched)
+            {
+               @if(bookingForm.controls["groupSize"].errors?.['required'])
+               {
+                 <div class="text-danger">Group size is required.</div>
+               }
+               @if(bookingForm.controls["groupSize"].errors?.['min'])
+               {
 
-            </select>
+                 <div class="text-danger">Invalid Number.</div>
+               }
+
+
+
+            }
           </div>
-          <button type="submit" class="btn btn-primary w-100">Submit</button>
+
+          <div class="mb-3">
+            <label for="numberOfDays" class="form-label">Number of Days</label>
+            <input type="number" id="numberOfDays" formControlName="numberOfDays" class="form-control" required min="1">
+             @if(bookingForm.controls["numberOfDays"].invalid && bookingForm.controls["numberOfDays"].touched)
+             {
+                @if(bookingForm.controls["numberOfDays"].errors?.['required'])
+                {
+                  <div class="text-danger">Number of days is required.</div>
+                }
+                @if(bookingForm.controls["numberOfDays"].errors?.['min'])
+                {
+
+                  <div class="text-danger"> Invalid Number.</div>
+                }
+
+
+
+             }
+          </div>
+
+          <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" id="price" formControlName="price" class="form-control" required min="1">
+            @if(bookingForm.controls["price"].invalid && bookingForm.controls["price"].touched)
+            {
+               @if(bookingForm.controls["price"].errors?.['required'])
+               {
+                 <div class="text-danger">Price is required.</div>
+               }
+               @if(bookingForm.controls["price"].errors?.['min'])
+               {
+
+                 <div class="text-danger">  Invalid Number.</div>
+               }
+
+
+
+            }
+          </div>
+<div class="mb-3">
+                 <button type="submit" class="btn btn-primary w-100">Submit</button>
+          </div>
         </form>
+
       </div>
     </div>
   </div>

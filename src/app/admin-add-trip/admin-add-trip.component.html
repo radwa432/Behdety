@@ -1,0 +1,67 @@
+<div class="container mt-4">
+  <form [formGroup]="tripForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input formControlName="name" class="form-control" />
+      <div *ngIf="tripForm.get('name')?.invalid && tripForm.get('name')?.touched" class="text-danger">
+        Invalid name (min 3 chars, letters only)
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea formControlName="description" class="form-control"></textarea>
+      <div *ngIf="tripForm.get('description')?.invalid && tripForm.get('description')?.touched" class="text-danger">
+        Invalid description
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>Start Date</label>
+        <input type="date" class="form-control" formControlName="startDate" />
+      </div>
+      <div class="col">
+        <label>End Date</label>
+        <input type="date" class="form-control" formControlName="endDate" />
+      </div>
+    </div>
+
+    <div class="mb-3 mt-3">
+      <label>Money</label>
+      <input type="number" class="form-control" formControlName="money" />
+    </div>
+
+    <div class="mb-3">
+      <label>Max People</label>
+      <input type="number" class="form-control" formControlName="maxPeople" />
+    </div>
+
+    <div class="mb-3">
+      <label>Included Items</label>
+      <div *ngFor="let item of includedItems.controls; let i = index">
+        <input [formControl]="item" class="form-control mb-2" />
+        <button type="button" class="btn btn-danger btn-sm mb-2" (click)="removeIncludedItem(i)">Remove</button>
+      </div>
+      <button type="button" class="btn btn-primary btn-sm" (click)="addIncludedItem()">Add Item</button>
+    </div>
+
+    <div class="mb-3">
+      <label>Excluded Items</label>
+      <div *ngFor="let item of excludedItems.controls; let i = index">
+        <input [formControl]="item" class="form-control mb-2" />
+        <button type="button" class="btn btn-danger btn-sm mb-2" (click)="removeExcludedItem(i)">Remove</button>
+      </div>
+      <button type="button" class="btn btn-primary btn-sm" (click)="addExcludedItem()">Add Item</button>
+    </div>
+
+    <div class="mb-3">
+      <label>Sites</label>
+      <select formControlName="sites" class="form-control" multiple>
+        <option *ngFor="let site of sitesList" [value]="site.id">{{ site.name }}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
