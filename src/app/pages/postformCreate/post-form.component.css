@@ -1,4 +1,31 @@
-.card{
-    margin-top: 5.2rem !important;
-    margin-bottom: 5.2rem !important;
-}
+
+@media (max-width: 768px) {
+    .sidebar {
+      width: 70px;
+    }
+    .sidebar .nav-link span {
+      display: none;
+    }
+    .main-content {
+      margin-left: 70px;
+    }
+    .sidebar h4 {
+      font-size: 1rem;
+      text-align: center;
+    }
+    
+    .btn span {
+      display: none;
+    }
+    .btn i {
+      margin-right: 0 !important;
+    }
+    
+    .form-control, .form-select {
+      font-size: 14px;
+    }
+    
+    .card-header h4 {
+      font-size: 1.25rem;
+    }
+  }

@@ -1,110 +1,137 @@
-<div class="container ">
-  <div class="card shadow-sm border-0">
-    <div class="card-header bg-white border-0 py-3">
-      <h2 class="mb-0 text-primary fw-bold">
-        <i class="bi bi-plus-circle me-2"></i>Create New Blog Post
-      </h2>
+<div class="dashboard-container bg-light" style="min-height: 100vh;">
+  <!-- Sidebar -->
+  <div class="sidebar bg-dark text-white" style="width: 250px; position: fixed; height: 100vh;">
+    <div class="p-3">
+      <h4 class="mb-4"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h4>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" href="#">
+            <i class="fas fa-newspaper me-2"></i> Blog Posts
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white active" href="#">
+            <i class="fas fa-plus-circle me-2"></i> Create New Post
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" href="#">
+            <i class="fas fa-users me-2"></i> Authors
+          </a>
+        </li>
+      </ul>
     </div>
+  </div>
 
-    <div class="card-body">
-      <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
-        <!-- Title Field -->
-        <div class="mb-4">
-          <label class="form-label fw-semibold">Title</label>
-          <input 
-            formControlName="title" 
-            class="form-control py-2" 
-            [ngClass]="{'is-invalid': postForm.get('title')?.invalid && postForm.get('title')?.touched}"
-            placeholder="Enter post title"
-          />
-          <div *ngIf="postForm.get('title')?.invalid && postForm.get('title')?.touched" class="invalid-feedback">
-            Please provide a valid title.
-          </div>
+  <!-- Main Content -->
+  <div class="main-content" style="margin-left: 250px; padding: 20px;">
+    <div class="container-fluid pt-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-primary text-white py-3">
+          <h4 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Create New Blog Post</h4>
         </div>
 
-        <!-- Content Field -->
-        <div class="mb-4">
-          <label class="form-label fw-semibold">Content</label>
-          <textarea 
-            formControlName="content" 
-            rows="8" 
-            class="form-control" 
-            [ngClass]="{'is-invalid': postForm.get('content')?.invalid && postForm.get('content')?.touched}"
-            placeholder="Write your post content here..."
-          ></textarea>
-          <div *ngIf="postForm.get('content')?.invalid && postForm.get('content')?.touched" class="invalid-feedback">
-            Content is required.
-          </div>
-        </div>
-
-        <!-- Image URL Field -->
-        <div class="mb-4">
-          <label class="form-label fw-semibold">Featured Image URL</label>
-          <div class="input-group">
-            <span class="input-group-text bg-light">
-              <i class="bi bi-image"></i>
-            </span>
-            <input 
-              formControlName="imageUrl" 
-              class="form-control" 
-              placeholder="https://example.com/image.jpg"
-            />
-          </div>
-          <small class="text-muted">Optional - provide a URL for the featured image</small>
-        </div>
-
-        <div class="row g-3">
-          <!-- Category Field -->
-          <div class="col-md-6 mb-4">
-            <label class="form-label fw-semibold">Category</label>
-            <select 
-              formControlName="blogCategoryId" 
-              class="form-select"
-              [ngClass]="{'is-invalid': postForm.get('blogCategoryId')?.invalid && postForm.get('blogCategoryId')?.touched}"
-            >
-              <option value="" disabled selected>Select a category</option>
-              <option *ngFor="let category of categories" [value]="category.id">
-                {{ category.name }}
-              </option>
-            </select>
-            <div *ngIf="postForm.get('blogCategoryId')?.invalid && postForm.get('blogCategoryId')?.touched" class="invalid-feedback">
-              Please select a category.
+        <div class="card-body">
+          <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+            <!-- Title Field -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Title</label>
+              <input 
+                formControlName="title" 
+                class="form-control" 
+                [ngClass]="{'is-invalid': postForm.get('title')?.invalid && postForm.get('title')?.touched}"
+                placeholder="Enter post title"
+              />
+              <div *ngIf="postForm.get('title')?.invalid && postForm.get('title')?.touched" class="invalid-feedback">
+                Please provide a valid title.
+              </div>
             </div>
-          </div>
 
-          <!-- Author Field -->
-          <div class="col-md-6 mb-4">
-            <label class="form-label fw-semibold">Author</label>
-            <select 
-              formControlName="authorId" 
-              class="form-select"
-              [ngClass]="{'is-invalid': postForm.get('authorId')?.invalid && postForm.get('authorId')?.touched}"
-            >
-              <option value="" disabled selected>Select an author</option>
-              <option *ngFor="let author of authors" [value]="author.id">
-                {{ author.name }}
-              </option>
-            </select>
-            <div *ngIf="postForm.get('authorId')?.invalid && postForm.get('authorId')?.touched" class="invalid-feedback">
-              Please select an author.
+            <!-- Content Field -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Content</label>
+              <textarea 
+                formControlName="content" 
+                rows="8" 
+                class="form-control" 
+                [ngClass]="{'is-invalid': postForm.get('content')?.invalid && postForm.get('content')?.touched}"
+                placeholder="Write your post content here..."
+              ></textarea>
+              <div *ngIf="postForm.get('content')?.invalid && postForm.get('content')?.touched" class="invalid-feedback">
+                Content is required.
+              </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Form Actions -->
-        <div class="d-flex justify-content-end gap-3 pt-2">
-          <button type="button" class="btn btn-outline-secondary px-4" routerLink="/posts">
-            Cancel
-          </button>
-          <button 
-            class="btn btn-primary px-4" 
-            type="submit" 
-            [disabled]="postForm.invalid"
-          >
-            <i class="bi bi-save me-2"></i>Save Post
-          </button>
+            <!-- Image URL Field -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Featured Image URL</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light">
+                  <i class="fas fa-image"></i>
+                </span>
+                <input 
+                  formControlName="imageUrl" 
+                  class="form-control" 
+                  placeholder="https://example.com/image.jpg"
+                />
+              </div>
+              <small class="text-muted">Optional - provide a URL for the featured image</small>
+            </div>
+
+            <div class="row g-3">
+              <!-- Category Field -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label fw-semibold">Category</label>
+                <select 
+                  formControlName="blogCategoryId" 
+                  class="form-select"
+                  [ngClass]="{'is-invalid': postForm.get('blogCategoryId')?.invalid && postForm.get('blogCategoryId')?.touched}"
+                >
+                  <option value="" disabled selected>Select a category</option>
+                  <option *ngFor="let category of categories" [value]="category.id">
+                    {{ category.name }}
+                  </option>
+                </select>
+                <div *ngIf="postForm.get('blogCategoryId')?.invalid && postForm.get('blogCategoryId')?.touched" class="invalid-feedback">
+                  Please select a category.
+                </div>
+              </div>
+
+              <!-- Author Field -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label fw-semibold">Author</label>
+                <select 
+                  formControlName="authorId" 
+                  class="form-select"
+                  [ngClass]="{'is-invalid': postForm.get('authorId')?.invalid && postForm.get('authorId')?.touched}"
+                >
+                  <option value="" disabled selected>Select an author</option>
+                  <option *ngFor="let author of authors" [value]="author.id">
+                    {{ author.name }}
+                  </option>
+                </select>
+                <div *ngIf="postForm.get('authorId')?.invalid && postForm.get('authorId')?.touched" class="invalid-feedback">
+                  Please select an author.
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="d-flex justify-content-end gap-3 pt-2">
+              <button type="button" class="btn btn-outline-secondary px-4" routerLink="/posts">
+                <i class="fas fa-times me-2"></i>Cancel
+              </button>
+              <button 
+                class="btn btn-primary px-4" 
+                type="submit" 
+                [disabled]="postForm.invalid"
+              >
+                <i class="fas fa-save me-2"></i>Save Post
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>

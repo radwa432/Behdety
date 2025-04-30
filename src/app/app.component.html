@@ -1,9 +1,9 @@
-<app-header></app-header>
+<app-header *ngIf="shouldShowHeader()"></app-header>
 <div class="main-content pt-2 mt-5">
   <router-outlet></router-outlet>
 </div>
 
 
+<app-footer  *ngIf="shouldShowHeader()"></app-footer>
 
-<app-footer></app-footer>
-<!-- <app-subscription></app-subscription> -->
+

@@ -18,10 +18,9 @@ export class DriverService {
 
   constructor(private http: HttpClient) { }
 
-  getAllDrivers(pageNumber: number): Observable<Driver[]> {
-    return this.http.get<Driver[]>(`${this.apiUrl}?pagenumber=${pageNumber}`);
+  getAllDrivers(): Observable<Driver[]> {
+    return this.http.get<Driver[]>(this.apiUrl);
   }
-
   createDriver(driver: Partial<Driver>): Observable<any> {
     return this.http.post(this.apiUrl, driver);
   }
@@ -33,4 +32,5 @@ export class DriverService {
   deleteDriver(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+  
 }

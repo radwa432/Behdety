@@ -15,6 +15,11 @@ import { OverviewComponent } from './overview/overview.component';
 import { CategoryDashboardComponent } from './pages/category-dashboard/category-dashboard.component';
 import { TransportationsComponent } from './pages/transportations-dashboard/transportations-dashboard.component';
 import { DriversDashboardComponent } from './pages/drivers-dashboard/drivers-dashboard.component';
+import { ViewpostDashboardComponent } from './pages/viewpost-dashboard/viewpost-dashboard.component';
+import { AuthorDashboardComponent } from './pages/author-dashboard/author-dashboard.component';
+import { AuthorPostsComponent } from './pages/author-posts/author-posts.component';
+import { AuthorpostsComponent } from './pages/authorposts-dashboard/authorposts.component';
+import {GovernmentsComponent} from './pages/governments-dashboard/governments-dashboard.component';
 
 import { BookingConfirmationComponent } from './booking-confirmation/booking-confirmation.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
@@ -22,7 +27,6 @@ import { AdminAddTripComponent } from './admin-add-trip/admin-add-trip.component
 import { AdminAddSiteComponent } from './admin-add-site/admin-add-site.component';
 import { PaymentComponent } from './payment/payment.component';
 import { BookingCanceledComponent } from './booking-canceled/booking-canceled.component';
-
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -51,7 +55,8 @@ export const routes: Routes = [
 //dashboard route
 {
   path: 'dashboard/posts',
-  loadComponent: () => import('./pages/postdashboard/postdashboard.component').then(m => m.DashboardComponent)
+  loadComponent: () => import('./pages/postdashboard/postdashboard.component').then(m => m.DashboardComponent),
+  title: 'Post Dashboard'
 }
 ,
 { path: 'payment/:bookingId', component: PaymentComponent },
@@ -59,6 +64,7 @@ export const routes: Routes = [
 { path: 'payment', component: PaymentComponent },
 
 {
+
   path: 'admin-main',
   loadComponent: () => import('./admin-main/admin-main.component').then(m => m.AdminMainComponent),
   children: [
@@ -67,15 +73,29 @@ export const routes: Routes = [
     { path: 'sites/add', component: AdminAddSiteComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' }
   ],
+
+
 },
+{
+  path: 'create-post',
+  loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
+  title: 'Create Post'},
 
 {
+
   path: 'booking-confirmation/:id',
   component: BookingConfirmationComponent
 },
 {
+  path: 'edit-post/:id',
+  loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
+  title: 'Edit Post'
+
+},
+{
   path: 'dashboard/categories',
-  component: CategoryDashboardComponent
+  component: CategoryDashboardComponent,
+  title: 'Category Dashboard'
 },
 {
   path: 'dashboard/transportations',
@@ -86,8 +106,41 @@ export const routes: Routes = [
 {
   path: 'dashboard/drivers',
   component: DriversDashboardComponent,
+  title: 'drivers Dashboard'
+},
+{
+
+
+  path: 'booking-canceled',
   title: 'drivers Dashboard'},
  { path: 'booking-canceled',
   component: BookingCanceledComponent
+},
+{
+  path: 'dashboard/viewpost/:id',
+  component: ViewpostDashboardComponent,
+  title: 'post Dashboard'
+}
+,
+{
+  path: 'dashboard/viewpost/:id',
+  component: ViewpostDashboardComponent,
+  title: 'post Dashboard'
+}
+
+,
+{path: 'dashboard/authors',
+  component: AuthorDashboardComponent,
+  title: 'Author Dashboard'
+},
+{
+  path: 'dashboard/viewAuthorposts/:id',
+  component: AuthorpostsComponent,
+  title: 'Authorpost Dashboard'
+},
+{
+  path: 'dashboard/governments',
+  component: GovernmentsComponent,
+  title: 'Governments Dashboard'
 }
 ];

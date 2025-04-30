@@ -21,7 +21,8 @@ export class CategoryDashboardComponent implements OnInit {
 
   categoryForm!: FormGroup;
   editingCategory: Category | null = null;
-
+  crearesuccess: boolean = false;
+  updatesuccess: boolean = false;
   constructor(private blogService: BlogService, private fb: FormBuilder) {}
 
   ngOnInit() {
@@ -56,6 +57,8 @@ export class CategoryDashboardComponent implements OnInit {
     } else {
       this.blogService.createCategory(categoryData).subscribe(() => {
         this.categoryForm.reset();
+        this.crearesuccess = true;
+        setTimeout(() => this.crearesuccess = false, 3000);
         this.loadCategories();
       });
     }
@@ -67,7 +70,7 @@ export class CategoryDashboardComponent implements OnInit {
   }
 
   deleteCategory(id: number) {
-    if (confirm('هل أنت متأكد من حذف التصنيف؟')) {
+    if (confirm(' Are you sure you want to delete this category?')) {
       this.blogService.deleteCategory(id).subscribe(() => {
         this.loadCategories();
       });

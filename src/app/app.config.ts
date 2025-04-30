@@ -16,6 +16,8 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       BrowserAnimationsModule,
       ToastrModule.forRoot()
+    )
+      ToastrModule.forRoot()
       )
   ],
 };
