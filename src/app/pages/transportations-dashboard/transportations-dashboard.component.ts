@@ -12,8 +12,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-transportations',
   templateUrl: './transportations-dashboard.component.html',
   imports: [
-    CommonModule, FormsModule, ReactiveFormsModule,
-
+    CommonModule, FormsModule, ReactiveFormsModule
 ],  
   styleUrls: ['./transportations-dashboard.component.css'],
 })
@@ -88,6 +87,20 @@ export class TransportationsComponent implements OnInit {
       });
     }
   }
+
+
+  get filteredtrans() {
+    if (!this.searchTerm) return this.transportations;
+    return this.transportations.filter(tran =>
+      tran.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  get pagedtrans() {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filteredtrans.slice(start, start + this.pageSize);
+  }
+  
   // Pagination logic
   get paginatedTransportations() {
     const start = (this.currentPage - 1) * this.pageSize;

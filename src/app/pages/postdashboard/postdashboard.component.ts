@@ -69,6 +69,10 @@ export class DashboardComponent implements OnInit {
       });
     }
   }
+
+  viewPost(id: number) {
+    this.router.navigate(['dashboard/viewpost', id]);
+  }
   editPost(id: number) {
     this.router.navigate(['edit-post', id]);
   }

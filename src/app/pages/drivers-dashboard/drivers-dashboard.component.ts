@@ -20,7 +20,7 @@ export class DriversDashboardComponent implements OnInit {
 
   searchTerm: string = '';
   currentPage = 1;
-  pageSize = 8; // Number of drivers per page
+  pageSize = 5; // Number of drivers per page
   
 
   constructor(
@@ -40,7 +40,7 @@ export class DriversDashboardComponent implements OnInit {
   }
 
   loadDrivers() {
-    this.driverService.getAllDrivers(this.currentPage).subscribe(data => {
+    this.driverService.getAllDrivers().subscribe(data => {
       this.drivers = data;
     });
   }
@@ -102,7 +102,7 @@ export class DriversDashboardComponent implements OnInit {
       driver.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
-
+  
   get pagedDrivers() {
     const start = (this.currentPage - 1) * this.pageSize;
     return this.filteredDrivers.slice(start, start + this.pageSize);
@@ -130,6 +130,18 @@ export class DriversDashboardComponent implements OnInit {
     return Math.ceil(this.filteredDrivers.length / this.pageSize);
   }
   getTotalPages() {
-    return Array(5).fill(0).map((_, i) => i + 1);
+    const total = Math.ceil(this.filteredDrivers.length / this.pageSize);
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+  goToPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+  
+  goToNextPage() {
+    if (this.currentPage < this.getTotalPages().length) {
+      this.currentPage++;
+    }
   }
 }

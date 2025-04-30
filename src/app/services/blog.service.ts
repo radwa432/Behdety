@@ -44,7 +44,20 @@ export class BlogService {
   getAuthors(): Observable<Author[]> {
     return this.http.get<Author[]>(`${this.apiUrl}/Author`);
   }
+  
+  deleteAuthor(authorId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/Author/${authorId}`); }
 
+  createAuthor(author: Author): Observable<Author> {
+    return this.http.post<Author>(`${this.apiUrl}/Author`, author, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  editAuthor(authorId: number, author: Author): Observable<Author> {
+    return this.http.put<Author>(`${this.apiUrl}/Author/${authorId}`, author, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 
 
   //search posts
