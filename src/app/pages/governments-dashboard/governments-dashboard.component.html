@@ -1,0 +1,103 @@
+<div class="container mt-5">
+  <div class="container mt-5 mb-5" style="max-width: 800px;">
+    <h2 class="mb-4 text-primary fw-bold border-bottom pb-2">Governments</h2>
+    <span>Count Of governments: {{governments.length}}</span>
+
+    <form [formGroup]="governmentForm" (ngSubmit)="submitForm()" class="mb-4 p-4 bg-light rounded-3 shadow-sm">
+      <!-- Name Field -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Name</label>
+        <input type="text" formControlName="name" class="form-control py-2"
+          [ngClass]="{'is-invalid': governmentForm.get('name')?.invalid && governmentForm.get('name')?.touched}">
+        <div *ngIf="governmentForm.get('name')?.invalid && governmentForm.get('name')?.touched"
+          class="invalid-feedback">
+          Government name is Required.
+        </div>
+      </div>
+
+      <!-- Image Field -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Image</label>
+        <input type="file" (change)="onFileSelected($event)" accept="image/*"
+          class="form-control py-2"
+          [ngClass]="{'is-invalid': !selectedFile && governmentForm.get('image')?.touched}">
+        <div *ngIf="!selectedFile && governmentForm.get('image')?.touched" class="invalid-feedback">
+          Image file is required.
+        </div>
+
+        <!-- Image Preview -->
+        <div *ngIf="imagePreview" class="mt-2">
+          <img [src]="imagePreview" class="img-thumbnail" style="max-height: 150px;">
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex align-items-center">
+        <button type="submit" class="btn btn-primary px-4 py-2">
+          {{ editingGovernmentId ? 'Update' : 'Add' }}
+        </button>
+        <button *ngIf="editingGovernmentId" type="button" (click)="cancelEdit()"
+          class="btn btn-outline-secondary ms-2 px-4 py-2">
+          Cancel
+        </button>
+      </div>
+    </form>
+
+    <!-- Search -->
+    <div class="mb-3">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Search governments..." class="form-control py-2">
+    </div>
+
+    <!-- Governments Table -->
+    <div class="table-responsive rounded-3 shadow">
+      <table class="table table-bordered table-hover mb-0">
+        <thead class="table-primary">
+          <tr>
+            <th class="fw-semibold py-3">Id</th>
+            <th class="fw-semibold py-3">Name</th>
+            <th class="fw-semibold py-3">Image</th>
+            <th class="fw-semibold py-3">Process</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let government of paginatedGovernments">
+            <td class="align-middle">{{ government.id }}</td>
+            <td class="align-middle">{{ government.name }}</td>
+            <td class="align-middle">
+              <img [src]="government.imageUrl" alt="{{government.name}}" style="max-width: 50px; max-height: 50px;">
+            </td>
+            <td class="align-middle">
+              <div class="d-flex">
+                <button class="btn btn-sm btn-outline-primary me-2" (click)="editGovernment(government)">
+                  <i class="bi bi-pencil-square me-1"></i> Edit
+                </button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteGovernment(government.id)">
+                  <i class="bi bi-trash me-1"></i> Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <nav class="mt-4">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link" (click)="currentPage = currentPage - 1"
+          [disabled]="currentPage === 1">Previous</button>
+      </li>
+
+      <li *ngFor="let page of totalPagesArray()" class="page-item" [class.active]="page === currentPage">
+        <button class="page-link" (click)="currentPage = page">{{ page }}</button>
+      </li>
+
+      <li class="page-item" [class.disabled]="currentPage === totalPages()">
+        <button class="page-link" (click)="currentPage = currentPage + 1"
+          [disabled]="currentPage === totalPages()">Next</button>
+      </li>
+    </ul>
+  </nav>
+</div>

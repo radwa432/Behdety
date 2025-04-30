@@ -19,7 +19,7 @@ import { ViewpostDashboardComponent } from './pages/viewpost-dashboard/viewpost-
 import { AuthorDashboardComponent } from './pages/author-dashboard/author-dashboard.component';
 import { AuthorPostsComponent } from './pages/author-posts/author-posts.component';
 import { AuthorpostsComponent } from './pages/authorposts-dashboard/authorposts.component';
-
+import {GovernmentsComponent} from './pages/governments-dashboard/governments-dashboard.component';
 
 import { BookingConfirmationComponent } from './booking-confirmation/booking-confirmation.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
@@ -135,5 +135,10 @@ export const routes: Routes = [
   path: 'dashboard/viewAuthorposts/:id',
   component: AuthorpostsComponent,
   title: 'Authorpost Dashboard'
+}
+{
+  path: 'dashboard/governments',
+  component: GovernmentsComponent,
+  title: 'Governments Dashboard'
 }
 ];
