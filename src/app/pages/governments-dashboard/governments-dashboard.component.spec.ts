@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GovernmentsDashboardComponent } from './governments-dashboard.component';
+import { GovernmentsComponent } from './governments-dashboard.component';
 
 describe('GovernmentsDashboardComponent', () => {
-  let component: GovernmentsDashboardComponent;
-  let fixture: ComponentFixture<GovernmentsDashboardComponent>;
+  let component: GovernmentsComponent;
+  let fixture: ComponentFixture<GovernmentsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GovernmentsDashboardComponent]
+      imports: [GovernmentsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GovernmentsDashboardComponent);
+    fixture = TestBed.createComponent(GovernmentsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -135,7 +135,7 @@ export const routes: Routes = [
   path: 'dashboard/viewAuthorposts/:id',
   component: AuthorpostsComponent,
   title: 'Authorpost Dashboard'
-}
+},
 {
   path: 'dashboard/governments',
   component: GovernmentsComponent,
