@@ -19,7 +19,7 @@ import { ViewpostDashboardComponent } from './pages/viewpost-dashboard/viewpost-
 import { AuthorDashboardComponent } from './pages/author-dashboard/author-dashboard.component';
 import { AuthorPostsComponent } from './pages/author-posts/author-posts.component';
 import { AuthorpostsComponent } from './pages/authorposts-dashboard/authorposts.component';
-<<<<<<< Updated upstream
+
 
 import { BookingConfirmationComponent } from './booking-confirmation/booking-confirmation.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
@@ -27,9 +27,6 @@ import { AdminAddTripComponent } from './admin-add-trip/admin-add-trip.component
 import { AdminAddSiteComponent } from './admin-add-site/admin-add-site.component';
 import { PaymentComponent } from './payment/payment.component';
 import { BookingCanceledComponent } from './booking-canceled/booking-canceled.component';
-=======
->>>>>>> Stashed changes
-
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -67,7 +64,7 @@ export const routes: Routes = [
 { path: 'payment', component: PaymentComponent },
 
 {
-<<<<<<< Updated upstream
+
   path: 'admin-main',
   loadComponent: () => import('./admin-main/admin-main.component').then(m => m.AdminMainComponent),
   children: [
@@ -76,28 +73,24 @@ export const routes: Routes = [
     { path: 'sites/add', component: AdminAddSiteComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' }
   ],
-=======
+
+
+},
+{
   path: 'create-post',
   loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
-  title: 'Create Post'
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-},
+  title: 'Create Post'},
 
 {
-<<<<<<< Updated upstream
+
   path: 'booking-confirmation/:id',
   component: BookingConfirmationComponent
-=======
+},
+{
   path: 'edit-post/:id',
   loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
   title: 'Edit Post'
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 },
 {
   path: 'dashboard/categories',
@@ -114,27 +107,25 @@ export const routes: Routes = [
   path: 'dashboard/drivers',
   component: DriversDashboardComponent,
   title: 'drivers Dashboard'
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+},
+{
+
+
   path: 'booking-canceled',
   component: BookingCanceledComponent
-}
-];
-=======
 },
 {
   path: 'dashboard/viewpost/:id',
   component: ViewpostDashboardComponent,
   title: 'post Dashboard'
 }
-=======
-},
+,
 {
   path: 'dashboard/viewpost/:id',
   component: ViewpostDashboardComponent,
   title: 'post Dashboard'
 }
->>>>>>> Stashed changes
+
 ,
 {path: 'dashboard/authors',
   component: AuthorDashboardComponent,
@@ -145,10 +136,4 @@ export const routes: Routes = [
   component: AuthorpostsComponent,
   title: 'Authorpost Dashboard'
 }
-,
-<<<<<<< Updated upstream
 ];
->>>>>>> Stashed changes
-=======
-];
->>>>>>> Stashed changes

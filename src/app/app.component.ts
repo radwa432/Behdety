@@ -9,29 +9,17 @@ import { NavigationEnd, RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 
-
-@Component({
-  selector: 'app-root',
-imports:[RouterOutlet, HeaderComponent, FooterComponent],
-=======
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs';
+
+
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, HeaderComponent, FooterComponent, CommonModule],
->>>>>>> Stashed changes
-=======
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { filter } from 'rxjs';
-@Component({
-  selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, CommonModule],
->>>>>>> Stashed changes
+
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
