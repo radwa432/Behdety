@@ -19,6 +19,7 @@ import { ViewpostDashboardComponent } from './pages/viewpost-dashboard/viewpost-
 import { AuthorDashboardComponent } from './pages/author-dashboard/author-dashboard.component';
 import { AuthorPostsComponent } from './pages/author-posts/author-posts.component';
 import { AuthorpostsComponent } from './pages/authorposts-dashboard/authorposts.component';
+<<<<<<< Updated upstream
 
 import { BookingConfirmationComponent } from './booking-confirmation/booking-confirmation.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
@@ -26,6 +27,8 @@ import { AdminAddTripComponent } from './admin-add-trip/admin-add-trip.component
 import { AdminAddSiteComponent } from './admin-add-site/admin-add-site.component';
 import { PaymentComponent } from './payment/payment.component';
 import { BookingCanceledComponent } from './booking-canceled/booking-canceled.component';
+=======
+>>>>>>> Stashed changes
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -77,6 +80,9 @@ export const routes: Routes = [
   path: 'create-post',
   loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
   title: 'Create Post'
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 },
 
@@ -88,6 +94,9 @@ export const routes: Routes = [
   path: 'edit-post/:id',
   loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
   title: 'Edit Post'
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 },
 {
@@ -106,6 +115,7 @@ export const routes: Routes = [
   component: DriversDashboardComponent,
   title: 'drivers Dashboard'
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   path: 'booking-canceled',
   component: BookingCanceledComponent
 }
@@ -117,6 +127,14 @@ export const routes: Routes = [
   component: ViewpostDashboardComponent,
   title: 'post Dashboard'
 }
+=======
+},
+{
+  path: 'dashboard/viewpost/:id',
+  component: ViewpostDashboardComponent,
+  title: 'post Dashboard'
+}
+>>>>>>> Stashed changes
 ,
 {path: 'dashboard/authors',
   component: AuthorDashboardComponent,
@@ -128,5 +146,9 @@ export const routes: Routes = [
   title: 'Authorpost Dashboard'
 }
 ,
+<<<<<<< Updated upstream
+];
+>>>>>>> Stashed changes
+=======
 ];
 >>>>>>> Stashed changes
