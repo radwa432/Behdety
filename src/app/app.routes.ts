@@ -86,8 +86,8 @@ export const routes: Routes = [
 {
   path: 'dashboard/drivers',
   component: DriversDashboardComponent,
-  title: 'drivers Dashboard'
-  path: 'booking-canceled',
+  title: 'drivers Dashboard'},
+ { path: 'booking-canceled',
   component: BookingCanceledComponent
 }
 ];
