@@ -23,6 +23,8 @@ import { AdminAddTripComponent } from './admin-add-trip/admin-add-trip.component
 import { AdminAddSiteComponent } from './admin-add-site/admin-add-site.component';
 import { PaymentComponent } from './payment/payment.component';
 import { BookingCanceledComponent } from './booking-canceled/booking-canceled.component';
+import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
+//import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
 //import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
 
 
@@ -124,9 +126,9 @@ export const routes: Routes = [
     component: GovernmentsComponent,
     title: 'Governments Dashboard'
   },
-  // {
-  //   path: 'dashboard/trip',
-  //   component: TripDashboardComponent,
-  //   title: 'Trip Dashboard'
-  // }
+  {
+    path: 'dashboard/trip',
+    component: TripDashboardComponent,
+    title: 'Trip Dashboard'
+  }
 ];

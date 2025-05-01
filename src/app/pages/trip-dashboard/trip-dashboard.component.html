@@ -1,6 +1,6 @@
-<div class="dashboard-container bg-light" style="min-height: 100vh;">
+<div class="dashboard-container">
   <!-- Sidebar -->
-  <div class="sidebar bg-dark text-white" style="width: 250px; position: fixed; height: 100vh;">
+  <div class="sidebar">
     <div class="p-3">
       <h4 class="mb-4"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h4>
       <ul class="nav flex-column">
@@ -24,7 +24,7 @@
   </div>
 
   <!-- Main Content -->
-  <div class="main-content" style="margin-left: 250px; padding: 20px;">
+  <div class="main-content">
     <div class="container-fluid pt-4">
       <div class="card border-0 shadow-lg">
         <!-- Card Header -->
@@ -60,10 +60,11 @@
                       formControlName="name"
                       class="form-control"
                       placeholder="Enter trip name"
-                      [ngClass]="{'is-invalid': tripForm.get('name')?.invalid && tripForm.get('name')?.touched}">
-                    <div *ngIf="tripForm.get('name')?.invalid && tripForm.get('name')?.touched"
+                      [class.is-invalid]="tripForm.get('name')?.invalid && (tripForm.get('name')?.touched || tripForm.get('name')?.dirty)">
+                    <div *ngIf="tripForm.get('name')?.invalid && (tripForm.get('name')?.touched || tripForm.get('name')?.dirty)"
                         class="invalid-feedback">
-                      Trip name is required (min 3 chars)
+                      <div *ngIf="tripForm.get('name')?.errors?.['required']">Trip name is required</div>
+                      <div *ngIf="tripForm.get('name')?.errors?.['minlength']">Minimum 3 characters required</div>
                     </div>
                   </div>
 
@@ -74,11 +75,7 @@
                       formControlName="description"
                       class="form-control"
                       placeholder="Enter trip description"
-                      [ngClass]="{'is-invalid': tripForm.get('description')?.invalid && tripForm.get('description')?.touched}"></textarea>
-                    <div *ngIf="tripForm.get('description')?.invalid && tripForm.get('description')?.touched"
-                        class="invalid-feedback">
-                      Description is required
-                    </div>
+                      [class.is-invalid]="tripForm.get('description')?.invalid && (tripForm.get('description')?.touched || tripForm.get('description')?.dirty)"></textarea>
                   </div>
 
                   <!-- Dates -->
@@ -88,8 +85,8 @@
                       type="date"
                       formControlName="startDate"
                       class="form-control"
-                      [ngClass]="{'is-invalid': tripForm.get('startDate')?.invalid && tripForm.get('startDate')?.touched}">
-                    <div *ngIf="tripForm.get('startDate')?.invalid && tripForm.get('startDate')?.touched"
+                      [class.is-invalid]="tripForm.get('startDate')?.invalid && (tripForm.get('startDate')?.touched || tripForm.get('startDate')?.dirty)">
+                    <div *ngIf="tripForm.get('startDate')?.invalid && (tripForm.get('startDate')?.touched || tripForm.get('startDate')?.dirty)"
                         class="invalid-feedback">
                       Start date is required
                     </div>
@@ -101,8 +98,8 @@
                       type="date"
                       formControlName="endDate"
                       class="form-control"
-                      [ngClass]="{'is-invalid': tripForm.get('endDate')?.invalid && tripForm.get('endDate')?.touched}">
-                    <div *ngIf="tripForm.get('endDate')?.invalid && tripForm.get('endDate')?.touched"
+                      [class.is-invalid]="tripForm.get('endDate')?.invalid && (tripForm.get('endDate')?.touched || tripForm.get('endDate')?.dirty)">
+                    <div *ngIf="tripForm.get('endDate')?.invalid && (tripForm.get('endDate')?.touched || tripForm.get('endDate')?.dirty)"
                         class="invalid-feedback">
                       End date is required
                     </div>
@@ -116,7 +113,11 @@
                       formControlName="money"
                       class="form-control"
                       min="0"
-                      [ngClass]="{'is-invalid': tripForm.get('money')?.invalid && tripForm.get('money')?.touched}">
+                      [class.is-invalid]="tripForm.get('money')?.invalid && (tripForm.get('money')?.touched || tripForm.get('money')?.dirty)">
+                    <div *ngIf="tripForm.get('money')?.invalid && (tripForm.get('money')?.touched || tripForm.get('money')?.dirty)"
+                        class="invalid-feedback">
+                      Valid price is required
+                    </div>
                   </div>
 
                   <div class="col-md-4">
@@ -126,7 +127,11 @@
                       formControlName="availablePeople"
                       class="form-control"
                       min="0"
-                      [ngClass]="{'is-invalid': tripForm.get('availablePeople')?.invalid && tripForm.get('availablePeople')?.touched}">
+                      [class.is-invalid]="tripForm.get('availablePeople')?.invalid && (tripForm.get('availablePeople')?.touched || tripForm.get('availablePeople')?.dirty)">
+                    <div *ngIf="tripForm.get('availablePeople')?.invalid && (tripForm.get('availablePeople')?.touched || tripForm.get('availablePeople')?.dirty)"
+                        class="invalid-feedback">
+                      Valid number is required
+                    </div>
                   </div>
 
                   <div class="col-md-4">
@@ -136,7 +141,11 @@
                       formControlName="maxPeople"
                       class="form-control"
                       min="1"
-                      [ngClass]="{'is-invalid': tripForm.get('maxPeople')?.invalid && tripForm.get('maxPeople')?.touched}">
+                      [class.is-invalid]="tripForm.get('maxPeople')?.invalid && (tripForm.get('maxPeople')?.touched || tripForm.get('maxPeople')?.dirty)">
+                    <div *ngIf="tripForm.get('maxPeople')?.invalid && (tripForm.get('maxPeople')?.touched || tripForm.get('maxPeople')?.dirty)"
+                        class="invalid-feedback">
+                      Minimum 1 required
+                    </div>
                   </div>
 
                   <!-- Included/Excluded Items -->
@@ -187,6 +196,7 @@
               <input
                 type="text"
                 [(ngModel)]="searchTerm"
+                (input)="onSearch()"
                 placeholder="Search trips by name..."
                 class="form-control">
             </div>
@@ -214,7 +224,7 @@
                     {{ trip.startDate | date:'shortDate' }} -
                     {{ trip.endDate | date:'shortDate' }}
                   </td>
-                  <td>${{ trip.money }}</td>
+                  <td>${{ trip.money | number:'1.2-2' }}</td>
                   <td>
                     <div class="progress" style="height: 20px;">
                       <div class="progress-bar bg-success"
@@ -250,7 +260,7 @@
               <li class="page-item" [class.disabled]="currentPage === 1">
                 <button
                   class="page-link"
-                  (click)="currentPage = currentPage - 1"
+                  (click)="currentPage = currentPage - 1; updatePaginatedTrips()"
                   [disabled]="currentPage === 1">
                   <i class="fas fa-chevron-left"></i>
                 </button>
@@ -258,7 +268,7 @@
 
               @for (page of totalPagesArray(); track page) {
               <li class="page-item" [class.active]="page === currentPage">
-                <button class="page-link" (click)="currentPage = page">
+                <button class="page-link" (click)="currentPage = page; updatePaginatedTrips()">
                   {{ page }}
                 </button>
               </li>
@@ -267,7 +277,7 @@
               <li class="page-item" [class.disabled]="currentPage === totalPages()">
                 <button
                   class="page-link"
-                  (click)="currentPage = currentPage + 1"
+                  (click)="currentPage = currentPage + 1; updatePaginatedTrips()"
                   [disabled]="currentPage === totalPages()">
                   <i class="fas fa-chevron-right"></i>
                 </button>
