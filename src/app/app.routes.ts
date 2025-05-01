@@ -125,7 +125,7 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard/viewAuthorposts/:id',
-    component: AuthorpostsComponent,
+    component: AuthorPostsComponent,
     title: 'Author Posts'
   },
   {
