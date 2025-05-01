@@ -1,9 +1,20 @@
 // site.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
-import { Site } from '../models/site';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
+export interface SiteImage {
+  id: string;
+  siteId: string;
+  image: string;
+}
+
+export interface Site {
+  id: string;
+  name: string;
+  description: string;
+  siteImages: SiteImage[];
+}
 
 @Injectable({
   providedIn: 'root'
