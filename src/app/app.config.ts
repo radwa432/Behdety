@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { NgxStripeModule } from 'ngx-stripe';
+
 import { ToastrModule } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
@@ -17,5 +17,7 @@ export const appConfig: ApplicationConfig = {
       BrowserAnimationsModule,
       ToastrModule.forRoot()
     )
+
+      
   ],
 };
