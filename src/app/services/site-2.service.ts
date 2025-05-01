@@ -10,6 +10,7 @@ export interface SiteImage {
 }
 
 export interface Site {
+[x: string]: any;
   id: string;
   name: string;
   description: string;
