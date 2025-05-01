@@ -17,7 +17,7 @@ export const appConfig: ApplicationConfig = {
       BrowserAnimationsModule,
       ToastrModule.forRoot()
     )
-      ToastrModule.forRoot()
-      )
+
+      
   ],
 };
