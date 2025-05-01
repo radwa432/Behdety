@@ -104,12 +104,15 @@ removeExistingImage(imageUrl: string, index: number): void {
 }
 
 submitForm(): void {
-  if (this.siteForm.invalid) return;
+  if (this.siteForm.invalid) {
+    console.log('Form is invalid', this.siteForm.errors);
+    return;
+  }
 
   const formData = new FormData();
   const formValue = this.siteForm.value;
 
-  // Append all non-file data
+  // Append all non-file data with correct casing
   formData.append('Id', this.editingSiteId || '');
   formData.append('Name', formValue.name);
   formData.append('Description', formValue.description);
@@ -117,36 +120,49 @@ submitForm(): void {
 
   // Handle existing images (if editing)
   if (this.editingSiteId && this.previewImages.length) {
-      const existingImages = this.previewImages
-          .filter(img => typeof img !== 'string' || !img.startsWith('blob:'))
-          .map(img => ({ image: img }));
-      formData.append('SiteImages', JSON.stringify(existingImages));
+    const existingImages = this.previewImages
+      .filter(img => typeof img === 'string' && !img.startsWith('blob:'))
+      .map(img => {
+        // Extract just the filename from the URL
+        const urlParts = img.split('/');
+        return urlParts[urlParts.length - 1];
+      });
+
+    // Append each existing image
+    existingImages.forEach((img, index) => {
+      formData.append(`SiteImages[${index}]`, img);
+    });
   }
 
   // Append new files
   this.selectedFiles.forEach(file => {
-      formData.append('Images', file, file.name);
+    formData.append('Images', file, file.name);
   });
 
-  // Debug what's being sent
-  console.log('FormData contents:');
-  formData.forEach((value, key) => {
-      console.log(key, value);
-  });
+  this.siteService.updateSite(formData).subscribe({
+    next: () => {
+      this.loadSites();
+      this.resetForm();
+    },
+    error: (err) => {
+      console.error('Full error response:', err);
 
-  const serviceCall = this.editingSiteId
-      ? this.siteService.updateSite(formData)
-      : this.siteService.createSite(formData);
-
-  serviceCall.subscribe({
-      next: () => {
-          this.loadSites();
-          this.resetForm();
-      },
-      error: (err) => {
-          console.error('Detailed error:', err);
-          this.showError(`Failed to ${this.editingSiteId ? 'update' : 'create'} site: ${err.message}`);
+      if (err.error) {
+        // Handle structured error response
+        if (err.error.errors) {
+          const errorMessages = Object.values(err.error.errors)
+            .flatMap((e: any) => e)
+            .join('\n');
+          this.showError(`Validation errors:\n${errorMessages}`);
+        } else if (err.error.message) {
+          this.showError(err.error.message);
+        } else {
+          this.showError(JSON.stringify(err.error));
+        }
+      } else {
+        this.showError(`Request failed: ${err.message}`);
       }
+    }
   });
 }
 

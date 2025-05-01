@@ -28,3 +28,10 @@ export interface SiteUpdateDto {
   siteImages?: SiteImage[];
   images?: File[];
 }
+export interface SiteHome {
+  id: string;
+  name: string;
+  description: string;
+  siteImages: SiteImage[];
+}
+

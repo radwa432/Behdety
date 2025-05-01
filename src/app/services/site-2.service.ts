@@ -1,20 +1,8 @@
 // site.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-export interface SiteImage {
-  id: string;
-  siteId: string;
-  image: string;
-}
-
-export interface Site {
-  id: string;
-  name: string;
-  description: string;
-  siteImages: SiteImage[];
-}
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
+import { Site } from '../models/site';
 
 @Injectable({
   providedIn: 'root'
@@ -40,13 +28,9 @@ export class SiteService {
   }
 
   updateSite(formData: FormData): Observable<any> {
-    return this.http.put(`${this.apiUrl}`, formData).pipe(
-        catchError(error => {
-            console.error('Full error response:', error);
-            return throwError(() => error);
-        })
-    );
+    return this.http.put(`${this.apiUrl}`, formData);
 }
+
   deleteSite(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));

@@ -4,8 +4,8 @@
   <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
 
   <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-3">
-    <h1 class="display-1 fw-bold mb-4 animate__animated animate__fadeInDown">The Egyptian Exploration Trips</h1>
-    <h3 class="signature-text animate__animated animate__fadeInDown">Welcome Home</h3>
+    <h1 class="display-1 fw-bold mb-4 animate_animated animate_fadeInDown">The Egyptian Exploration Trips</h1>
+    <h3 class="signature-text animate_animated animate_fadeInDown">Welcome Home</h3>
 
   </div>
 
@@ -37,19 +37,19 @@
           <img
             [src]="site.siteImages"
             class="card-img-top"
-            alt="{{ site['siteName'] }}"
+            alt="{{ site['name'] }}"
             style="height: 180px; object-fit: cover;"
           />
           <div class="card-body p-2">
-            <h6 class="card-title text-center mb-1">{{ site['siteName'] }}</h6>
+            <h6 class="card-title text-center mb-1">{{ site['name'] }}</h6>
             <p
               class="card-text text-center mb-0"
               style="font-size: 0.8rem; color: #555;"
             >
-              {{ site['SiteDescription'] }}
+              {{ site['description'] }}
             </p>
             <a
-              [routerLink]="['/site', site['SiteId']]"
+              [routerLink]="['/site', site['id']]"
               class="stretched-link"
             ></a>
           </div>
