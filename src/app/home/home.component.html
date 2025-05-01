@@ -1,1 +1,166 @@
-<p>home works!</p>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<div class="position-relative vh-100">
+  <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+
+  <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-3">
+    <h1 class="display-1 fw-bold mb-4 animate_animated animate_fadeInDown">The Egyptian Exploration Trips</h1>
+    <h3 class="signature-text animate_animated animate_fadeInDown">Welcome Home</h3>
+
+  </div>
+
+  <img src="assets/images/home.jpg.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Home cover image">
+</div>
+<div class="container my-5">
+
+  <div class="container my-6">
+
+    <h2 class="text-center mb-4 mt-5">Sites</h2>
+
+    <div class="d-flex align-items-center position-relative px-3">
+      <!-- Left Scroll Button -->
+      <button class="btn btn-outline-primary me-2" (click)="scrollLeft('sitesScroll')">
+        &#8249;
+      </button>
+
+      <!-- Scrollable Cards Container -->
+      <div
+        id="sitesScroll"
+        class="d-flex overflow-auto"
+        style="scroll-behavior: smooth; white-space: nowrap; flex-grow: 1;"
+      >
+        <div
+          *ngFor="let site of sites"
+          class="card hover-touch-card me-3"
+          style="min-width: 280px; max-width: 280px;"
+        >
+          <img
+            [src]="site.siteImages"
+            class="card-img-top"
+            alt="{{ site['name'] }}"
+            style="height: 180px; object-fit: cover;"
+          />
+          <div class="card-body p-2">
+            <h6 class="card-title text-center mb-1">{{ site['name'] }}</h6>
+            <p
+              class="card-text text-center mb-0"
+              style="font-size: 0.8rem; color: #555;"
+            >
+              {{ site['description'] }}
+            </p>
+            <a
+              [routerLink]="['/site', site['id']]"
+              class="stretched-link"
+            ></a>
+          </div>
+        </div>
+      </div>
+      <!-- Right Scroll Button -->
+      <button class="btn btn-outline-primary ms-2" (click)="scrollRight('sitesScroll')">
+        &#8250;
+      </button>
+    </div>
+
+
+    <!-- Features Section -->
+<section class="container my-5 py-5">
+  <div class="row text-center">
+    <div class="col">
+      <h3 class="mb-4">Our Features</h3>
+      <p class="lead text-muted">
+        Enjoy your own trip with us while discovering new places
+      </p>
+
+      <div class="row mt-4">
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm hover-touch-card">
+            <div class="card-body">
+              <h5 class="card-title">A Glimpse of Beauty</h5>
+              <p class="card-text">Itinerary makers have an opportunity to provide a memorable experience to their travelers.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm hover-touch-card">
+            <div class="card-body">
+              <h5 class="card-title">A Change of Pace</h5>
+              <p class="card-text">Provide something totally different in the day's pacing to feel really "away".</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm hover-touch-card">
+            <div class="card-body">
+              <h5 class="card-title">A Sense of Fun</h5>
+              <p class="card-text">Funny stories and light moments make great group memories.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Governrates Section -->
+<h2 class="text-center mb-4 mt-5">Governrates</h2>
+<div class="d-flex align-items-center position-relative">
+  <button class="btn btn-primary me-2" (click)="scrollLeft('governratesScroll')">
+    &#8249;
+  </button>
+
+  <div id="governratesScroll"
+      class="d-flex overflow-hidden"
+      style="scroll-behavior: smooth; white-space: nowrap; flex-grow: 1;">
+    <div *ngFor="let governrate of government" class="card hover-touch-card me-3" style="min-width: 300px;">
+      <img [src]="governrate.image" class="card-img-top" alt="{{ governrate.name }}">
+      <div class="card-body p-2">
+        <h6 class="card-title text-center mb-0">{{ governrate.name }}</h6>
+        <a [routerLink]="['/governrate', governrate.governmentId]" class="stretched-link"></a>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary ms-2" (click)="scrollRight('governratesScroll')">
+    &#8250;
+  </button>
+</div>
+<section class="container my-5 py-5">
+  <div class="row text-center">
+    <div class="col">
+
+      <h3 class="mb-4">Our Features</h3>
+      <p class="lead text-muted">
+        Enjoy your own trip with us while discovering new places
+      </p>
+
+      <div class="row mt-4">
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm hover-touch-card">
+            <div class="card-body">
+              <h5 class="card-title">A Glimpse of Beauty</h5>
+              <p class="card-text">Itinerary makers have an opportunity to provide a memorable experience to their travelers.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm hover-touch-card">
+            <div class="card-body">
+              <h5 class="card-title">A Change of Pace</h5>
+              <p class="card-text">Provide something totally different in the day's pacing to feel really "away".</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm hover-touch-card">
+            <div class="card-body">
+              <h5 class="card-title">A Sense of Fun</h5>
+              <p class="card-text">Funny stories and light moments make great group memories.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

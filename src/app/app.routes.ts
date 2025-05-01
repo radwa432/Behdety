@@ -25,6 +25,9 @@ import { AdminAddTripComponent } from './admin-add-trip/admin-add-trip.component
 import { AdminAddSiteComponent } from './admin-add-site/admin-add-site.component';
 import { PaymentComponent } from './payment/payment.component';
 import { BookingCanceledComponent } from './booking-canceled/booking-canceled.component';
+import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
+import { SiteDashboardComponent } from './pages/site-dashboard/site-dashboard.component';
+//import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
 //import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
 
 
@@ -72,6 +75,76 @@ export const routes: Routes = [
       { path: 'home', component: AdminHomeComponent },
       { path: 'trips/add', component: AdminAddTripComponent },
       { path: 'sites/add', component: AdminAddSiteComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' }
+    ]
+  },
+  {
+    path: 'create-post',
+    loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
+    title: 'Create Post'
+  },
+  {
+    path: 'booking-confirmation/:id',
+    component: BookingConfirmationComponent,
+    title: 'Booking Confirmation'
+  },
+  {
+    path: 'edit-post/:id',
+    loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
+    title: 'Edit Post'
+  },
+  {
+    path: 'dashboard/categories',
+    component: CategoryDashboardComponent,
+    title: 'Category Dashboard'
+  },
+  {
+    path: 'dashboard/transportations',
+    component: TransportationsComponent,
+    title: 'Transportations Dashboard'
+  },
+  {
+    path: 'dashboard/drivers',
+    component: DriversDashboardComponent,
+    title: 'Drivers Dashboard'
+  },
+  {
+    path: 'booking-canceled',
+    component: BookingCanceledComponent,
+    title: 'Booking Canceled'
+  },
+  {
+    path: 'dashboard/viewpost/:id',
+    component: ViewpostDashboardComponent,
+    title: 'Post Dashboard'
+  },
+  {
+    path: 'dashboard/authors',
+    component: AuthorDashboardComponent,
+    title: 'Author Dashboard'
+  },
+  {
+    path: 'dashboard/viewAuthorposts/:id',
+    component: AuthorpostsComponent,
+    title: 'Author Posts'
+  },
+  {
+    path: 'dashboard/governments',
+    component: GovernmentsComponent,
+    title: 'Governments Dashboard'
+  },
+  {
+    path: 'dashboard/trip',
+    component: TripDashboardComponent,
+    title: 'Trip Dashboard'
+  }
+  ,
+  {
+    path: 'dashboard/site',
+    component: SiteDashboardComponent,
+    title: 'Site Dashboard'
+  }
+];
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'dashboard/posts',

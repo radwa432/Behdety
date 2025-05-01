@@ -1,20 +1,8 @@
-
+// site.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-export interface SiteImage {
-  id: string;
-  siteId: string;
-  image: string;
-}
-
-export interface Site {
-  id: string;
-  name: string;
-  description: string;
-  siteImages: SiteImage[];
-}
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
+import { Site } from '../models/site';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +10,40 @@ export interface Site {
 export class SiteService {
   private apiUrl = 'https://localhost:44334/api/Site';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getSites(pageNumber: number = 1): Observable<Site[]> {
-    return this.http.get<Site[]>(`${this.apiUrl}?pagenumber=${pageNumber}`);
+  getSites(pageNumber: number): Observable<Site[]> {
+    return this.http.get<Site[]>(`${this.apiUrl}?pagenumber=${pageNumber}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  getSiteById(id: string): Observable<Site> {
+    return this.http.get<Site>(`${this.apiUrl}/${id}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  createSite(site: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}`, site)
+      .pipe(catchError(this.handleError));
+  }
+
+  updateSite(formData: FormData): Observable<any> {
+    return this.http.put(`${this.apiUrl}`, formData);
+}
+
+  deleteSite(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('API Error:', error);
+    let errorMessage = 'An unknown error occurred!';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(() => new Error(errorMessage));
   }
 }
