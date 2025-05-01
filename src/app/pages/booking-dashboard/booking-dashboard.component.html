@@ -8,34 +8,40 @@
     </div>
   
     <div *ngIf="!isLoading && bookings.length > 0">
-      <table class="table table-bordered table-hover">
-        <thead class="table-dark">
-          <tr>
-            <th>Booking ID</th>
-            <th>Trip Name</th>
-            <th>User ID</th>
-            <th>Date Booked</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th># Days</th>
-            <th># People</th>
-            <th>Total Amount ($)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let book of bookings">
-            <td>{{ book.bookId }}</td>
-            <td>{{ book.tripName }}</td>
-            <td>{{ book.applicationUserId }}</td>
-            <td>{{ book.dateBook | date: 'yyyy-MM-dd' }}</td>
-            <td>{{ book.startComingDate | date: 'yyyy-MM-dd' }}</td>
-            <td>{{ book.endComingDate | date: 'yyyy-MM-dd' }}</td>
-            <td>{{ book.numberDays }}</td>
-            <td>{{ book.numberPeople }}</td>
-            <td>{{ book.amountMoney | number: '1.2-2' }}</td>
-          </tr>
-        </tbody>
-      </table>
+
+    <!-- زر Create أعلى الصفحة -->
+<button class="btn btn-success mb-3" [routerLink]="['/dashboard/bookings/create']">Create Booking</button>
+
+<!-- جدول الحجوزات -->
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Trip</th>
+      <th>People</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Amount</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of bookings">
+      <td>{{ book.tripName }}</td>
+      <td>{{ book.numberPeople }}</td>
+      <td>{{ book.startComingDate | date }}</td>
+      <td>{{ book.endComingDate | date }}</td>
+      <td>{{ book.amountMoney }}</td>
+      <td>
+        <!-- زر Edit -->
+        <button class="btn btn-primary btn-sm" [routerLink]="['/dashboard/bookings/edit', book.bookId]">Edit</button>
+
+        <!-- زر Delete -->
+        <button class="btn btn-danger btn-sm" (click)="deleteBooking(book.bookId)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
     </div>
   </div>
   

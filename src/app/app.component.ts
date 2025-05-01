@@ -38,6 +38,6 @@ export class AppComponent {
       });
 }
 shouldShowHeader(): boolean {
-  return !this.currentRoute.startsWith('/dashboard') && !this.currentRoute.startsWith('/create-post') && !this.currentRoute.startsWith('/edit-post/') ;
+  return !this.currentRoute.startsWith('/dashboard') && !this.currentRoute.startsWith('/create-post') && !this.currentRoute.startsWith('/edit-post')&& !this.currentRoute.startsWith('/admin') ;
 }
 }

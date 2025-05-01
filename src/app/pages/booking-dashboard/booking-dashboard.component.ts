@@ -35,4 +35,21 @@ export class BookingDashboardComponent implements OnInit {
       }
     });
   }
+
+
+
+  deleteBooking(bookId: string) {
+    if (confirm('Are you sure you want to delete this booking?')) {
+      this.bookService.deleteBook(bookId).subscribe({
+        next: () => {
+          this.bookings = this.bookings.filter(b => b.bookId !== bookId); //  
+          alert('Booking deleted successfully');
+        },
+        error: (err) => {
+          console.error('Delete failed', err);
+          alert('Failed to delete booking');
+        }
+      });
+    }
+  }
 }

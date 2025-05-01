@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class BookService {
   private apiUrl = `${environment.apiUrl}/api/Books`;
+  private tripsUrl = 'https://localhost:44334/api/Trip';
 
   constructor(private http: HttpClient) { }
 
@@ -25,5 +26,17 @@ export class BookService {
     return this.http.get<Book[]>(this.apiUrl);
   }
   
+  updateBook(id: string, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, data);
+  }
+
   
+  deleteBook(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  getTrips(page: number): Observable<any> {
+    const pageSize = 10; // أو أي عدد من الرحلات الذي ترغب في جلبه في الصفحة الواحدة
+    return this.http.get<any[]>(`${this.tripsUrl}?pagenumber=${page}`); // تأكد من إرسال `pagenumber` بشكل صحيح
+  }
 }

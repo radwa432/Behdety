@@ -1,0 +1,30 @@
+<div class="container">
+    <h2>{{ isEdit ? 'Edit Booking' : 'Create Booking' }}</h2>
+  
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="mb-3">
+        <label for="tripName" class="form-label">Trip</label>
+        <select formControlName="tripName" class="form-select">
+          <option *ngFor="let trip of trips" [value]="trip.name">{{ trip.name }}</option>
+        </select>
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Number of People</label>
+        <input type="number" class="form-control" formControlName="numberPeople" />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Start Date</label>
+        <input type="date" class="form-control" formControlName="startComingDate" />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">End Date</label>
+        <input type="date" class="form-control" formControlName="endComingDate" />
+      </div>
+  
+      <button type="submit" class="btn btn-primary">{{ isEdit ? 'Update' : 'Create' }}</button>
+    </form>
+  </div>
+  
