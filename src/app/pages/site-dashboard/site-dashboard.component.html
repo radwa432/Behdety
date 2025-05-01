@@ -1,0 +1,271 @@
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="p-3">
+      <h4 class="mb-4"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h4>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" routerLink="/governments">
+            <i class="fas fa-city me-2"></i>Governments
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white active" href="#">
+            <i class="fas fa-landmark me-2"></i>Sites
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" routerLink="/trips">
+            <i class="fas fa-route me-2"></i>Trips
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container-fluid pt-4">
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ errorMessage }}
+        <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+      </div>
+
+      <div class="card border-0 shadow-lg">
+        <!-- Card Header -->
+        <div class="card-header bg-primary text-white py-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">
+              <i class="fas fa-landmark me-2"></i>Sites Management
+            </h2>
+            <span class="badge bg-light text-primary fs-6">
+              Total Sites: {{sites.length}}
+            </span>
+          </div>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body">
+          <!-- Site Form -->
+          <div class="card mb-4 border-primary">
+            <div class="card-header bg-light-primary py-3">
+              <h5 class="mb-0 text-primary">
+                <i class="fas fa-plus-circle me-2"></i>
+                {{ editingSiteId ? 'Update Site' : 'Add New Site' }}
+              </h5>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="siteForm" (ngSubmit)="submitForm()">
+                <div class="row g-3">
+                  <!-- Name Field -->
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Site Name</label>
+                    <input
+                      type="text"
+                      formControlName="name"
+                      class="form-control"
+                      placeholder="Enter site name"
+                      [class.is-invalid]="siteForm.get('name')?.invalid && (siteForm.get('name')?.touched || siteForm.get('name')?.dirty)">
+                    <div *ngIf="siteForm.get('name')?.invalid && (siteForm.get('name')?.touched || siteForm.get('name')?.dirty)"
+                        class="invalid-feedback">
+                      <div *ngIf="siteForm.get('name')?.errors?.['required']">Site name is required</div>
+                      <div *ngIf="siteForm.get('name')?.errors?.['minlength']">Minimum 3 characters required</div>
+                    </div>
+                  </div>
+
+                  <!-- Government Field -->
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Government</label>
+                    <select
+                      formControlName="governmentId"
+                      class="form-select"
+                      [class.is-invalid]="siteForm.get('governmentId')?.invalid && (siteForm.get('governmentId')?.touched || siteForm.get('governmentId')?.dirty)">
+                      <option value="">Select Government</option>
+                      <option *ngFor="let gov of governments" [value]="gov.id">{{ gov.name }}</option>
+                    </select>
+                    <div *ngIf="siteForm.get('governmentId')?.invalid && (siteForm.get('governmentId')?.touched || siteForm.get('governmentId')?.dirty)"
+                        class="invalid-feedback">
+                      Government is required
+                    </div>
+                  </div>
+
+                  <!-- Description Field -->
+                  <div class="col-12">
+                    <label class="form-label fw-semibold">Description</label>
+                    <textarea
+                      formControlName="description"
+                      class="form-control"
+                      rows="3"
+                      placeholder="Enter site description"
+                      [class.is-invalid]="siteForm.get('description')?.invalid && (siteForm.get('description')?.touched || siteForm.get('description')?.dirty)"></textarea>
+                    <div *ngIf="siteForm.get('description')?.invalid && (siteForm.get('description')?.touched || siteForm.get('description')?.dirty)"
+                        class="invalid-feedback">
+                      <div *ngIf="siteForm.get('description')?.errors?.['required']">Description is required</div>
+                      <div *ngIf="siteForm.get('description')?.errors?.['minlength']">Minimum 3 characters required</div>
+                    </div>
+                  </div>
+
+                  <!-- Images Field -->
+                  <div class="col-12">
+                    <label class="form-label fw-semibold">Images</label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      multiple
+                      accept="image/*"
+                      (change)="onFileSelected($event)">
+                  </div>
+
+                  <!-- Image Previews -->
+                  <div class="col-12">
+                    <div class="d-flex flex-wrap gap-3 mt-3">
+                      <!-- Existing Images -->
+                      <ng-container *ngIf="editingSiteId">
+                        <div *ngFor="let img of previewImages; let i = index" class="position-relative" style="width: 150px;">
+                          <img [src]="img" class="img-thumbnail" style="width: 100%; height: 100px; object-fit: cover;">
+                          <button
+                            type="button"
+                            class="btn btn-danger btn-sm position-absolute top-0 end-0"
+                            (click)="removeExistingImage(img, i)">
+                            <i class="fas fa-times"></i>
+                          </button>
+                        </div>
+                      </ng-container>
+
+                      <!-- New Images -->
+                      <div *ngFor="let img of previewImages; let i = index" class="position-relative" style="width: 150px;">
+                        <img [src]="img" class="img-thumbnail" style="width: 100%; height: 100px; object-fit: cover;">
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm position-absolute top-0 end-0"
+                          (click)="removeImage(i)">
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="d-flex justify-content-end gap-3 mt-4">
+                  <button
+                    type="submit"
+                    class="btn btn-primary px-4"
+                    [disabled]="siteForm.invalid || (editingSiteId && !previewImages.length && !selectedFiles.length)">
+                    <i class="fas" [class.fa-save]="editingSiteId" [class.fa-plus]="!editingSiteId"></i>
+                    {{ editingSiteId ? 'Update' : 'Add' }}
+                  </button>
+                  <button
+                    *ngIf="editingSiteId"
+                    type="button"
+                    (click)="cancelEdit()"
+                    class="btn btn-outline-secondary px-4">
+                    <i class="fas fa-times me-2"></i>Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Search Section -->
+          <div class="mb-4">
+            <div class="input-group shadow-sm">
+              <span class="input-group-text bg-light">
+                <i class="fas fa-search text-secondary"></i>
+              </span>
+              <input
+                type="text"
+                [(ngModel)]="searchTerm"
+                (input)="onSearch()"
+                placeholder="Search sites by name..."
+                class="form-control">
+            </div>
+          </div>
+
+          <!-- Sites Table -->
+          <div class="table-responsive rounded-3 border shadow-sm">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th class="fw-semibold py-3">ID</th>
+                  <th class="fw-semibold py-3">Site</th>
+                  <th class="fw-semibold py-3">Description</th>
+                  <th class="fw-semibold py-3">Images</th>
+                  <th class="fw-semibold py-3 text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (site of paginatedSites; track site.id) {
+                <tr>
+                  <td class="fw-medium text-muted">#{{ site.id }}</td>
+                  <td class="fw-semibold">{{ site.name }}</td>
+                  <td>{{ site.description | truncate:50 }}</td>
+                  <td>
+                    <div class="d-flex gap-2">
+                      <img *ngFor="let img of site.siteImages.slice(0, 3)"
+                           [src]="img.image"
+                           class="img-thumbnail"
+                           style="width: 50px; height: 50px; object-fit: cover;">
+                      <span *ngIf="site.siteImages.length > 3" class="badge bg-secondary align-self-center">
+                        +{{ site.siteImages.length - 3 }}
+                      </span>
+                    </div>
+                  </td>
+                  <td class="text-end">
+                    <div class="d-flex gap-2 justify-content-end">
+                      <button
+                        class="btn btn-sm btn-outline-warning"
+                        (click)="editSite(site)">
+                        <i class="fas fa-edit me-1"></i>
+                      </button>
+                      <button
+                        class="btn btn-sm btn-outline-danger"
+                        (click)="deleteSite(site.id)">
+                        <i class="fas fa-trash me-1"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          @if (totalPages() > 1) {
+          <nav class="mt-4">
+            <ul class="pagination justify-content-center mb-0">
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <button
+                  class="page-link"
+                  (click)="currentPage = currentPage - 1; updatePaginatedSites()"
+                  [disabled]="currentPage === 1">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+              </li>
+
+              @for (page of totalPagesArray(); track page) {
+              <li class="page-item" [class.active]="page === currentPage">
+                <button class="page-link" (click)="currentPage = page; updatePaginatedSites()">
+                  {{ page }}
+                </button>
+              </li>
+              }
+
+              <li class="page-item" [class.disabled]="currentPage === totalPages()">
+                <button
+                  class="page-link"
+                  (click)="currentPage = currentPage + 1; updatePaginatedSites()"
+                  [disabled]="currentPage === totalPages()">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </li>
+            </ul>
+          </nav>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

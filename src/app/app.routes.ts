@@ -24,6 +24,7 @@ import { AdminAddSiteComponent } from './admin-add-site/admin-add-site.component
 import { PaymentComponent } from './payment/payment.component';
 import { BookingCanceledComponent } from './booking-canceled/booking-canceled.component';
 import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
+import { SiteDashboardComponent } from './pages/site-dashboard/site-dashboard.component';
 //import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
 //import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
 
@@ -130,5 +131,11 @@ export const routes: Routes = [
     path: 'dashboard/trip',
     component: TripDashboardComponent,
     title: 'Trip Dashboard'
+  }
+  ,
+  {
+    path: 'dashboard/site',
+    component: SiteDashboardComponent,
+    title: 'Site Dashboard'
   }
 ];
