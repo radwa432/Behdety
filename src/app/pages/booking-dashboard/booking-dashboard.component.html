@@ -1,0 +1,41 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Dashboard - All Bookings</h2>
+  
+    <div *ngIf="isLoading">Loading bookings...</div>
+  
+    <div *ngIf="!isLoading && bookings.length === 0">
+      No bookings found.
+    </div>
+  
+    <div *ngIf="!isLoading && bookings.length > 0">
+      <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>Booking ID</th>
+            <th>Trip Name</th>
+            <th>User ID</th>
+            <th>Date Booked</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th># Days</th>
+            <th># People</th>
+            <th>Total Amount ($)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of bookings">
+            <td>{{ book.bookId }}</td>
+            <td>{{ book.tripName }}</td>
+            <td>{{ book.applicationUserId }}</td>
+            <td>{{ book.dateBook | date: 'yyyy-MM-dd' }}</td>
+            <td>{{ book.startComingDate | date: 'yyyy-MM-dd' }}</td>
+            <td>{{ book.endComingDate | date: 'yyyy-MM-dd' }}</td>
+            <td>{{ book.numberDays }}</td>
+            <td>{{ book.numberPeople }}</td>
+            <td>{{ book.amountMoney | number: '1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
