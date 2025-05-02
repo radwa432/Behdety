@@ -1,55 +1,52 @@
+
 import { Component, OnInit } from '@angular/core';
-import { BookService } from '../../services/book.service';
-import { Book } from '../../models/book';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
+import { BookingService } from '../../services/bookingdashboard/booking-dashboard.service';
+import { BookDetailDto } from '../../models/book';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { Pipe } from '@angular/core';
 
 @Component({
-  selector: 'app-booking-dashboard',
-  imports: [ FormsModule, RouterModule,CommonModule],
+  selector: 'app-booking-management',
+  standalone: true,
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './booking-dashboard.component.html',
-  styleUrl: './booking-dashboard.component.css'
+  styleUrls: ['./booking-dashboard.component.css']
 })
-export class BookingDashboardComponent implements OnInit {
+export class BookingManagementComponent implements OnInit {
+  bookings: BookDetailDto[] = [];
+  loading = true;
 
-  bookings: Book[] = [];
-  isLoading = true;
-
-  constructor(private bookService: BookService) {}
+  constructor(
+    private bookingService: BookingService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fetchBookings();
   }
 
-  fetchBookings(): void {
-    this.bookService.getAllBookings().subscribe({
-      next: (data) => {
-        this.bookings = data;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        console.error('Error fetching bookings:', err);
-        this.isLoading = false;
-      }
+  fetchBookings() {
+    this.loading = true;
+    this.bookingService.getBookings().subscribe({
+      next: data => { this.bookings = data; this.loading = false; },
+      error: () => this.loading = false
     });
   }
 
+  onEdit(id: string) {
+    this.router.navigate(['/admin-main/dashboard/booking-management/edit', id]);
+  }
 
-
-  deleteBooking(bookId: string) {
+  onDelete(id: string) {
     if (confirm('Are you sure you want to delete this booking?')) {
-      this.bookService.deleteBook(bookId).subscribe({
-        next: () => {
-          this.bookings = this.bookings.filter(b => b.bookId !== bookId); //  
-          alert('Booking deleted successfully');
-        },
-        error: (err) => {
-          console.error('Delete failed', err);
-          alert('Failed to delete booking');
-        }
+      this.bookingService.deleteBooking(id).subscribe({
+        next: () => this.fetchBookings()
       });
     }
+  }
+
+  onCreate() {
+    this.router.navigate(['/admin-main/dashboard/booking-management/create']);
   }
 }

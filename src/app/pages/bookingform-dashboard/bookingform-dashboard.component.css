@@ -1,0 +1,23 @@
+@media (max-width: 768px) {
+    .sidebar {
+      width: 70px;
+    }
+    .sidebar .nav-link span {
+      display: none;
+    }
+    .main-content {
+      margin-left: 70px;
+    }
+    .col-md-6 {
+      width: 100%;
+    }
+    .btn span {
+      display: none;
+    }
+    .btn i {
+      margin-right: 0 !important;
+    }
+    .card-header h2 {
+      font-size: 1.25rem;
+    }
+  }

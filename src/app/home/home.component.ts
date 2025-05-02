@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SiteService } from '../services/site-2.service';
-
 import { Site } from '../models/site';
 import { GovernmentService } from '../services/government.service';
 import { Government } from '../interface/government';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,14 +12,49 @@ import { RouterLink } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.revealMultiple();
+    this.revealSingle();
+  }
+  
+  // Animate multiple elements with class `.reveal-on-scroll`
+  revealMultiple() {
+    const reveals = document.querySelectorAll('.reveal-on-scroll');
+    reveals.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        el.classList.add('in-view');
+      }
+    });
+  }
+  
+  // Animate one element with class `.scroll-section`
+  revealSingle() {
+    const section = document.querySelector('.scroll-section');
+    if (!section) return;
+  
+    const rect = section.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      section.classList.add('in-view');
+    }
+  }
+  
+
+
+  ngAfterViewInit() {
+    this.onWindowScroll();
+  }
+
   sites: Site[] = [];
   government: Government[] = [];
-  currentPage: number = 1; // Set default page number to 1
+  currentPage: number = 1;
 
   constructor(
     private siteService: SiteService,
-    private governrateService: GovernmentService
+    private governrateService: GovernmentService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +93,13 @@ export class HomeComponent implements OnInit {
       container.scrollBy({ left: 300, behavior: 'smooth' });
     }
   }
+
+  goToGovernment(id: number | undefined) {
+    
+    this.router.navigate(['../site-by-government/sites-by-government.component', id]);
+  }
+  
+   
 
   getGovernment(): void {
     this.governrateService.getGovernments().subscribe({

@@ -35,8 +35,5 @@ export class BookService {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  getTrips(page: number): Observable<any> {
-    const pageSize = 10; // أو أي عدد من الرحلات الذي ترغب في جلبه في الصفحة الواحدة
-    return this.http.get<any[]>(`${this.tripsUrl}?pagenumber=${page}`); // تأكد من إرسال `pagenumber` بشكل صحيح
-  }
+  
 }
