@@ -1,0 +1,12 @@
+<!-- sites-by-government.component.html -->
+<div *ngIf="sites.length">
+  <h2>The Sites</h2>
+  <div *ngFor="let site of sites" class="card">
+    <h3>{{ site.siteName }}</h3>
+    <p>{{ site.siteDescription }}</p>
+  </div>
+</div>
+<div *ngIf="!sites.length">
+  <p></p>
+</div>
+

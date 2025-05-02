@@ -48,10 +48,18 @@
             >
               {{ site['description'] }}
             </p>
+<<<<<<< HEAD
+            <div *ngFor="let site of sites">
+              <a *ngIf="site?.id" [routerLink]="['/site', site.id]">
+              </a>
+            </div>
+
+=======
             <a
               [routerLink]="['/site', site['id']]"
               class="stretched-link"
             ></a>
+>>>>>>> faa0dc6464799fe1b3deca3604ae1f5c87749945
           </div>
         </div>
       </div>
@@ -102,65 +110,86 @@
   </div>
 </section>
 
+<!-- <section class="separator-section">
+  <img src="assets/images/.jpg" alt="Separator Image" class="separator-img">
+</section> -->
+
+
 <!-- Governrates Section -->
 <h2 class="text-center mb-4 mt-5">Governrates</h2>
-<div class="d-flex align-items-center position-relative">
+
+<div class="d-flex align-items-center position-relative px-3">
+  <!-- Left scroll button -->
   <button class="btn btn-primary me-2" (click)="scrollLeft('governratesScroll')">
     &#8249;
   </button>
 
-  <div id="governratesScroll"
-      class="d-flex overflow-hidden"
-      style="scroll-behavior: smooth; white-space: nowrap; flex-grow: 1;">
-    <div *ngFor="let governrate of government" class="card hover-touch-card me-3" style="min-width: 300px;">
-      <img [src]="governrate.image" class="card-img-top" alt="{{ governrate.name }}">
-      <div class="card-body p-2">
-        <h6 class="card-title text-center mb-0">{{ governrate.name }}</h6>
-        <a [routerLink]="['/governrate', governrate.governmentId]" class="stretched-link"></a>
+  <!-- Scrollable card container -->
+  <div
+    id="governratesScroll"
+    class="d-flex overflow-auto"
+    style="scroll-behavior: smooth; white-space: nowrap; gap: 1rem; flex-grow: 1;"
+  >
+    <div
+      *ngFor="let government of government"
+      class="card p-2"
+      style="min-width: 200px; cursor: pointer;"
+      (click)="goToGovernment(government.governmentId)"
+    >
+      <img
+        [src]="government.image"
+        alt="{{ government.name }}"
+        class="card-img-top"
+        style="height: 150px; object-fit: cover;"
+      />
+      <div class="card-body text-center">
+        <h5 class="card-title">{{ government.name }}</h5>
       </div>
     </div>
   </div>
 
+  <!-- Right scroll button -->
   <button class="btn btn-primary ms-2" (click)="scrollRight('governratesScroll')">
     &#8250;
   </button>
 </div>
-<section class="container my-5 py-5">
-  <div class="row text-center">
-    <div class="col">
 
-      <h3 class="mb-4">Our Features</h3>
-      <p class="lead text-muted">
-        Enjoy your own trip with us while discovering new places
-      </p>
+    <!-- Features Section -->
+    <section class="container my-5 py-5">
+      <div class="row text-center">
+        <div class="col">
+          <h3 class="mb-4">Our Features</h3>
+          <p class="lead text-muted">
+            Enjoy your own trip with us while discovering new places
+          </p>
 
-      <div class="row mt-4">
-        <div class="col-md-4 mb-4">
-          <div class="card h-100 shadow-sm hover-touch-card">
-            <div class="card-body">
-              <h5 class="card-title">A Glimpse of Beauty</h5>
-              <p class="card-text">Itinerary makers have an opportunity to provide a memorable experience to their travelers.</p>
+          <div class="row mt-4">
+            <div class="col-md-4 mb-4">
+              <div class="card h-100 shadow-sm hover-touch-card">
+                <div class="card-body">
+                  <h5 class="card-title">A Glimpse of Beauty</h5>
+                  <p class="card-text">Itinerary makers have an opportunity to provide a memorable experience to their travelers.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="card h-100 shadow-sm hover-touch-card">
+                <div class="card-body">
+                  <h5 class="card-title">A Change of Pace</h5>
+                  <p class="card-text">Provide something totally different in the day's pacing to feel really "away".</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="card h-100 shadow-sm hover-touch-card">
+                <div class="card-body">
+                  <h5 class="card-title">A Sense of Fun</h5>
+                  <p class="card-text">Funny stories and light moments make great group memories.</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="card h-100 shadow-sm hover-touch-card">
-            <div class="card-body">
-              <h5 class="card-title">A Change of Pace</h5>
-              <p class="card-text">Provide something totally different in the day's pacing to feel really "away".</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="card h-100 shadow-sm hover-touch-card">
-            <div class="card-body">
-              <h5 class="card-title">A Sense of Fun</h5>
-              <p class="card-text">Funny stories and light moments make great group memories.</p>
-            </div>
-          </div>
+
         </div>
       </div>
-
-    </div>
-  </div>
-</section>
+    </section>

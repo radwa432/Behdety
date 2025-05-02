@@ -138,59 +138,24 @@ export const routes: Routes = [
     path: 'dashboard/trip',
     component: TripDashboardComponent,
     title: 'Trip Dashboard'
+  },
+  {
+    path: 'governrate/:id',
+    component: GovernmentsComponent
+  },
+  {
+    path: 'government/:id',
+    loadComponent: () => import('./components/site-by-government/sites-by-government.component').then(m => m.SitesByGovernmentComponent)
   }
+
   ,
   {
     path: 'dashboard/site',
     component: SiteDashboardComponent,
     title: 'Site Dashboard'
-  },
-   { path: '', redirectTo: 'home', pathMatch: 'full' },
-      {
-        path: 'dashboard/posts',
-        loadComponent: () => import('./pages/postdashboard/postdashboard.component').then(m => m.DashboardComponent),
-        title: 'Post Dashboard'
-      },
-      
-      {
-        path: 'dashboard/viewpost/:id',
-        component: ViewpostDashboardComponent,
-        title: 'post Dashboard'
-      },
-
-      {
-        path: 'dashboard/categories',
-        component: CategoryDashboardComponent,
-        title: 'Category Dashboard'
-      },
-      {
-        path: 'dashboard/transportations',
-        component: TransportationsComponent,
-        title: 'Transportations Dashboard'
-      },
-    
-      {
-        path: 'dashboard/drivers',
-        component: DriversDashboardComponent,
-        title: 'drivers Dashboard'
-      },
-    
-
-      {
-        path: 'dashboard/authors',
-        component: AuthorDashboardComponent,
-        title: 'Author Dashboard'
-      },
-      {
-        path: 'dashboard/viewAuthorposts/:id',
-        component: AuthorpostdahboardComponent,
-        title: 'Authorpost Dashboard'
-      },
-      {
-        path: 'dashboard/governments',
-        component: GovernmentsComponent,
-        title: 'Governments Dashboard'
-      },
+  }
+];
+    /*
       { path: 'dashboard/booking',
          component: BookingManagementComponent,
           title: 'Booking Dashboard' },
@@ -317,9 +282,8 @@ export const routes: Routes = [
 }
 ];
 
-     
+     */
 
 
 
 
-*/
