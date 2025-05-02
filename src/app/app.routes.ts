@@ -130,5 +130,14 @@ export const routes: Routes = [
     path: 'dashboard/trip',
     component: TripDashboardComponent,
     title: 'Trip Dashboard'
+  },
+  {
+    path: 'governrate/:id',
+    component: GovernmentsComponent
+  },
+  {
+    path: 'government/:id',
+    loadComponent: () => import('./components/site-by-government/sites-by-government.component').then(m => m.SitesByGovernmentComponent)
   }
+
 ];

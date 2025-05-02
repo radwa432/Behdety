@@ -4,7 +4,7 @@ import { SiteService } from '../services/site-2.service';
 import { Site } from '../services/site-2.service';
 import { GovernmentService } from '../services/government.service';
 import { Government } from '../interface/government';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +15,13 @@ import { RouterLink } from '@angular/router';
 export class HomeComponent implements OnInit {
   sites: Site[] = [];
   government: Government[] = [];
-  currentPage: number = 1; // Set default page number to 1
+  currentPage: number = 1;
+  // router: any;
 
   constructor(
     private siteService: SiteService,
-    private governrateService: GovernmentService
+    private governrateService: GovernmentService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +52,9 @@ export class HomeComponent implements OnInit {
     if (container) {
       container.scrollBy({ left: -300, behavior: 'smooth' });
     }
+  }
+  goToGovernment(id: number) {
+    this.router.navigate(['/government', id]);
   }
 
   scrollRight(id: string): void {

@@ -1,4 +1,4 @@
-import { Trip } from "../models/trip.model";
+// import { Trip } from "../models/trip.model";
 import { SiteImage } from "../services/site-2.service";
 import { Government } from "./government";
 
