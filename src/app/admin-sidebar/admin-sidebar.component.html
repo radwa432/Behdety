@@ -1,8 +1,13 @@
-<div class="position-sticky">
+<!--<div class="position-sticky">
   <ul class="nav flex-column">
     <li class="nav-item">
       <a class="nav-link" routerLink="/admin-main/home">
         Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="dashboard/posts">
+        Blog Posts
       </a>
     </li>
     <li class="nav-item">
@@ -16,4 +21,62 @@
       </a>
     </li>
   </ul>
+</div>
+-->
+
+
+<!-- Sidebar -->
+<div class="sidebar bg-dark text-white" style="width: 250px; position: sticky; height: 100vh;">
+  <div class="p-3">
+    <h4 class="mb-4"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h4>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white" routerLink="dashboard/booking">
+          <i class="fas fa-cog me-2"></i>Booking
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link" routerLink="/admin-main/sites/add">
+          
+          <i class="fas fa-blog me-2"></i>Add Site
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link" routerLink="/admin-main/trips/add">
+         
+          <i class="fas fa-tags me-2"></i> Add Trip
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white" routerLink="dashboard/posts">
+          <i class="fas fa-cog me-2"></i>Blog posts
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white" routerLink="dashboard/categories">
+          <i class="fas fa-cog me-2"></i>Blog Category
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white" routerLink="dashboard/authors">
+          <i class="fas fa-cog me-2"></i>Blog Author
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white" routerLink="dashboard/transportations">
+          <i class="fas fa-cog me-2"></i>Transportation
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white" routerLink="dashboard/drivers">
+          <i class="fas fa-cog me-2"></i>Driver
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white" routerLink="dashboard/governments">
+          <i class="fas fa-cog me-2"></i>Government
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminGuard } from './admin-guard.component';
+import { SiteDashboardComponent } from './site-dashboard.component';
 
-describe('AdminGuardComponent', () => {
-  let component: AdminGuard;
-  let fixture: ComponentFixture<AdminGuard>;
+describe('SiteDashboardComponent', () => {
+  let component: SiteDashboardComponent;
+  let fixture: ComponentFixture<SiteDashboardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminGuard]
+      imports: [SiteDashboardComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AdminGuard);
+    fixture = TestBed.createComponent(SiteDashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

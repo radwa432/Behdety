@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Site, SiteService } from '../services/site-2.service';
+import {  SiteService } from '../services/site-2.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Site } from '../models/site';
 
 @Component({
   selector: 'app-tour',

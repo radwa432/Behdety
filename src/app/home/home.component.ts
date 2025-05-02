@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SiteService } from '../services/site-2.service';
-import { Site } from '../services/site-2.service';
+
+import { Site } from '../models/site';
 import { GovernmentService } from '../services/government.service';
 import { Government } from '../interface/government';
 import { Router, RouterLink } from '@angular/router';

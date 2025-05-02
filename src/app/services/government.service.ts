@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Site } from './site-2.service';
 import { Observable } from 'rxjs';
 import { Government } from '../interface/government';
 

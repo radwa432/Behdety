@@ -8,10 +8,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
+import { AdminSidebarComponent } from "../../admin-sidebar/admin-sidebar.component";
 
 @Component({
   selector: 'app-viewpost-dashboard',
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule, AdminSidebarComponent],
   templateUrl: './viewpost-dashboard.component.html',
   styleUrl: './viewpost-dashboard.component.css'
 })

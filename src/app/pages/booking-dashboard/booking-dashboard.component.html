@@ -1,0 +1,47 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Dashboard - All Bookings</h2>
+  
+    <div *ngIf="isLoading">Loading bookings...</div>
+  
+    <div *ngIf="!isLoading && bookings.length === 0">
+      No bookings found.
+    </div>
+  
+    <div *ngIf="!isLoading && bookings.length > 0">
+
+    <!-- زر Create أعلى الصفحة -->
+<button class="btn btn-success mb-3" [routerLink]="['/dashboard/bookings/create']">Create Booking</button>
+
+<!-- جدول الحجوزات -->
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Trip</th>
+      <th>People</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Amount</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of bookings">
+      <td>{{ book.tripName }}</td>
+      <td>{{ book.numberPeople }}</td>
+      <td>{{ book.startComingDate | date }}</td>
+      <td>{{ book.endComingDate | date }}</td>
+      <td>{{ book.amountMoney }}</td>
+      <td>
+        <!-- زر Edit -->
+        <button class="btn btn-primary btn-sm" [routerLink]="['/dashboard/bookings/edit', book.bookId]">Edit</button>
+
+        <!-- زر Delete -->
+        <button class="btn btn-danger btn-sm" (click)="deleteBooking(book.bookId)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+    </div>
+  </div>
+  

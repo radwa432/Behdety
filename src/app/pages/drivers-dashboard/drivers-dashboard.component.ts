@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   selector: 'app-drivers-dashboard',
   templateUrl: './drivers-dashboard.component.html',
   styleUrls: ['./drivers-dashboard.component.css'],
-  standalone: true,
+ 
   imports: [CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class DriversDashboardComponent implements OnInit {
