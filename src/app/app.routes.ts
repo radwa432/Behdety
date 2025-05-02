@@ -31,8 +31,9 @@ import { SiteDashboardComponent } from './pages/site-dashboard/site-dashboard.co
 //import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
 
 
-import { BookingDashboardComponent } from './pages/booking-dashboard/booking-dashboard.component';
-import { BookingformDashboardComponent } from './pages/bookingform-dashboard/bookingform-dashboard.component';
+import { BookingManagementComponent } from './pages/booking-dashboard/booking-dashboard.component';
+import { BookingFormComponent } from './pages/bookingform-dashboard/bookingform-dashboard.component';
+import { DashboardComponent } from './pages/postdashboard/postdashboard.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -68,6 +69,12 @@ export const routes: Routes = [
   { path: 'payment', component: PaymentComponent },
 
 
+
+
+
+
+
+  //dashboard routes
   {
     path: 'admin-main',
     loadComponent: () => import('./admin-main/admin-main.component').then(m => m.AdminMainComponent),
@@ -75,89 +82,37 @@ export const routes: Routes = [
       { path: 'home', component: AdminHomeComponent },
       { path: 'trips/add', component: AdminAddTripComponent },
       { path: 'sites/add', component: AdminAddSiteComponent },
-      { path: '', redirectTo: 'home', pathMatch: 'full' }
-    ]
-  },
-  {
-    path: 'create-post',
-    loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
-    title: 'Create Post'
-  },
-  {
-    path: 'booking-confirmation/:id',
-    component: BookingConfirmationComponent,
-    title: 'Booking Confirmation'
-  },
-  {
-    path: 'edit-post/:id',
-    loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
-    title: 'Edit Post'
-  },
-  {
-    path: 'dashboard/categories',
-    component: CategoryDashboardComponent,
-    title: 'Category Dashboard'
-  },
-  {
-    path: 'dashboard/transportations',
-    component: TransportationsComponent,
-    title: 'Transportations Dashboard'
-  },
-  {
-    path: 'dashboard/drivers',
-    component: DriversDashboardComponent,
-    title: 'Drivers Dashboard'
-  },
-  {
-    path: 'booking-canceled',
-    component: BookingCanceledComponent,
-    title: 'Booking Canceled'
-  },
-  {
-    path: 'dashboard/viewpost/:id',
-    component: ViewpostDashboardComponent,
-    title: 'Post Dashboard'
-  },
-  {
-    path: 'dashboard/authors',
-    component: AuthorDashboardComponent,
-    title: 'Author Dashboard'
-  },
-  {
-    path: 'dashboard/viewAuthorposts/:id',
-    component: AuthorPostsComponent,
-    title: 'Author Posts'
-  },
-  {
-    path: 'dashboard/governments',
-    component: GovernmentsComponent,
-    title: 'Governments Dashboard'
-  },
-  {
-    path: 'dashboard/trip',
-    component: TripDashboardComponent,
-    title: 'Trip Dashboard'
-  }
-  ,
-  {
-    path: 'dashboard/site',
-    component: SiteDashboardComponent,
-    title: 'Site Dashboard'
-  }
-];
       { path: '', redirectTo: 'home', pathMatch: 'full' },
+      
+      {
+        path: 'dashboard/booking-management',
+        children: [
+          { path: '', component: BookingManagementComponent },
+          { path: 'create', component: BookingFormComponent },
+          { path: 'edit/:id', component: BookingFormComponent }
+        ]
+      },
       {
         path: 'dashboard/posts',
-        loadComponent: () => import('./pages/postdashboard/postdashboard.component').then(m => m.DashboardComponent),
+        component: DashboardComponent,
         title: 'Post Dashboard'
       },
-      
+
+      {
+        path: 'create-post',
+        loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
+        title: 'Create Post'
+      },
+      {
+        path: 'edit-post/:id',
+        loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
+        title: 'Edit Post'
+      },
       {
         path: 'dashboard/viewpost/:id',
         component: ViewpostDashboardComponent,
-        title: 'post Dashboard'
+        title: 'Post Dashboard'
       },
-
       {
         path: 'dashboard/categories',
         component: CategoryDashboardComponent,
@@ -168,14 +123,17 @@ export const routes: Routes = [
         component: TransportationsComponent,
         title: 'Transportations Dashboard'
       },
-    
       {
         path: 'dashboard/drivers',
         component: DriversDashboardComponent,
-        title: 'drivers Dashboard'
+        title: 'Drivers Dashboard'
       },
-    
 
+      {
+        path: 'dashboard/governments',
+        component: GovernmentsComponent,
+        title: 'Governments Dashboard'
+      },
       {
         path: 'dashboard/authors',
         component: AuthorDashboardComponent,
@@ -183,46 +141,31 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard/viewAuthorposts/:id',
-        component: AuthorpostdahboardComponent,
-        title: 'Authorpost Dashboard'
+        component: AuthorPostsComponent,
+        title: 'Author Posts'
       },
+    
       {
-        path: 'dashboard/governments',
-        component: GovernmentsComponent,
-        title: 'Governments Dashboard'
+        path: 'dashboard/trip',
+        component: TripDashboardComponent,
+        title: 'Trip Dashboard'
       },
-      { path: 'dashboard/booking',
-         component: BookingDashboardComponent,
-          title: 'Booking Dashboard' },
 
-          {
-            path: 'create-post',
-            loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
-            title: 'Create Post'
-          },
-          {
-            path: 'edit-post/:id',
-            loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
-            title: 'Edit Post'
-          
-          },
-          {
-            path: 'dashboard/viewpost/:id',
-            component: ViewpostDashboardComponent,
-            title: 'post Dashboard'
-          },
-          
-         
-      
+      {
+        path: 'dashboard/site',
+        component: SiteDashboardComponent,
+        title: 'Site Dashboard'
+      }
+
     ]
   },
+    
 
   {
     path: 'booking-confirmation/:id',
     component: BookingConfirmationComponent,
     title: 'Booking Confirmation'
   },
-  
  
   
   {
@@ -230,70 +173,17 @@ export const routes: Routes = [
     component: BookingCanceledComponent,
     title: 'Booking Canceled'
   },
- 
-  // {
-  //   path: 'dashboard/trip',
-  //   component: TripDashboardComponent,
-  //   title: 'Trip Dashboard'
-  // }
- 
-  
 
- 
-  //booking confirmation and payment routes
 
   {
-    path: 'booking-confirmation/:id',
-    component: BookingConfirmationComponent
+    path: 'governrate/:id',
+    component: GovernmentsComponent
   },
-
   {
-    path: 'booking-canceled',
-    component: BookingCanceledComponent
-  },
+    path: 'government/:id',
+    loadComponent: () => import('./components/site-by-government/sites-by-government.component').then(m => m.SitesByGovernmentComponent)
+  }
 
-  { path: 'payment/:bookingId', component: PaymentComponent },
-
-  { path: 'payment', component: PaymentComponent },
-
-
-// //dashboard route
-
-{
-  path: 'create-post',
-  loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
-  title: 'Create Post'
-},
-{
-  path: 'edit-post/:id',
-  loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
-  title: 'Edit Post'
-
-},
-{
-  path: 'dashboard/viewpost/:id',
-  component: ViewpostDashboardComponent,
-  title: 'post Dashboard'
-},
-
-{
-  path: 'dashboard/viewAuthorposts/:id',
-  component: AuthorpostdahboardComponent,
-  title: 'Authorpost Dashboard'
-},
-
-{
-  path: 'dashboard/bookings/create',
-  component: BookingformDashboardComponent,
-  title: 'Create Booking'
-},
-{
-  path: 'dashboard/bookings/edit/:id',
-  component: BookingformDashboardComponent,
-  title: 'Edit Booking'
-}
-];
-
-
-
-
+  ,
+      
+    ];

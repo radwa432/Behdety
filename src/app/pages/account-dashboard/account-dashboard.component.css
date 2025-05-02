@@ -1,0 +1,12 @@
+@media (max-width: 768px) {
+    .main-content {
+      margin-left: 70px;
+    }
+    .card-header h2 {
+      font-size: 1.25rem;
+    }
+    .col-md-6 {
+      width: 100%;
+    }
+  }
+  
