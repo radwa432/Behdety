@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SiteService } from '../services/site-2.service';
-
 import { Site } from '../models/site';
 import { GovernmentService } from '../services/government.service';
 import { Government } from '../interface/government';
@@ -13,11 +12,44 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.revealMultiple();
+    this.revealSingle();
+  }
+  
+  // Animate multiple elements with class `.reveal-on-scroll`
+  revealMultiple() {
+    const reveals = document.querySelectorAll('.reveal-on-scroll');
+    reveals.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        el.classList.add('in-view');
+      }
+    });
+  }
+  
+  // Animate one element with class `.scroll-section`
+  revealSingle() {
+    const section = document.querySelector('.scroll-section');
+    if (!section) return;
+  
+    const rect = section.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      section.classList.add('in-view');
+    }
+  }
+  
+
+
+  ngAfterViewInit() {
+    this.onWindowScroll();
+  }
+
   sites: Site[] = [];
   government: Government[] = [];
   currentPage: number = 1;
-  // router: any;
 
   constructor(
     private siteService: SiteService,
@@ -54,9 +86,6 @@ export class HomeComponent implements OnInit {
       container.scrollBy({ left: -300, behavior: 'smooth' });
     }
   }
-  goToGovernment(id: number) {
-    this.router.navigate(['/government', id]);
-  }
 
   scrollRight(id: string): void {
     const container = document.getElementById(id);
@@ -64,6 +93,13 @@ export class HomeComponent implements OnInit {
       container.scrollBy({ left: 300, behavior: 'smooth' });
     }
   }
+
+  goToGovernment(id: number | undefined) {
+    
+    this.router.navigate(['../site-by-government/sites-by-government.component', id]);
+  }
+  
+   
 
   getGovernment(): void {
     this.governrateService.getGovernments().subscribe({

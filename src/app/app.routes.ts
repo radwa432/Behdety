@@ -69,12 +69,6 @@ export const routes: Routes = [
   { path: 'payment', component: PaymentComponent },
 
 
-
-
-
-
-
-  //dashboard routes
   {
     path: 'admin-main',
     loadComponent: () => import('./admin-main/admin-main.component').then(m => m.AdminMainComponent),
@@ -150,12 +144,12 @@ export const routes: Routes = [
         component: TripDashboardComponent,
         title: 'Trip Dashboard'
       },
-
       {
         path: 'dashboard/site',
         component: SiteDashboardComponent,
         title: 'Site Dashboard'
       }
+      ,
 
     ]
   },
@@ -186,6 +180,8 @@ export const routes: Routes = [
 
   ,
 
+    
+     
       
     ];
 
