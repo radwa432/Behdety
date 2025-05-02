@@ -35,7 +35,7 @@ export class BookingManagementComponent implements OnInit {
   }
 
   onEdit(id: string) {
-    this.router.navigate(['/dashboard/booking-management/edit', id]);
+    this.router.navigate(['/admin-main/dashboard/booking-management/edit', id]);
   }
 
   onDelete(id: string) {
@@ -47,6 +47,6 @@ export class BookingManagementComponent implements OnInit {
   }
 
   onCreate() {
-    this.router.navigate(['/dashboard/booking-management/create']);
+    this.router.navigate(['/admin-main/dashboard/booking-management/create']);
   }
 }
