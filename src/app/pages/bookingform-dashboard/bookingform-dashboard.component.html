@@ -1,30 +1,122 @@
-<div class="container">
-    <h2>{{ isEdit ? 'Edit Booking' : 'Create Booking' }}</h2>
-  
-    <form [formGroup]="form" (ngSubmit)="submit()">
-      <div class="mb-3">
-        <label for="tripName" class="form-label">Trip</label>
-        <select formControlName="tripName" class="form-select">
-          <option *ngFor="let trip of trips" [value]="trip.name">{{ trip.name }}</option>
-        </select>
-      </div>
-  
-      <div class="mb-3">
-        <label class="form-label">Number of People</label>
-        <input type="number" class="form-control" formControlName="numberPeople" />
-      </div>
-  
-      <div class="mb-3">
-        <label class="form-label">Start Date</label>
-        <input type="date" class="form-control" formControlName="startComingDate" />
-      </div>
-  
-      <div class="mb-3">
-        <label class="form-label">End Date</label>
-        <input type="date" class="form-control" formControlName="endComingDate" />
-      </div>
-  
-      <button type="submit" class="btn btn-primary">{{ isEdit ? 'Update' : 'Create' }}</button>
-    </form>
+<div class="dashboard-container bg-light" style="min-height: 100vh;">
+  <!-- Sidebar -->
+  <div class="sidebar bg-dark text-white" style="width: 250px; position: fixed; height: 100vh;">
+    <div class="p-3">
+      <h4 class="mb-4"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h4>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" routerLink="/dashboard/booking-management">
+            <i class="fas fa-calendar-check me-2"></i>Bookings
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white active" href="#">
+            <i class="fas fa-edit me-2"></i>{{ isEdit ? 'Edit Booking' : 'New Booking' }}
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
-  
+
+  <!-- Main Content -->
+  <div class="main-content" style="margin-left: 250px; padding: 20px;">
+    <div class="container-fluid pt-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-primary text-white py-3">
+          <h2 class="mb-0">
+            <i class="fas fa-calendar-alt me-2"></i>
+            {{ isEdit ? 'Edit Booking' : 'Create New Booking' }}
+          </h2>
+        </div>
+
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row g-3">
+              <!-- Trip Name -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">
+                  <i class="fas fa-map-marked me-2"></i>Trip Name
+                </label>
+                <input formControlName="tripName" 
+                      class="form-control"
+                      [ngClass]="{'is-invalid': form.get('tripName')?.invalid && form.get('tripName')?.touched}">
+                <div *ngIf="form.get('tripName')?.invalid" class="invalid-feedback">
+                  Trip name is required
+                </div>
+              </div>
+
+              <!-- Start Date -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">
+                  <i class="fas fa-calendar-day me-2"></i>Start Date
+                </label>
+                <input type="date" formControlName="startComingDate" 
+                      class="form-control"
+                      [ngClass]="{'is-invalid': form.get('startComingDate')?.invalid && form.get('startComingDate')?.touched}">
+                <div *ngIf="form.get('startComingDate')?.invalid" class="invalid-feedback">
+                  Start date is required
+                </div>
+              </div>
+
+              <!-- End Date -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">
+                  <i class="fas fa-calendar-times me-2"></i>End Date
+                </label>
+                <input type="date" formControlName="endComingDate" 
+                      class="form-control"
+                      [ngClass]="{'is-invalid': form.get('endComingDate')?.invalid && form.get('endComingDate')?.touched}">
+                <div *ngIf="form.get('endComingDate')?.invalid" class="invalid-feedback">
+                  End date is required
+                </div>
+              </div>
+
+              <!-- Number of People -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">
+                  <i class="fas fa-users me-2"></i>Number of People
+                </label>
+                <input type="number" formControlName="numberPeople" 
+                      class="form-control"
+                      [ngClass]="{'is-invalid': form.get('numberPeople')?.invalid && form.get('numberPeople')?.touched}">
+                <div *ngIf="form.get('numberPeople')?.invalid" class="invalid-feedback">
+                  Please enter number of people
+                </div>
+              </div>
+
+              <!-- Optional Fields -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold text-muted">
+                  <i class="fas fa-clock me-2"></i>Number of Days (optional)
+                </label>
+                <input type="number" formControlName="numberDays" class="form-control">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold text-muted">
+                  <i class="fas fa-coins me-2"></i>Amount (optional)
+                </label>
+                <input type="number" formControlName="amountMoney" class="form-control">
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="d-flex justify-content-end gap-3 mt-4">
+              <button type="submit" 
+                      class="btn btn-success px-4"
+                      [disabled]="form.invalid">
+                <i class="fas" [class.fa-save]="isEdit" [class.fa-plus]="!isEdit"></i>
+                {{ isEdit ? 'Update' : 'Create' }}
+              </button>
+              <button type="button" 
+                      class="btn btn-secondary px-4"
+                      (click)="router.navigate(['/dashboard/booking-management'])">
+                <i class="fas fa-times me-2"></i>Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

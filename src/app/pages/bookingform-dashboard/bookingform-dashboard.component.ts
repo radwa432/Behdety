@@ -1,92 +1,67 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BookService } from '../../services/book.service';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule, RouterLink } from '@angular/router';
+import { BookingService } from '../../services/bookingdashboard/booking-dashboard.service';
+import { CreateBookDto } from '../../models/book';
 
 @Component({
-  selector: 'app-bookingform-dashboard',
-  imports: [ CommonModule, FormsModule, RouterModule, ReactiveFormsModule ],
+  selector: 'app-booking-form',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, RouterLink],
   templateUrl: './bookingform-dashboard.component.html',
-  styleUrl: './bookingform-dashboard.component.css'
+  styleUrls: ['./bookingform-dashboard.component.css']
 })
-export class BookingformDashboardComponent implements OnInit {
-  form!: FormGroup;
+export class BookingFormComponent implements OnInit {
+  form: ReturnType<FormBuilder['group']>;
   isEdit = false;
-  bookingId!: string;
-  trips: any[] = [];
+  bookingId: string | null = null;
 
   constructor(
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private bookService: BookService
-  ) {}
-
-  ngOnInit(): void {
+    private readonly fb: FormBuilder,
+    private readonly bookingService: BookingService,
+    private readonly route: ActivatedRoute,
+    readonly router: Router
+  ) {
+    // 🔄 حركنا إنشاء الـ Form إلى الـ constructor بعد تهيئة fb
     this.form = this.fb.group({
       tripName: ['', Validators.required],
-      numberPeople: [1, Validators.required],
       startComingDate: ['', Validators.required],
       endComingDate: ['', Validators.required],
+      numberPeople: [1, [Validators.required, Validators.min(1)]],
+      numberDays: [null as number | null],
+      amountMoney: [null as number | null]
     });
+  }
 
-    // تحميل الرحلات
-    this.loadAllTrips();
-
-    // إذا كان فيه ID --> Edit
-    this.bookingId = this.route.snapshot.paramMap.get('id')!;
+  ngOnInit(): void {
+    this.bookingId = this.route.snapshot.paramMap.get('id');
     if (this.bookingId) {
       this.isEdit = true;
-      this.bookService.getBooking(this.bookingId).subscribe(booking => {
+      this.bookingService.getBooking(this.bookingId).subscribe(b => {
         this.form.patchValue({
-          tripName: booking.tripName,
-          numberPeople: booking.numberPeople,
-          startComingDate: booking.startComingDate,
-          endComingDate: booking.endComingDate,
+          tripName: b.tripName,
+          startComingDate: b.startComingDate,
+          endComingDate: b.endComingDate,
+          numberPeople: b.numberPeople,
+          numberDays: b.numberDays ?? null,        
+          amountMoney: b.amountMoney ?? null       
         });
       });
     }
   }
 
-  loadAllTrips() {
-    let page = 1;
-    let allTrips: any[] = [];
-  
-    const loadPage = () => {
-      this.bookService.getTrips(page).subscribe(response => {
-        const trips = response.items || response; // تأكد من أن الـ response يحتوي على البيانات بشكل صحيح
-        if (trips && trips.length > 0) {
-          allTrips = [...allTrips, ...trips];
-          page++;
-          loadPage(); // استدعاء الصفحة التالية
-        } else {
-          this.trips = allTrips; // حفظ كل الرحلات بعد الانتهاء
-        }
-      }, error => {
-        console.error('Error loading trips:', error);
-      });
-    };  loadPage();
-  }
-
-  submit() {
+  onSubmit(): void {
     if (this.form.invalid) return;
 
-    const dto = this.form.value;
+    const dto: CreateBookDto = this.form.value as CreateBookDto;
 
-    if (this.isEdit) {
-      this.bookService.updateBook(this.bookingId, dto).subscribe(() => {
-        alert('Booking updated!');
-        this.router.navigate(['/bookings']);
-      });
+    const redirect = () => this.router.navigate(['/dashboard/booking-management']);
+
+    if (this.isEdit && this.bookingId) {
+      this.bookingService.updateBooking(this.bookingId, dto).subscribe(redirect);
     } else {
-      this.bookService.createBooking(dto).subscribe(() => {
-        alert('Booking created!');
-        this.router.navigate(['/bookings']);
-      });
+      this.bookingService.createBooking(dto).subscribe(redirect);
     }
   }
 }

@@ -31,8 +31,8 @@ import { SiteDashboardComponent } from './pages/site-dashboard/site-dashboard.co
 //import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
 
 
-import { BookingDashboardComponent } from './pages/booking-dashboard/booking-dashboard.component';
-import { BookingformDashboardComponent } from './pages/bookingform-dashboard/bookingform-dashboard.component';
+import { BookingManagementComponent } from './pages/booking-dashboard/booking-dashboard.component';
+import { BookingFormComponent } from './pages/bookingform-dashboard/bookingform-dashboard.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -78,6 +78,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
   },
+
   {
     path: 'create-post',
     loadComponent: () => import('./pages/postformCreate/post-form.component').then(m => m.CreatePostComponent),
@@ -143,9 +144,8 @@ export const routes: Routes = [
     path: 'dashboard/site',
     component: SiteDashboardComponent,
     title: 'Site Dashboard'
-  }
-];
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
+  },
+   { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'dashboard/posts',
         loadComponent: () => import('./pages/postdashboard/postdashboard.component').then(m => m.DashboardComponent),
@@ -192,7 +192,7 @@ export const routes: Routes = [
         title: 'Governments Dashboard'
       },
       { path: 'dashboard/booking',
-         component: BookingDashboardComponent,
+         component: BookingManagementComponent,
           title: 'Booking Dashboard' },
 
           {
@@ -211,10 +211,33 @@ export const routes: Routes = [
             component: ViewpostDashboardComponent,
             title: 'post Dashboard'
           },
-          
-         
+          {
+            path: 'dashboard/bookings',
+            component: BookingManagementComponent,
+          },
+          {
+            path: 'dashboard/bookings/create',
+            component: BookingFormComponent,
+            title: 'Create Booking'
+          },
+          {
+            path: 'dashboard/bookings/edit/:id',
+            component: BookingFormComponent,
+            title: 'Edit Booking'
+          },
       
-    ]
+          {
+            path: 'dashboard/booking-management',
+            children: [
+              { path: '', component: BookingManagementComponent },
+              { path: 'create', component: BookingFormComponent },
+              { path: 'edit/:id', component: BookingFormComponent }
+            ]
+          }
+    ];
+
+    /////////////////
+    /*
   },
 
   {
@@ -284,16 +307,19 @@ export const routes: Routes = [
 
 {
   path: 'dashboard/bookings/create',
-  component: BookingformDashboardComponent,
+  component: BookingformDashboardComponent
   title: 'Create Booking'
 },
 {
   path: 'dashboard/bookings/edit/:id',
-  component: BookingformDashboardComponent,
+  component: BookingformDashboardComponent
   title: 'Edit Booking'
 }
 ];
 
+     
 
 
 
+
+*/

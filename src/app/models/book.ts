@@ -10,6 +10,7 @@ export interface Book {
   numberDays: number;
   numberPeople: number;
   amountMoney: number;
+
   // Add any other properties your booking might have
 }
 
@@ -34,4 +35,27 @@ export interface PaymentIntentResponse {
   amount: number;
   currency: string;
   status: string;
+}
+
+///
+export interface CreateBookDto {
+  tripName: string;
+  startComingDate: string; // ISO date
+  endComingDate: string;
+  numberPeople: number;
+  numberDays?: number;
+  amountMoney?: number;
+}
+
+export interface BookDetailDto {
+  bookId: string;
+  tripId: string;
+  tripName?: string;
+  applicationUserId?: string;
+  dateBook?: string;
+  startComingDate: string;
+  endComingDate: string;
+  numberDays: number;
+  numberPeople: number;
+  amountMoney: number;
 }
