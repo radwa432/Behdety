@@ -18,7 +18,6 @@ export class TripService {
     return this.http.get<TripGetDto[]>(`${this.apiUrl}?pagenumber=${pageNumber}`);
   }
 
-
   createTrip(formData: FormData): Observable<any> {
     return this.http.post(this.apiUrl, formData).pipe(
       catchError(error => {

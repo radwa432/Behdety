@@ -1,0 +1,41 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">AI Assistant</h5>
+      <button class="btn btn-sm btn-danger" (click)="newChat()">New Chat</button>
+    </div>
+    <div class="card-body" style="height: 400px; overflow-y: auto;" #chatContainer>
+      <div *ngFor="let msg of messages" class="mb-2">
+        <div [ngClass]="{
+          'text-end': msg.role === 'user',
+          'text-start': msg.role === 'assistant'
+        }">
+          <span class="badge p-2" [ngClass]="{
+            'bg-primary': msg.role === 'user',
+            'bg-success': msg.role === 'assistant',
+            'bg-danger': msg.role === 'error'
+          }">
+            {{ msg.message }}
+          </span>
+        </div>
+      </div>
+      <div *ngIf="isLoading" class="text-start mb-2">
+        <span class="badge bg-secondary p-2">
+          <span class="spinner-border spinner-border-sm me-2"></span>
+          Assistant is typing...
+        </span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <form [formGroup]="chatForm" (ngSubmit)="sendMessage()">
+        <div class="input-group">
+          <textarea
+          formControlName="message"
+          class="form-control"
+          placeholder="Type a message..."
+          style="resize: vertical; height: 60px; max-height: 150px; overflow-y: auto;">
+        </textarea>
+          <button type="submit" class="btn btn-primary" [disabled]="chatForm.invalid">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>

@@ -49,6 +49,7 @@ interface ResetPasswordDto {
   providedIn: 'root'
 })
 export class AuthService {
+  private isAuthenticated = false;
   private apiUrl = `${environment.apiUrl}/api/Account`;
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
@@ -57,6 +58,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private jwtService: JwtService) {
     this.initializeUser();
+     // Check initial auth state (e.g., from localStorage)
+     this.isAuthenticated = !!localStorage.getItem('authToken');
   }
 
   private initializeUser() {
@@ -72,6 +75,9 @@ export class AuthService {
   }
   register(userData: RegisterRequest): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, userData);
+  }
+  isLoggedIn(): boolean {
+    return this.isAuthenticated;
   }
 
   login(credentials: LoginRequest): Observable<any> {
