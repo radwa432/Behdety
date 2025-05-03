@@ -12,6 +12,64 @@
 
   <img src="assets/images/home.jpg.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Home cover image">
 </div>
+
+
+
+
+<!-- tour sections -->
+<div class="container  my-5 py-5" style="width: 80%;">
+  
+  <h2 class="display-5 fw-bold mb-5 text-center" style="color: #202F59; font-size: 55px; line-height: 60px;">Popular Tours</h2>
+  
+  <div class="row g-4 ">
+    <div class="col-md-4" *ngFor="let tour of trips">
+      <div class="card blog-card h-100 border-0 shadow-hover">
+        <a [routerLink]="['/Overview', tour.tripId]" class="text-decoration-none text-dark">
+          <div class="card-img-container position-relative">
+            <img
+              [src]="getMainImage(tour)"
+              class="card-img-top rounded-4 object-fit-cover"
+              alt="{{ tour.name }}"
+              onerror="this.src='assets/images/default.jpg'"
+              style="height: 320px;"
+            />
+          
+          </div>
+          
+          <div class="card-body p-4">
+            <div class="post-meta d-flex flex-wrap gap-3 mb-3">
+              <span class="d-flex align-items-center" style="color: #F77500;">
+                <i class="far fa-calendar-alt mx-1"></i>              
+                {{ tour.duration }}
+              </span>
+             
+              <span class="d-flex align-items-center" style="color: #F77500;">
+                <i class="fa-solid fa-person mx-1"></i>                
+                {{ tour.maxPeople }}
+              </span>
+            </div>
+            
+            <h4 class="card-title fw-bold mb-3" style="color: #333;">
+              {{ tour.name }}
+            </h4>
+          
+          </div>
+          <hr class="card-title fw-bold mb-3" style="color: #333;">
+          <div class="d-flex align-items-center  hover-effect" style="color: #ffffff; margin-left: 14px;">
+            <span class="fw-bold badge me-2 fs-6"style="background-color: #F77500; color: white;"> {{tour.money}} <i class="fa-solid fa-dollar-sign"></i></span>
+            
+          </div>
+          <div class="card-footer bg-transparent border-0 py-3">
+            <div class="d-flex align-items-center hover-effect" style="color: #dc834e;">
+              <span class="fw-bold me-2">Explore</span>
+              <i class="fas fa-arrow-right transition-icon"></i>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container my-5">
 
   <div class="container my-6">
@@ -134,7 +192,7 @@
       <img
         [src]="government.image"
         alt="Image for{{ government.name }}"
-        (error)="government.image = 'assets/images/lux.jpg'"
+     
         class="card-img-top"
         style="height: 150px; object-fit: cover;"
       />
@@ -246,5 +304,9 @@
     </div>
  
 </div>
+
+
+
+
 
   <app-contact></app-contact>
