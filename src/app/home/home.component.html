@@ -81,58 +81,50 @@
       <button class="btn btn-outline-primary me-2" (click)="scrollLeft('sitesScroll')">
         &#8249;
       </button>
-
+    
       <!-- Scrollable Cards Container -->
       <div
         id="sitesScroll"
         class="d-flex overflow-auto"
         style="scroll-behavior: smooth; white-space: nowrap; flex-grow: 1;"
       >
-        <div
+        <a
           *ngFor="let site of sites"
-          class="card hover-touch-card me-3"
-          style="min-width: 280px; max-width: 280px;"
+          [routerLink]="['/site', site.id]"
+          class="text-decoration-none text-dark"
         >
-        <div *ngIf="site.siteImages.length > 0">
-          <img
-            [src]="site.siteImages[0].image"
-            class="card-img-top"
-            alt="{{ site.name }}"
-            style="height: 180px; object-fit: cover;"
-          />
-        </div>
-        <ng-container *ngFor="let img of site.siteImages">
-          <img
-            *ngIf="img.image.includes(site.id)"
-            [src]="img.image"
-            class="card-img-top"
-            alt="{{ site.name }}"
-            style="height: 180px; object-fit: cover;"
-          />
-        </ng-container>
-        
-        
-          <div class="card-body p-2">
-            <h6 class="card-title text-center mb-1">{{ site.name }}</h6>
-            <p
-            class="card-text text-center mb-0 text-truncate site-description"
-            [attr.title]="site.description"
+          <div
+            class="card hover-touch-card me-3"
+            style="min-width: 280px; max-width: 280px;"
           >
-            {{ site.description }}
-          </p>          
-            <div *ngFor="let site of sites">
-              <a *ngIf="site?.id" [routerLink]="['/site', site.id]">
-              </a>
+            <div *ngIf="site.siteImages.length > 0">
+              <img
+                [src]="site.siteImages[0].image"
+                class="card-img-top"
+                alt="{{ site.name }}"
+                style="height: 180px; object-fit: cover;"
+              />
             </div>
-
+    
+            <div class="card-body p-2">
+              <h6 class="card-title text-center mb-1">{{ site.name }}</h6>
+              <p
+                class="card-text text-center mb-0 text-truncate site-description"
+                [attr.title]="site.description"
+              >
+                {{ site.description }}
+              </p>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
+    
       <!-- Right Scroll Button -->
       <button class="btn btn-outline-primary ms-2" (click)="scrollRight('sitesScroll')">
         &#8250;
       </button>
     </div>
+    
 
 
     <!-- Features Section -->

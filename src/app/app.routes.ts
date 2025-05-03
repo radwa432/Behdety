@@ -34,6 +34,9 @@ import { SiteDashboardComponent } from './pages/site-dashboard/site-dashboard.co
 import { BookingManagementComponent } from './pages/booking-dashboard/booking-dashboard.component';
 import { BookingFormComponent } from './pages/bookingform-dashboard/bookingform-dashboard.component';
 import { DashboardComponent } from './pages/postdashboard/postdashboard.component';
+import { SiteDetailsComponent } from './site-details/site-details.component';
+
+
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -185,5 +188,11 @@ export const routes: Routes = [
   }
 
   ,
-      
+  { path: 'site/:id', component: SiteDetailsComponent },
+  {
+    path: 'site/:id',
+    loadComponent: () => import('./site-details/site-details.component').then(m => m.SiteDetailsComponent)
+  }
+  
+ 
     ];
