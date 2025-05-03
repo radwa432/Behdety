@@ -19,7 +19,7 @@
 <!-- tour sections -->
 <div class="container  my-5 py-5" style="width: 80%;">
   
-  <h2 class="display-5 fw-bold mb-5 text-center" style="color: #202F59; font-size: 55px; line-height: 60px;">Popular Tours</h2>
+  <h2 class="display-5 fw-bold mb-5 text-center" style="color: #F77500; font-size: 55px; line-height: 60px;">Popular Tours</h2>
   
   <div class="row g-4 ">
     <div class="col-md-4" *ngFor="let tour of trips">
@@ -49,7 +49,7 @@
               </span>
             </div>
             
-            <h4 class="card-title fw-bold mb-3" style="color: #333;">
+            <h4 class="card-title fw-bold mb-3" style="color: #dc834e;">
               {{ tour.name }}
             </h4>
           
@@ -70,23 +70,24 @@
     </div>
   </div>
 </div>
+  <!-- Sites -->
 <div class="container my-5">
 
   <div class="container my-6">
 
-    <h2 class="text-center mb-4 mt-5">Sites</h2>
+    <h2 class="text-center mb-4 mt-5" style="color: #F77500; ;">Sites</h2>
 
     <div class="d-flex align-items-center position-relative px-3">
       <!-- Left Scroll Button -->
-      <button class="btn btn-outline-primary me-2" (click)="scrollLeft('sitesScroll')">
-        &#8249;
+      <button class="btn btn-outline-primary me-2 "  (click)="scrollLeft('sitesScroll')">
+        &#8250;
       </button>
     
       <!-- Scrollable Cards Container -->
       <div
         id="sitesScroll"
         class="d-flex overflow-auto"
-        style="scroll-behavior: smooth; white-space: nowrap; flex-grow: 1;"
+        style="scroll-behavior: smooth; white-space: nowrap; flex-grow: 1; "
       >
         <a
           *ngFor="let site of sites"
@@ -131,8 +132,8 @@
 <section class="container my-5 py-5">
   <div class="row text-center">
     <div class="col">
-      <h3 class="mb-4">Our Features</h3>
-      <p class="lead text-muted">
+      <h3 class="mb-4" style="color: #F77500;">Our Features</h3>
+      <p class="lead text-muted" >
         Enjoy your own trip with us while discovering new places
       </p>
 
@@ -176,7 +177,7 @@
 <!-- Update the government section -->
 <h2 class="text-center mb-4 mt-5">Governrates</h2>
 
-<div class="d-flex align-items-center position-relative px-3">
+<div class="d-flex align-items-center position-relative px-3 bs-btn-bg:#fff bs-btn-border:#f0541d ">
   <button class="btn btn-primary me-2" (click)="scrollLeft('governratesScroll')">
     &#8249;
   </button>
@@ -232,8 +233,8 @@
           <p class="card-text text-muted fs-5">
             Discover breathtaking destinations, curated itineraries, and memorable moments with our top-rated tours. Let us guide your next adventure!
           </p>
-          <a [routerLink]="['/Overview']" routerLinkActive="router-link-active" class="deco">
-            Explore <i class="fa-solid fa-arrow-right"></i>
+          <a [routerLink]="['/Overview']" routerLinkActive="router-link-active" class="deco" style="color: #F77500;">
+            Explore <i class="fa-solid fa-arrow-right" style="color: #F77500;"></i>
           </a> 
         </div>
       </div>

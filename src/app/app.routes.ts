@@ -203,7 +203,7 @@ export const routes: Routes = [
 
   ,
       
-    ];
+    
   { path: 'site/:id', component: SiteDetailsComponent },
   {
     path: 'site/:id',
@@ -211,7 +211,7 @@ export const routes: Routes = [
   }
   
  
-    ];
+    ,
 
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },

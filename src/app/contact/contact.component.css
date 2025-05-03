@@ -19,7 +19,7 @@
 
 /* Contact Info Card */
 .contact-card {
-  background: #fff;
+  background: #FFEBCC;
   padding: 30px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   min-width: 300px;
@@ -135,4 +135,73 @@
   }
   
 
+}
+.contact-form-section input,
+.contact-form-section textarea {
+  background-color: #FFEBCC; /* لون مشمشي */
+  box-shadow: 0 0 8px 2px rgba(255, 165, 0, 0.6); /* شادو برتقالي */
+  border: 1px solid #FFA500; /* حدود برتقالية */
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.contact-form-section button {
+  background-color: #FFA500; /* زر برتقالي */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.contact-form-section button:hover {
+  background-color: #FF8C00; /* تغيير لون الزر عند التمرير */
+}
+/* Footer */
+.contact-section {
+  background-color: #FFF2E6; /* خلفية فاتحة بدرجات البرتقالي */
+  color: #333;
+  ;
+}
+
+.contact-section .text-muted {
+  color: #FF8C00 !important; /* تعديل اللون الرمادي إلى البرتقالي الداكن */
+}
+
+.contact-section .text-dark {
+  color: #FF5722; /* تغيير النصوص الداكنة إلى لون برتقالي دافئ */
+}
+
+.contact-section .social-icon {
+  background-color: #FFA500; /* لون خلفية الأيقونات برتقالي */
+  color: white; /* لون الأيقونات أبيض */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.contact-section .social-icon:hover {
+  background-color: #FF7F32; /* تأثير التمرير بلون برتقالي داكن */
+  color: white;
+}
+
+.contact-section .fas, .contact-section .fab {
+  font-size: 20px;
+}
+
+/* Icons for phone and email */
+.contact-section .fa-phone-alt {
+  color: #FF5722; /* اللون البرتقالي الداكن للهاتف */
+}
+
+.contact-section .fa-envelope {
+  color: #FF7043; /* اللون البرتقالي المائل للوردي للبريد الإلكتروني */
 }

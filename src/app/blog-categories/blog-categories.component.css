@@ -1,0 +1,32 @@
+/* Button primary (active/selected) */
+.btn.btn-primary {
+    background-color: #ff7a00;
+    border-color: #ff7a00;
+    color: white;
+  }
+  
+  .btn.btn-primary:hover {
+    background-color: #e06600;
+    border-color: #e06600;
+  }
+  
+  /* Button outline (unselected) */
+  .btn.btn-outline-primary {
+    color: #ff7a00;
+    border-color: #ff7a00;
+    background-color: transparent;
+  }
+  
+  .btn.btn-outline-primary:hover {
+    background-color: #ff7a00;
+    color: white;
+    border-color: #ff7a00;
+  }
+  
+  /* Optional: spacing and rounded corners */
+  .category-list .btn {
+    border-radius: 10px;
+    font-weight: 500;
+    transition: 0.3s ease;
+  }
+  
