@@ -56,7 +56,7 @@ export class BookingFormComponent implements OnInit {
 
     const dto: CreateBookDto = this.form.value as CreateBookDto;
 
-    const redirect = () => this.router.navigate(['/dashboard/booking-management']);
+    const redirect = () => this.router.navigate(['admin-main/dashboard/booking-management']);
 
     if (this.isEdit && this.bookingId) {
       this.bookingService.updateBooking(this.bookingId, dto).subscribe(redirect);
