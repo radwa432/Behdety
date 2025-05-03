@@ -1,0 +1,24 @@
+<div class="position-relative vh-100 overflow-hidden">
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50 z-1"></div>
+  
+    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white text-center p-3 z-2">
+      <h1 class="display-3 fw-bold mb-4">{{ site?.name }}</h1>
+  
+      <div *ngIf="site">
+        <p>{{ site?.description }}</p>
+      </div>
+    </div>
+  
+    <!-- Display site image -->
+    <img *ngIf="site?.siteImages.length > 0"
+      [src]="site?.siteImages[0].image"
+      class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+      alt="{{ site?.name }}"
+    />
+    <div class="mt-auto">
+        <a (click)="navigateToOverview(trip)" class="btn btn-primary">
+          Explore <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+  </div>
+  

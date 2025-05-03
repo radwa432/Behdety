@@ -165,4 +165,24 @@ img:hover {
   max-width:90%;
 
 }
+
+#sitesScroll {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;    
+}
+
+#sitesScroll::-webkit-scrollbar {
+  display: none;             
+}
+
+#governratesScroll {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;     
+}
+
+#governratesScroll::-webkit-scrollbar {
+  display: none;            
+}
+
+
 /* Responsive Design */

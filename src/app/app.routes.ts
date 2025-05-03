@@ -25,9 +25,8 @@ import { AdminAddTripComponent } from './admin-add-trip/admin-add-trip.component
 import { AdminAddSiteComponent } from './admin-add-site/admin-add-site.component';
 import { PaymentComponent } from './payment/payment.component';
 import { BookingCanceledComponent } from './booking-canceled/booking-canceled.component';
-//import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
-import { SiteDashboardComponent } from './pages/site-dashboard/site-dashboard.component';
 import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
+import { SiteDashboardComponent } from './pages/site-dashboard/site-dashboard.component';
 //import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
 //import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
 
@@ -35,6 +34,11 @@ import { AccountDashboardComponent } from './pages/account-dashboard/account-das
 import { BookingManagementComponent } from './pages/booking-dashboard/booking-dashboard.component';
 import { BookingFormComponent } from './pages/bookingform-dashboard/bookingform-dashboard.component';
 import { DashboardComponent } from './pages/postdashboard/postdashboard.component';
+import { SiteDetailsComponent } from './site-details/site-details.component';
+
+
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -44,7 +48,7 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
-  { path: 'Overview/:id', component: OverviewComponent },
+  { path: 'Overview', component: OverviewComponent },
   { path: 'faqs', component: FaqsComponent },
   { path: 'Overview', component: OverviewComponent },
   { path: 'faqs', component: FaqsComponent },
@@ -70,6 +74,12 @@ export const routes: Routes = [
   { path: 'payment', component: PaymentComponent },
 
 
+
+
+
+
+
+  //dashboard routes
 
 
 
@@ -152,6 +162,7 @@ export const routes: Routes = [
         title: 'Trip Dashboard'
       },
 
+
       {
         path: 'dashboard/site',
         component: SiteDashboardComponent,
@@ -193,3 +204,38 @@ export const routes: Routes = [
   ,
       
     ];
+  { path: 'site/:id', component: SiteDetailsComponent },
+  {
+    path: 'site/:id',
+    loadComponent: () => import('./site-details/site-details.component').then(m => m.SiteDetailsComponent)
+  }
+  
+ 
+    ];
+
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+     
+      
+    ];
+
+  
+    
+  
+
+ 
+ 
+  
+ 
+  
+
+
+
+
+
+
+
+
+
+    
+
