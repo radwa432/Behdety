@@ -28,7 +28,7 @@ export class TripService {
   }
 
   updateTrip(id: string, formData: FormData): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, formData).pipe(
+    return this.http.put(`${this.apiUrl}`, formData).pipe(
       catchError(error => {
         console.error('Update error:', error);
         throw error;

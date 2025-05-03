@@ -98,11 +98,12 @@ export class TripDashboardComponent implements OnInit {
         this.markFormGroupTouched(this.tripForm);
         throw new Error('Please fill all required fields correctly');
       }
-
+  
       const formValue = this.tripForm.value;
       const formData = new FormData();
-
+  
       // Append all basic fields
+      formData.append('TripId', this.editingTripId || this.generateId());
       formData.append('Name', formValue.name);
       formData.append('Description', formValue.description || '');
       formData.append('StartDate', new Date(formValue.startDate).toISOString());
@@ -119,26 +120,24 @@ export class TripDashboardComponent implements OnInit {
       formData.append('ExcludedItems', JSON.stringify(
         formValue.excludedItems?.split(',').map((i: string) => i.trim()).filter(Boolean) || []
       ));
-
+  
       // Append images
       if (this.selectedImages?.length) {
         this.selectedImages.forEach((image) => {
-          formData.append('TripImages', image, image.name);
+          formData.append('Images', image, image.name);
         });
       }
-
+  
       if (this.editingTripId) {
         // Update existing trip
-        formData.append('TripId', this.editingTripId);
         await this.tripService.updateTrip(this.editingTripId, formData).toPromise();
         this.showSuccess('Trip updated successfully');
       } else {
         // Create new trip
-        formData.append('TripId', this.generateId());
         await this.tripService.createTrip(formData).toPromise();
         this.showSuccess('Trip created successfully');
       }
-
+  
       this.loadTrips();
       this.resetForm();
       
