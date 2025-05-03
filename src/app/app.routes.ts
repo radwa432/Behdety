@@ -50,7 +50,7 @@ export const routes: Routes = [
   { path: 'signup', component: SignUpComponent },
   { path: 'Overview', component: OverviewComponent },
   { path: 'faqs', component: FaqsComponent },
-  { path: 'Overview', component: OverviewComponent },
+  { path: 'Overview/:id', component: OverviewComponent },
   { path: 'faqs', component: FaqsComponent },
  ///////////
   {
@@ -197,13 +197,13 @@ export const routes: Routes = [
   }
   
  
-    ];
+    ,
 
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
      
       
-    ];
+];
 
   
     
