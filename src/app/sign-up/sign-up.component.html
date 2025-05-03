@@ -20,25 +20,16 @@
         <div class="mb-3">
           <label for="firstName" class="form-label">First Name</label>
           <input type="text" id="firstName" formControlName="firstName" class="form-control" required>
-         <!-- For First Name -->
-@if(signupForm.controls["firstName"].invalid && (signupForm.controls["firstName"].dirty || signupForm.controls["firstName"].touched)) {
-  <div class="form-text text-danger">
-    @if(signupForm.controls["firstName"].errors?.['required']) {
-      <span>First name is required</span>
-    }
-    @if(signupForm.controls["firstName"].errors?.['minlength']) {
-      <span>First name must be at least 3 characters</span>
-    }
-    @if(signupForm.controls["firstName"].errors?.['maxlength']) {
-      <span>First name must be maximum 15 characters</span>
-    }
-    @if(signupForm.controls["firstName"].errors?.['pattern']) {
-      <span>First name must contain only letters</span>
-    }
-  </div>
-}
-
-<!-- Similar updates for other fields -->
+          @if(signupForm.controls["firstName"].invalid && (signupForm.controls["firstName"].dirty || signupForm.controls["firstName"].touched)) {
+            <div class="form-text text-danger">
+              @if(signupForm.controls["firstName"].errors?.['required']) {
+                <span>First name is required</span>
+              }
+              @if(signupForm.controls["firstName"].errors?.['minlength']) {
+                <span>First name must be at least 2 characters long</span>
+              }
+            </div>
+          }
         </div>
 
         <div class="mb-3">
