@@ -22,17 +22,15 @@ throw new Error('Method not implemented.');
   sites:Site[] = [];
   site: any;
   private apiUrl = `${environment.apiUrl}/api/Site`;
-  siteService: any;
+ 
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private siteService: SiteService ) {}
 
   ngOnInit(): void {
-    // Get the 'id' from the route parameters
     const siteId = this.route.snapshot.paramMap.get('id');
-    
-    // Fetch the site details using the ID
-    this.siteService.getSiteById(siteId).subscribe((data: any) => {
-      this.site = data;
+    this.http.get<Site>(`${this.apiUrl}/${siteId}`).subscribe({
+      next: (data) => this.site = data,
+      error: (err) => console.error('Error loading site:', err)
     });
   }
 
