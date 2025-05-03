@@ -1,5 +1,5 @@
 <div class="overview-container">
-  <h1 class="m-4">{{ currentTrip?.name }}</h1>
+  <h1 class="m-4">{{ currentTrip.name }}</h1>
   
   <!-- Image Gallery -->
   <div class="row gallery-section gx-2">
@@ -37,19 +37,19 @@
   <div class="overview-content mb-5">
     <div class="row gx-4 gy-3">
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-currency-dollar me-2"></i>Price<br>From {{ currentTrip?.money | currency }}</p>
+        <p class="mb-0"><i class="bi bi-currency-dollar me-2"></i>Price<br>From {{ currentTrip.money | currency }}</p>
       </div>
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-calendar me-2"></i>Duration<br>{{ currentTrip?.duration }} Days</p>
+        <p class="mb-0"><i class="bi bi-calendar me-2"></i>Duration<br>{{ currentTrip.duration }} Days</p>
       </div>
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-person-fill me-2"></i>Max People<br>{{ currentTrip?.maxPeople }}</p>
+        <p class="mb-0"><i class="bi bi-person-fill me-2"></i>Max People<br>{{ currentTrip.maxPeople }}</p>
       </div>
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-clock me-2"></i>Start Date<br>{{ currentTrip?.startDate | date }}</p>
+        <p class="mb-0"><i class="bi bi-clock me-2"></i>Start Date<br>{{ currentTrip.startDate | date }}</p>
       </div>
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-clock me-2"></i>End Date<br>{{ currentTrip?.endDate | date }}</p>
+        <p class="mb-0"><i class="bi bi-clock me-2"></i>End Date<br>{{ currentTrip.endDate | date }}</p>
       </div>
     </div>
   </div>

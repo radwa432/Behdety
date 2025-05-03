@@ -50,7 +50,7 @@ export class SiteDashboardComponent implements OnInit {
     // this.loadGovernments();
   }
   loadGovernments(): void {
-    this.governmentService.getAll().subscribe({
+    this.governmentService.getGovernments().subscribe({
       next: (governments: any[]) => {
         this.governments = governments;
       },

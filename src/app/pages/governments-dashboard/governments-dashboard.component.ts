@@ -43,7 +43,7 @@ export class GovernmentsComponent implements OnInit {
   }
 
   loadGovernments(): void {
-    this.governmentService.getAll().subscribe({
+    this.governmentService.getGovernments().subscribe({
       next: (data: any) => {
         this.governments = data.map((gov: any) => ({
           id: gov.id,
@@ -86,7 +86,7 @@ export class GovernmentsComponent implements OnInit {
         formData.append('ImageUrl', this.imagePreview.toString());
       }
 
-      this.governmentService.update(formData).subscribe({
+      this.governmentService.updateGovernment(formData).subscribe({
         next: () => {
           this.loadGovernments();
           this.resetForm();
@@ -133,7 +133,7 @@ export class GovernmentsComponent implements OnInit {
 
   deleteGovernment(id: number): void {
     if (confirm('Are you sure you want to delete this government?')) {
-      this.governmentService.delete(id).subscribe({
+      this.governmentService.deleteGovernment(id).subscribe({
         next: () => this.loadGovernments(),
         error: (err) => console.error('Error deleting government:', err)
       });

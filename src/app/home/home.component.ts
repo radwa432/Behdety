@@ -172,24 +172,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
   
    
 
-  getGovernment(): void {
-    this.governrateService.getGovernments().subscribe({
-      next: (data) => {
-        this.government = data.map((gov: any) => ({
-          governmentId: gov.governmentId,
-          name: gov.name,
-          image: gov.image, 
-          sites: gov.sites
-        }));
-      },
-      error: (err) => {
-        console.error('Error loading governments:', err);
-      }
-    });
+// In home.component.ts
+governments: Government[] = []; // Make sure this uses the correct interface
 
+// Update the getGovernment method
+getGovernment(): void {
+  this.governrateService.getGovernments().subscribe({
+    next: (data: Government[]) => {
+      this.government = data;
+      console.log('Loaded governments:', data); // For debugging
+    },
+    error: (err) => {
+      console.error('Error loading governments:', err);
+    }
+  });
+}
    
   }
 
 
  
-}
+
