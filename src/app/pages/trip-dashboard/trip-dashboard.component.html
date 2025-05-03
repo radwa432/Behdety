@@ -141,22 +141,24 @@
                   </div>
 
                   <!-- Included/Excluded Items -->
-                  <div class="col-md-6">
-                    <label class="form-label fw-semibold">Included Items (comma separated)</label>
-                    <textarea
-                      formControlName="includedItems"
-                      class="form-control"
-                      placeholder="Pickup, Meals, Guide"></textarea>
-                  </div>
+                 <!-- In your trip-dashboard.component.html -->
+<div class="col-md-6">
+  <label class="form-label fw-semibold">Included Items (one per line)</label>
+  <textarea
+    formControlName="includedItems"
+    class="form-control"
+    placeholder="Pickup&#10;Meals&#10;Guide"
+    rows="5"></textarea>
+</div>
 
-                  <div class="col-md-6">
-                    <label class="form-label fw-semibold">Excluded Items (comma separated)</label>
-                    <textarea
-                      formControlName="excludedItems"
-                      class="form-control"
-                      placeholder="Tips, Personal expenses"></textarea>
-                  </div>
-
+<div class="col-md-6">
+  <label class="form-label fw-semibold">Excluded Items (one per line)</label>
+  <textarea
+    formControlName="excludedItems"
+    class="form-control"
+    placeholder="Tips&#10;Personal expenses"
+    rows="5"></textarea>
+</div>
                   <!-- Image Upload -->
                   <div class="col-12">
                     <label class="form-label fw-semibold">

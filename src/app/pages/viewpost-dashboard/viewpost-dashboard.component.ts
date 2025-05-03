@@ -12,7 +12,7 @@ import { AdminSidebarComponent } from "../../admin-sidebar/admin-sidebar.compone
 
 @Component({
   selector: 'app-viewpost-dashboard',
-  imports: [FormsModule, CommonModule, RouterModule, AdminSidebarComponent],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './viewpost-dashboard.component.html',
   styleUrl: './viewpost-dashboard.component.css'
 })
