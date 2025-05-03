@@ -3,7 +3,7 @@
   background-image: url('../assets/images/2.jpg');
   background-size: cover;
   background-position: center;
-  padding: 100px 0;
+  padding: 150px 0;
   color: white;
 }
 
@@ -85,103 +85,7 @@
   background-color: #d6551d;
 }
 
-/* Footer */
-.footer {
-  background-color: #f8f8f8;
-  padding: 30px 0;
-  border-top: 1px solid #e5e5e5;
-}
 
-.footer-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  flex-wrap: wrap;
-}
-
-/* Contact Info */
-.contact-info {
-  display: flex;
-  gap: 30px;
-  order: 1;
-}
-
-/* Social Icons */
-.social-icons {
-  display: flex;
-  gap: 15px;
-  order: 2;
-}
-
-.social-icons a {
-  font-size: 1.5rem;
-  color: #ff8c00;
-  transition: all 0.3s ease;
-}
-
-.social-icons a:hover {
-  color: #e67300;
-  transform: translateY(-3px);
-}
-
-/* Copyright */
-.copyright {
-  order: 3;
-  color: #666;
-  font-size: 0.9rem;
-  margin-left: auto;
-}
-
-/* Contact Items - Updated with orange hover */
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-}
-
-.contact-item:hover {
-  transform: translateY(-2px);
-}
-
-.contact-item i {
-  font-size: 1.2rem;
-  transition: color 0.3s ease;
-}
-
-.phone-link i {
-  color: #ff8c00;
-}
-
-.email-link i {
-  color: #e67300;
-}
-
-.phone-link, .email-link {
-  color: #333;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  transition: color 0.3s ease;
-}
-
-/* Hover effects - both text and icon turn orange */
-.phone-link:hover,
-.phone-link:hover i {
-  color: #ff8c00;
-}
-
-.email-link:hover,
-.email-link:hover i {
-  color: #e67300;
-}
-.footer-content a:hover {
-  color: #f26522;
-}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -206,5 +110,29 @@
     margin-left: 0;
     margin-top: 15px;
   }
+  .contact-section {
+    background-color: #e4d6cb;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #fffffffa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00204a;
+    font-size: 18px;
+   
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-decoration: none;
+  }
+  
+  .social-icon:hover {
+    background-color: #00204a;
+    color: #fff;
+  }
+  
 
 }

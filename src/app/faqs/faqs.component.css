@@ -1,15 +1,51 @@
+/* FAQ Container */
+.container.mt-5.mb-2.shadow-sm.p-4.rounded {
+  background-color: #FFF3E0 !important; /* Light orange background */
+  border: 1px solid #FFE0B2; /* Light orange border */
+}
+
+/* FAQ Header */
+h2.text-center.mb-4.fw-bold {
+  color: #E65100 !important; /* Dark orange for heading */
+}
+
+p.text-muted {
+  color: #FF8F00 !important; /* Medium orange for subheading */
+  font-size: 1.1rem;
+}
+
+/* Accordion Items */
+.accordion-item {
+  border: 1px solid #FFCC80; /* Light orange border */
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem !important;
+}
+
+/* Accordion Button */
 .accordion-button {
   font-weight: 500;
   font-size: 1.1rem;
-  background-color: #f8f9fa;
-  color: #0d6efd;
+  background-color: #FFE0B2 !important; /* Light orange background */
+  color: #BF360C !important; /* Dark orange text */
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #FFCC80 !important; /* Medium orange when expanded */
+  color: #BF360C !important;
 }
 
 .accordion-button:focus {
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(255, 167, 38, 0.25) !important; /* Orange focus shadow */
 }
 
+/* Accordion Body */
 .accordion-body {
-  background-color: #ffffff;
+  background-color: #FFF8E1 !important; /* Very light orange background */
+  color: #5D4037; /* Dark brown text for contrast */
   font-size: 1rem;
+}
+
+/* Accordion Collapse Animation */
+.accordion-collapse {
+  transition: all 0.3s ease;
 }

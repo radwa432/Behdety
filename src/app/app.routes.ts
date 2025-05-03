@@ -30,7 +30,7 @@ import { SiteDashboardComponent } from './pages/site-dashboard/site-dashboard.co
 //import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
 //import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.component';
 
-
+import { AccountDashboardComponent } from './pages/account-dashboard/account-dashboard.component';
 import { BookingManagementComponent } from './pages/booking-dashboard/booking-dashboard.component';
 import { BookingFormComponent } from './pages/bookingform-dashboard/bookingform-dashboard.component';
 import { DashboardComponent } from './pages/postdashboard/postdashboard.component';
@@ -155,6 +155,11 @@ export const routes: Routes = [
         path: 'dashboard/site',
         component: SiteDashboardComponent,
         title: 'Site Dashboard'
+      },
+      {
+        path:'dashboard/Account',
+        component: AccountDashboardComponent,
+        title: 'Account Dashboard'
       }
 
     ]

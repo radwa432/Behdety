@@ -1,4 +1,3 @@
-
 .hover-touch-card {
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
@@ -6,7 +5,7 @@
 .hover-touch-card:hover,
 .hover-touch-card:active {
   transform: translateY(-8px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(255, 165, 0, 0.3); /* Changed to orange shadow */
 }
 
 .carousel-wrapper {
@@ -21,7 +20,7 @@
   scroll-behavior: smooth;
   padding-bottom: 0.5rem;
   scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,0.3) transparent;
+  scrollbar-color: rgba(255, 165, 0, 0.3) transparent; /* Changed to orange */
   width: 100%;
 }
 
@@ -30,7 +29,7 @@
 }
 
 .horizontal-scroll::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(255, 165, 0, 0.3); /* Changed to orange */
   border-radius: 3px;
 }
 
@@ -43,12 +42,12 @@
 
 .card.small-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 16px rgba(255, 165, 0, 0.3); /* Changed to orange */
 }
 
 .scroll-btn {
   position: absolute;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(255, 165, 0, 0.7); /* Changed to orange */
   border: none;
   color: white;
   width: 30px;
@@ -74,10 +73,11 @@
   font-size: 2.5rem;
   font-weight: normal;
   margin-bottom: 1rem;
+  color: #FF8C00; /* Darker orange */
 }
 .site-description {
   font-size: 0.8rem;
-  color: #555;
+  color: #FFA500; /* Orange */
   max-width: 100%;
   overflow: hidden;
   white-space: nowrap;
@@ -87,10 +87,12 @@
 img:hover {
   transform: scale(1.02);
   transition: transform 0.3s ease-in-out;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.4); /* Added orange glow */
 }
 .card:hover {
   transform: translateY(-5px);
   transition: transform 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3); /* Changed to orange */
 }
 .scroll-text {
   opacity: 0;
@@ -98,7 +100,7 @@ img:hover {
   transition: all 1s ease-in-out;
   font-size: 3rem;
   font-weight: bold;
-  color: #a7771f;
+  color: #FF7F00; /* Dark orange */
 }
 
 .scroll-section.in-view .scroll-text {
@@ -119,7 +121,128 @@ img:hover {
   transform: translateY(0);
 }
 
+/* Additional orange color accents */
+.btn-outline-primary {
+  color: #FF8C00;
+  border-color: #FF8C00;
+}
 
+.btn-outline-primary:hover {
+  background-color: #FF8C00;
+  border-color: #FF8C00;
+}
 
+.btn-primary {
+  background-color: #FF8C00;
+  border-color: #FF8C00;
+}
 
+.btn-primary:hover {
+  background-color: #FF7F00;
+  border-color: #FF7F00;
+}
 
+.deco {
+  color: #FF8C00;
+}
+
+.deco:hover {
+  color: #FF7F00;
+}
+
+.card-title {
+  color: #FF8C00;
+}
+/* Add these new styles to target the specific elements */
+h2.text-center.mb-4.mt-5 { /* Targets "Sites" and "Governrates" headings */
+  color: #FF8C00; /* Dark orange */
+  position: relative;
+  display: inline-block;
+}
+
+h2.text-center.mb-4.mt-5:after {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 3px;
+  bottom: -8px;
+  left: 25%;
+  background-color: #FFA500; /* Orange */
+}
+
+h3.mb-4 { /* Targets "Our Features" heading */
+  color: #FF7F00; /* Slightly darker orange */
+  font-weight: 600;
+}
+
+p.lead.text-muted { /* Targets "Enjoy your trip..." text */
+  color: #FFA07A !important; /* Light salmon (orange tone) */
+  font-style: italic;
+  font-size: 1.2rem;
+}
+
+/* Keep all existing styles below this line */
+.hover-touch-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.hover-touch-card:hover,
+.hover-touch-card:active {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(255, 165, 0, 0.3);
+}
+p.lead.text-muted { /* Targets "Enjoy your trip..." text */
+  color: #FFA07A !important;
+  font-style: italic;
+  font-size: 1.4rem; /* Increased from 1.2rem */
+  font-weight: 500; /* Added medium weight */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Subtle shadow for better readability */
+  margin-bottom: 2rem; /* Added more space below */
+  line-height: 1.4; /* Improved line spacing */
+}
+
+/* Optional: Add animation for extra emphasis */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+p.lead.text-muted {
+  animation: fadeInUp 1s ease-out both;
+}
+/* تنسيق عناوين "Sites" و "Governrates" */
+h2.text-center.mb-4.mt-5 {
+  text-align: center !important;
+  width: 100%;
+  margin: 2rem auto; /* زيادة المسافة حول النص */
+  padding: 0.5rem 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* خط برتقالي تحت العناوين للإبراز */
+h2.text-center.mb-4.mt-5::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: #FF8C00; /* لون برتقالي */
+  border-radius: 3px;
+}
+h2.text-center.mb-4.mt-5 {
+  font-size: 2.5rem; /* حجم كبير */
+  font-weight: 600; /* سمك الخط */
+  color: #FF8C00; /* لون برتقالي */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* ظل للنص */
+}
