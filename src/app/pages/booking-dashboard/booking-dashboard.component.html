@@ -1,0 +1,84 @@
+<div class="dashboard-container bg-light" style="min-height: 100vh;">
+  <!-- Sidebar -->
+
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container-fluid pt-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-primary text-white py-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mb-0"><i class="fas fa-calendar-alt me-2"></i>Booking Management</h2>
+            <span class="badge bg-light text-primary fs-6">
+              Total Bookings: {{bookings.length}}
+            </span>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <!-- Action Bar -->
+          <div class="d-flex justify-content-between mb-4">
+            <button class="btn btn-primary" (click)="onCreate()">
+              <i class="fas fa-plus-circle me-2"></i>New Booking
+            </button>
+          </div>
+
+          <!-- Loading State -->
+          <div *ngIf="loading" class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+
+                <!-- 🔍 فلترة باسم الرحلة 
+        <div class="mb-3">
+          <input
+            type="text"
+            [(ngModel)]="searchTripName"
+            (input)="applyFilters()"
+            placeholder="Search by Trip Name"
+            class="form-control"
+          />
+        </div>-->
+          <!-- Bookings Table -->
+          <div *ngIf="!loading" class="table-responsive rounded-3 border shadow-sm">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Book ID</th>
+                  <th>Trip Name</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>People</th>
+                  <th>Amount</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let b of bookings">
+                  <td class="fw-medium">{{ b.bookId }}</td>
+                  <td>{{ b.tripName }}</td>
+                  <td>{{ b.startComingDate | date }}</td>
+                  <td>{{ b.endComingDate | date }}</td>
+                  <td>{{ b.numberPeople }}</td>
+                  <td class="fw-semibold">{{ b.amountMoney | currency }}</td>
+                  <td class="text-end">
+                    <div class="d-flex gap-2 justify-content-end">
+                      <button class="btn btn-sm btn-outline-warning" (click)="onEdit(b.bookId)">
+                        <i class="fas fa-edit me-1"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger" (click)="onDelete(b.bookId)">
+                        <i class="fas fa-trash me-1"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

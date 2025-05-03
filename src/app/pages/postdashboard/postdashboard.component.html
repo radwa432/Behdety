@@ -1,30 +1,9 @@
 <div class="dashboard-container bg-light" style="min-height: 100vh;">
   <!-- Sidebar -->
-  <div class="sidebar bg-dark text-white" style="width: 250px; position: fixed; height: 100vh;">
-    <div class="p-3">
-      <h4 class="mb-4"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h4>
-      <ul class="nav flex-column">
-        <li class="nav-item mb-2">
-          <a class="nav-link text-white" routerLink="/posts">
-            <i class="fas fa-list me-2"></i>All Posts
-          </a>
-        </li>
-        <li class="nav-item mb-2">
-          <a class="nav-link text-white active" routerLink="/create-post">
-            <i class="fas fa-plus-circle me-2"></i>New Post
-          </a>
-        </li>
-        <li class="nav-item mb-2">
-          <a class="nav-link text-white" href="#">
-            <i class="fas fa-chart-bar me-2"></i>Analytics
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
+ 
 
   <!-- Main Content -->
-  <div class="main-content" style="margin-left: 250px; padding: 20px;">
+  <div class="main-content" >
     <div class="container-fluid pt-4">
       <div class="card border-0 shadow-sm">
         <div class="card-header bg-primary text-white py-3">
@@ -39,7 +18,7 @@
             <!-- Create Button -->
             <div class="col-md-2">
               <button 
-                routerLink="/create-post" 
+                routerLink="/admin-main/create-post" 
                 class="btn btn-primary w-100 d-flex align-items-center justify-content-center"
               >
                 <i class="fas fa-plus-circle me-2"></i>New Post

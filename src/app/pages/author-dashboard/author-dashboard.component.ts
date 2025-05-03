@@ -92,7 +92,7 @@ export class AuthorDashboardComponent implements OnInit {
   }
 
   viewAuthor(id: number) {
-    this.router.navigate(['dashboard/viewAuthorposts', id]);
+    this.router.navigate(['/admin-main/dashboard/viewAuthorposts', id]);
   }
 
    
