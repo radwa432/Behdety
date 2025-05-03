@@ -1,5 +1,7 @@
 <div class="overview-container">
-  <h1 class="m-4">2 Nights & 3 Days White and Black Desert Tour</h1>
+  <h1 class="m-4">{{ currentTrip.name }}</h1>
+  
+  <!-- Image Gallery -->
   <div class="row gallery-section gx-2">
     <div class="col-lg-9 col-md-8 main-image-col">
       <div class="main-image-wrapper" #mainImageContainer>
@@ -30,170 +32,188 @@
       </div>
     </div>
   </div>
-  <!-- Overview Info -->
+
+  <!-- Trip Info -->
   <div class="overview-content mb-5">
     <div class="row gx-4 gy-3">
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-currency-dollar me-2"></i>Price varies by group size.<br>From {{10 | currency}}</p>
+        <p class="mb-0"><i class="bi bi-currency-dollar me-2"></i>Price<br>From {{ currentTrip.money | currency }}</p>
       </div>
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-calendar me-2"></i>Duration<br><i class="fa-regular fa-clock"></i> 3 Days</p>
+        <p class="mb-0"><i class="bi bi-calendar me-2"></i>Duration<br>{{ currentTrip.duration }} Days</p>
       </div>
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-person-fill me-2"></i>Max People<br><i class="fa-solid fa-users"></i> 17</p>
+        <p class="mb-0"><i class="bi bi-person-fill me-2"></i>Max People<br>{{ currentTrip.maxPeople }}</p>
       </div>
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-clock me-2"></i>Tour Type<br><i class="fa-solid fa-user"></i> Private</p>
+        <p class="mb-0"><i class="bi bi-clock me-2"></i>Start Date<br>{{ currentTrip.startDate | date }}</p>
       </div>
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-globe me-2"></i>Location<br><i class="fa-solid fa-location-dot"></i></p>
-      </div>
-      <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-star me-2"></i>Reviews<br>No reviews yet</p>
+        <p class="mb-0"><i class="bi bi-clock me-2"></i>End Date<br>{{ currentTrip.endDate | date }}</p>
       </div>
     </div>
   </div>
 
-  <!-- Overview and Highlights -->
   <div class="row gx-4 gy-4">
     <div class="col-md-8">
       <h2 class="mb-5">Overview</h2>
-      <h4 class="fw-bold mb-3">{{tourName}}</h4>
-      <p class="overview-text mb-4">With Egypt Vacation Tours team, you will be able to enjoy Bahariya Oasis and discover the White Desert, the Black Desert, and the Crystal Mountains in 3 days. Enjoy Western Desert Safari packages of Egypt Vacation Tours.</p>
-
-      <h3 class="mb-3">Highlights</h3>
-      <ul class="list-group list-group-flush mb-4">
-        <li class="list-group-item">Explore the Black Desert and the White Desert.</li>
-        <li class="list-group-item">Visit the Crystal Mountain.</li>
-        <li class="list-group-item">Enjoy a night in the desert.</li>
-        <li class="list-group-item">Experience the local culture.</li>
-        <li class="list-group-item">Enjoy a delicious Bedouin dinner.</li>
-      </ul>
+      <h4 class="fw-bold mb-3">{{ currentTrip.name }}</h4>
+      <p class="overview-text mb-4">{{ currentTrip.description }}</p>
 
       <h3 class="mb-3">Included/Excluded</h3>
-      <ul class="list-unstyled">
-        @for (item of includedItems; track item) {
-          <li class="d-flex align-items-center mb-2">
-            <i class="fa-regular fa-circle-check me-2"></i><span>{{item}}</span>
-          </li>
-        }
-        @for (item of excludedItems; track item) {
-          <li class="d-flex align-items-center mb-2">
-            <i class="fa-regular fa-circle-xmark me-2"></i><span>{{item}}</span>
-          </li>
-        }
-
-      </ul>
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Included</h4>
+          <ul>
+            <li *ngFor="let item of includedItems">{{ item }}</li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <h4>Excluded</h4>
+          <ul>
+            <li *ngFor="let item of excludedItems">{{ item }}</li>
+          </ul>
+        </div>
+      </div>
 
       <div class="my-4">
         <h2 class="text-center fw-bold text-primary mb-3">Tour Plans</h2>
         <div class="accordion" id="tourPlanAccordion">
-          @for (plan of tourPlans; let i = $index; track i) {
-            <div class="accordion-item">
-              <h2 class="accordion-header" [id]="'planHeading' + i">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        [attr.data-bs-target]="'#planCollapse' + i" aria-expanded="false"
-                        [attr.aria-controls]="'planCollapse' + i">
-                  {{ plan.name }}
-                </button>
-              </h2>
-              <div [id]="'planCollapse' + i" class="accordion-collapse collapse"
-                   [attr.aria-labelledby]="'planHeading' + i" data-bs-parent="#tourPlanAccordion">
-                <div class="accordion-body fs-5">
-                  {{ plan.description }}
-                </div>
+          <div *ngFor="let plan of tourPlans; let i = index" class="accordion-item">
+            <h2 class="accordion-header" [id]="'planHeading' + i">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      [attr.data-bs-target]="'#planCollapse' + i" aria-expanded="false"
+                      [attr.aria-controls]="'planCollapse' + i">
+                {{ plan.name }}
+              </button>
+            </h2>
+            <div [id]="'planCollapse' + i" class="accordion-collapse collapse"
+                 [attr.aria-labelledby]="'planHeading' + i" data-bs-parent="#tourPlanAccordion">
+              <div class="accordion-body fs-5">
+                {{ plan.description }}
               </div>
             </div>
-          }
-
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-
-    <!-- Booking Form - Orange Theme -->
-<div class="col-md-4">
-  <div class="booking-form-container p-4">
-    <h3 class="mb-4 form-title">Book This Tour</h3>
-    <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="name" class="form-label orange-label">Name</label>
-        <input type="text" id="name" formControlName="tourName" class="form-control orange-input" required>
-        @if(bookingForm.controls["tourName"].invalid && bookingForm.controls["tourName"].touched) {
-          @if(bookingForm.controls["tourName"].errors?.['required']) {
-            <div class="orange-error">Tour name is required.</div>
-          }
-        }
-      </div>
-
-      <!-- Dates Side by Side -->
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label for="startDate" class="form-label orange-label">Start Date</label>
-          <input type="date" id="startDate" formControlName="startDate" class="form-control orange-input" required>
-          @if(bookingForm.controls["startDate"].invalid && bookingForm.controls["startDate"].touched) {
-            @if(bookingForm.controls["startDate"].errors?.['required']) {
-              <div class="orange-error">Start date is required.</div>
+    <!-- Booking Form -->
+    <div class="col-md-4">
+      <div class="shadow-sm p-4 border rounded">
+        <h3 class="mb-4">Book This Tour</h3>
+        <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text"  id="name" formControlName="tourName" class="form-control"   required>
+            @if(bookingForm.controls["tourName"].invalid && bookingForm.controls["tourName"].touched)
+            {
+               @if(bookingForm.controls["tourName"].errors?.['required'])
+               {
+                 <div class="text-danger">Tour name is required.</div>
+               }
             }
-          }
-        </div>
-        <div class="col-md-6">
-          <label for="endDate" class="form-label orange-label">End Date</label>
-          <input type="date" id="endDate" formControlName="endDate" class="form-control orange-input" required>
-          @if (bookingForm.controls["endDate"].invalid && bookingForm.controls["endDate"].touched) {
-            @if (bookingForm.controls["endDate"].errors?.['required']) {
-              <div class="orange-error">End date is required.</div>
+          </div>
+
+          <!-- Dates Side by Side -->
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="startDate" class="form-label">Start Date</label>
+              <input type="date"  id="startDate" formControlName="startDate" class="form-control" required>
+              @if(bookingForm.controls["startDate"].invalid && bookingForm.controls["startDate"].touched)
+              {
+                 @if(bookingForm.controls["startDate"].errors?.['required'])
+                 {
+                   <div class="text-danger">Start date is required.</div>
+                 }
+              }
+            </div>
+            <div class="col-md-6">
+              <label for="endDate" class="form-label">End Date</label>
+              <input
+                type="date"
+                id="endDate"
+                formControlName="endDate"
+                class="form-control"
+                required
+              >
+
+              @if (bookingForm.controls["endDate"].invalid && bookingForm.controls["endDate"].touched) {
+                @if (bookingForm.controls["endDate"].errors?.['required']) {
+                  <div class="text-danger">End date is required.</div>
+                }
+                @if (bookingForm.controls["endDate"].errors?.['endDateBeforeStart']) {
+                  <div class="text-danger">End date must be after start date.</div>
+                }
+              }
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="groupSize" class="form-label">Group Size</label>
+            <input type="number" id="groupSize" formControlName="groupSize" class="form-control" required min="1">
+            @if(bookingForm.controls["groupSize"].invalid && bookingForm.controls["groupSize"].touched)
+            {
+               @if(bookingForm.controls["groupSize"].errors?.['required'])
+               {
+                 <div class="text-danger">Group size is required.</div>
+               }
+               @if(bookingForm.controls["groupSize"].errors?.['min'])
+               {
+
+                 <div class="text-danger">Invalid Number.</div>
+               }
+
+
+
             }
-            @if (bookingForm.controls["endDate"].errors?.['endDateBeforeStart']) {
-              <div class="orange-error">End date must be after start date.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="numberOfDays" class="form-label">Number of Days</label>
+            <input type="number" id="numberOfDays" formControlName="numberOfDays" class="form-control" required min="1">
+             @if(bookingForm.controls["numberOfDays"].invalid && bookingForm.controls["numberOfDays"].touched)
+             {
+                @if(bookingForm.controls["numberOfDays"].errors?.['required'])
+                {
+                  <div class="text-danger">Number of days is required.</div>
+                }
+                @if(bookingForm.controls["numberOfDays"].errors?.['min'])
+                {
+
+                  <div class="text-danger"> Invalid Number.</div>
+                }
+
+
+
+             }
+          </div>
+
+          <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" id="price" formControlName="price" class="form-control" required min="1">
+            @if(bookingForm.controls["price"].invalid && bookingForm.controls["price"].touched)
+            {
+               @if(bookingForm.controls["price"].errors?.['required'])
+               {
+                 <div class="text-danger">Price is required.</div>
+               }
+               @if(bookingForm.controls["price"].errors?.['min'])
+               {
+
+                 <div class="text-danger">  Invalid Number.</div>
+               }
+
+
+
             }
-          }
-        </div>
-      </div>
+          </div>
+<div class="mb-3">
+                 <button type="submit" class="btn btn-primary w-100">Submit</button>
+          </div>
+        </form>
 
-      <div class="mb-3">
-        <label for="groupSize" class="form-label orange-label">Group Size</label>
-        <input type="number" id="groupSize" formControlName="groupSize" class="form-control orange-input" required min="1">
-        @if(bookingForm.controls["groupSize"].invalid && bookingForm.controls["groupSize"].touched) {
-          @if(bookingForm.controls["groupSize"].errors?.['required']) {
-            <div class="orange-error">Group size is required.</div>
-          }
-          @if(bookingForm.controls["groupSize"].errors?.['min']) {
-            <div class="orange-error">Invalid Number.</div>
-          }
-        }
       </div>
-
-      <div class="mb-3">
-        <label for="numberOfDays" class="form-label orange-label">Number of Days</label>
-        <input type="number" id="numberOfDays" formControlName="numberOfDays" class="form-control orange-input" required min="1">
-        @if(bookingForm.controls["numberOfDays"].invalid && bookingForm.controls["numberOfDays"].touched) {
-          @if(bookingForm.controls["numberOfDays"].errors?.['required']) {
-            <div class="orange-error">Number of days is required.</div>
-          }
-          @if(bookingForm.controls["numberOfDays"].errors?.['min']) {
-            <div class="orange-error">Invalid Number.</div>
-          }
-        }
-      </div>
-
-      <div class="mb-3">
-        <label for="price" class="form-label orange-label">Price</label>
-        <input type="number" id="price" formControlName="price" class="form-control orange-input" required min="1">
-        @if(bookingForm.controls["price"].invalid && bookingForm.controls["price"].touched) {
-          @if(bookingForm.controls["price"].errors?.['required']) {
-            <div class="orange-error">Price is required.</div>
-          }
-          @if(bookingForm.controls["price"].errors?.['min']) {
-            <div class="orange-error">Invalid Number.</div>
-          }
-        }
-      </div>
-
-      <div class="mb-3">
-        <button type="submit" class="btn orange-submit-btn w-100">Submit</button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>
