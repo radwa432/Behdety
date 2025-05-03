@@ -113,12 +113,12 @@ export class TripDashboardComponent implements OnInit {
       formData.append('AvailablePeople', formValue.availablePeople.toString());
       formData.append('MaxPeople', formValue.maxPeople.toString());
       
-      // Append arrays as JSON strings
+      // Process included/excluded items with newlines
       formData.append('IncludedItems', JSON.stringify(
-        formValue.includedItems?.split(',').map((i: string) => i.trim()).filter(Boolean) || []
+        formValue.includedItems?.split('\n').map((i: string) => i.trim()).filter(Boolean) || []
       ));
       formData.append('ExcludedItems', JSON.stringify(
-        formValue.excludedItems?.split(',').map((i: string) => i.trim()).filter(Boolean) || []
+        formValue.excludedItems?.split('\n').map((i: string) => i.trim()).filter(Boolean) || []
       ));
   
       // Append images
@@ -163,8 +163,8 @@ export class TripDashboardComponent implements OnInit {
       money: trip.money,
       availablePeople: trip.availablePeople,
       maxPeople: trip.maxPeople,
-      includedItems: trip.includedItems?.join(', '),
-      excludedItems: trip.excludedItems?.join(', ')
+      includedItems: trip.includedItems?.join('\n'),  
+      excludedItems: trip.excludedItems?.join('\n')   
     });
   }
 

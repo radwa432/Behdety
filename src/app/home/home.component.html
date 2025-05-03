@@ -168,41 +168,38 @@
 
 
 <!-- Governrates Section -->
+<!-- Update the government section -->
 <h2 class="text-center mb-4 mt-5">Governrates</h2>
 
 <div class="d-flex align-items-center position-relative px-3">
-  <!-- Left scroll button -->
   <button class="btn btn-primary me-2" (click)="scrollLeft('governratesScroll')">
     &#8249;
   </button>
 
-  <!-- Scrollable card container -->
   <div
     id="governratesScroll"
     class="d-flex overflow-auto"
     style="scroll-behavior: smooth; white-space: nowrap; gap: 1rem; flex-grow: 1;"
   >
-  <div
-  *ngFor="let government of government"
-  class="card p-2"
-  style="min-width: 200px; cursor: pointer;"
-  (click)="goToGovernment(government.governmentId)"
-
->
+    <div
+      *ngFor="let gov of government"
+      class="card p-2"
+      style="min-width: 200px; cursor: pointer;"
+      (click)="goToGovernment(gov.id)"
+    >
       <img
-        [src]="government.image"
-        alt="Image for{{ government.name }}"
-     
+        [src]="gov.imageUrl"
+        [alt]="gov.name"
         class="card-img-top"
         style="height: 150px; object-fit: cover;"
+        onerror="this.src='assets/images/default-government.jpg'"
       />
       <div class="card-body text-center">
-        <h5 class="card-title">{{ government.name }}</h5>
+        <h5 class="card-title">{{ gov.name }}</h5>
       </div>
     </div>
   </div>
 
-  <!-- Right scroll button -->
   <button class="btn btn-primary ms-2" (click)="scrollRight('governratesScroll')">
     &#8250;
   </button>
