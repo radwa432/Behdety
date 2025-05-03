@@ -1,0 +1,108 @@
+/* Orange Booking Confirmation Theme */
+.confirmation-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #FFF8F1; /* Very light orange background */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(255, 152, 0, 0.1);
+  }
+  
+  /* Loading Spinner */
+  .loading-spinner {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .spinner-border.text-primary {
+    color: #FF6D00 !important; /* Vibrant orange */
+    border-color: currentColor;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .loading-spinner p {
+    color: #5D4037; /* Dark brown-orange */
+    font-size: 1.1rem;
+  }
+  
+  /* Error State */
+  .alert-danger {
+    background-color: #FFEBEE; /* Light orange-red */
+    border-color: #EF5350; /* Red-orange */
+    color: #D32F2F; /* Dark red-orange */
+    border-left: 4px solid #E53935;
+  }
+  
+  .btn-primary {
+    background-color: #FF6D00; /* Vibrant orange */
+    border-color: #FF6D00;
+  }
+  
+  .btn-primary:hover {
+    background-color: #E65100; /* Dark orange */
+    border-color: #E65100;
+  }
+  
+  /* Confirmation Card */
+  .confirmation-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    border: 1px solid #FFCC80; /* Light orange border */
+  }
+  
+  .confirmation-card h2 {
+    color: #E65100; /* Dark orange */
+    text-align: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  
+  .confirmation-card h2:after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #FF6D00, #FFAB40);
+  }
+  
+  .confirmation-details {
+    margin-bottom: 2rem;
+  }
+  
+  .confirmation-details p {
+    color: #5D4037; /* Dark brown-orange */
+    font-size: 1.05rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #FFE0B2; /* Pale orange */
+  }
+  
+  .confirmation-details strong {
+    color: #E65100; /* Dark orange */
+    min-width: 150px;
+    display: inline-block;
+  }
+  
+  /* Buttons */
+  .confirmation-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .btn-secondary {
+    background-color: white;
+    color: #FF6D00; /* Vibrant orange */
+    border: 1px solid #FF6D00;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #FFF3E0; /* Very light orange */
+    color: #E65100; /* Dark orange */
+  }

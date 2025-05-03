@@ -23,3 +23,93 @@
 .error {
   color: red;
 }
+/* Orange Payment Theme */
+.mt-5.mb-5 {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: #FFF3E0; /* Very light orange background */
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.1);
+}
+
+h2 {
+  color: #E65100; /* Dark orange */
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  position: relative;
+}
+
+h2:after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #FF6D00, #FFAB40);
+}
+
+p {
+  color: #5D4037; /* Dark brown-orange */
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.error {
+  color: #D84315; /* Dark red-orange */
+  background-color: #FFEBEE; /* Light orange-red */
+  padding: 0.75rem;
+  border-radius: 6px;
+  border-left: 4px solid #E53935;
+  margin: 1rem 0;
+}
+
+#payment-element {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #FFCC80; /* Light orange border */
+}
+
+button[type="submit"] {
+  background-color: #FF6D00; /* Vibrant orange */
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+button[type="submit"]:hover:not([disabled]) {
+  background-color: #E65100; /* Darker orange */
+  transform: translateY(-2px);
+}
+
+button[type="submit"]:disabled {
+  background-color: #FFCC80; /* Light orange */
+  cursor: not-allowed;
+}
+
+/* Loading Spinner */
+.spinner {
+  border: 4px solid rgba(255, 183, 77, 0.1); /* Light orange */
+  border-left-color: #FF6D00; /* Vibrant orange */
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

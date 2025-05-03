@@ -18,9 +18,9 @@
 
   @if (bookingDetails && !loading) {
     <div class="confirmation-card">
-      <h2>Booking Confirmation</h2>
+      <h2 style="color:#E65100 ;">Booking Confirmation</h2>
       <div class="confirmation-details">
-        <p><strong>Booking ID:</strong> {{ bookingDetails.bookId }}</p>
+        <p style="color: #E65100;"><strong >Booking ID:</strong> {{ bookingDetails.bookId }}</p>
         <p><strong>Trip:</strong> {{ bookingDetails.tripName }}</p>
         <p><strong>Start Date:</strong> {{ bookingDetails.startComingDate | date }}</p>
         <p><strong>End Date:</strong> {{ bookingDetails.endComingDate | date }}</p>

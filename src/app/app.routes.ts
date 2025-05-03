@@ -39,7 +39,7 @@ import { SiteDetailsComponent } from './site-details/site-details.component';
 
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
-import { AdminChatbotComponent } from './pages/admin-chatbot/admin-chatbot.component';
+//import { AdminChatbotComponent } from './pages/admin-chatbot/admin-chatbot.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -216,7 +216,8 @@ export const routes: Routes = [
 
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  {path: 'dashboard/chat', component: AdminChatbotComponent}
+  
+  //{path: 'dashboard/chat', component: AdminChatbotComponent}
      
       
 ];
