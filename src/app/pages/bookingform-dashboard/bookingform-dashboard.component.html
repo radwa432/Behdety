@@ -28,6 +28,18 @@
                   Trip name is required
                 </div>
               </div>
+               <!-- Number of People -->
+               <div class="col-md-6">
+                <label class="form-label fw-semibold">
+                  <i class="fas fa-users me-2"></i>Number of People
+                </label>
+                <input type="number" formControlName="numberPeople" 
+                      class="form-control"
+                      [ngClass]="{'is-invalid': form.get('numberPeople')?.invalid && form.get('numberPeople')?.touched}">
+                <div *ngIf="form.get('numberPeople')?.invalid" class="invalid-feedback">
+                  Please enter number of people
+                </div>
+              </div>
 
               <!-- Start Date -->
               <div class="col-md-6">
@@ -55,33 +67,12 @@
                 </div>
               </div>
 
-              <!-- Number of People -->
-              <div class="col-md-6">
-                <label class="form-label fw-semibold">
-                  <i class="fas fa-users me-2"></i>Number of People
-                </label>
-                <input type="number" formControlName="numberPeople" 
-                      class="form-control"
-                      [ngClass]="{'is-invalid': form.get('numberPeople')?.invalid && form.get('numberPeople')?.touched}">
-                <div *ngIf="form.get('numberPeople')?.invalid" class="invalid-feedback">
-                  Please enter number of people
-                </div>
-              </div>
+             
 
               <!-- Optional Fields -->
-              <div class="col-md-6">
-                <label class="form-label fw-semibold text-muted">
-                  <i class="fas fa-clock me-2"></i>Number of Days (optional)
-                </label>
-                <input type="number" formControlName="numberDays" class="form-control">
-              </div>
+              
 
-              <div class="col-md-6">
-                <label class="form-label fw-semibold text-muted">
-                  <i class="fas fa-coins me-2"></i>Amount (optional)
-                </label>
-                <input type="number" formControlName="amountMoney" class="form-control">
-              </div>
+              
             </div>
 
             <!-- Form Actions -->
