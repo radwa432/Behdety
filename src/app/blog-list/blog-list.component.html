@@ -53,15 +53,16 @@
       </div>
 
       <!-- Sidebar -->
-      <div class="col-lg-3">
+      <div class="col-lg-3 ">
         <!-- Search -->
-        <div class="sidebar-widget serach-input mb-5">
-          <div class="input-group text-danger" >
+        <div class="sidebar-widget serach-input mb-5  ">
+          <div class="input-group " >
             <input
               [(ngModel)]="search"
               (keyup.enter)="onSearchChange()"
               class=""
               placeholder="Search..."
+              
             />
             <button class="btn  search" (click)="onSearchChange()">
               <i class="fas fa-search"></i>

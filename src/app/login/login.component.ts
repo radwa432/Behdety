@@ -40,7 +40,7 @@ export class LoginComponent {
     this.authService.login(credentials).subscribe({
       next: (response) => {
         this.isLoading = false;
-        // Store token if needed: localStorage.setItem('token', response.token);
+       //localStorage.setItem('token', response.token);
         this.router.navigate(['/home']); // Navigate to dashboard or home
       },
       error: (err) => {

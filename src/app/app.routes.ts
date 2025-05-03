@@ -35,6 +35,7 @@ import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.co
 import { BookingManagementComponent } from './pages/booking-dashboard/booking-dashboard.component';
 import { BookingFormComponent } from './pages/bookingform-dashboard/bookingform-dashboard.component';
 import { DashboardComponent } from './pages/postdashboard/postdashboard.component';
+import { AdminGuard } from './admin-guard/admin-guard.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -73,6 +74,8 @@ export const routes: Routes = [
   {
     path: 'admin-main',
     loadComponent: () => import('./admin-main/admin-main.component').then(m => m.AdminMainComponent),
+    /*canActivate: [AdminGuard],
+    canActivateChild: [AdminGuard],*/
     children: [
       { path: 'home', component: AdminHomeComponent },
       { path: 'trips/add', component: AdminAddTripComponent },

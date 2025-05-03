@@ -15,7 +15,7 @@
 <div class="container mt-4">
   <div class="row gx-4">
     <!-- Main Post Content -->
-    <div class="col-lg-8">
+    <div class="col-lg-9">
       <!-- Loading State -->
       <div *ngIf="isLoading" class="text-center py-5">
         <div class="spinner-border text-primary" role="status">
@@ -54,7 +54,7 @@
                class="post-image img-fluid rounded mb-4 w-100" 
                alt="Post Image">
 
-          <div class="post-content" [innerHTML]="post.content"></div>
+          <div class="post-content fw-b fs-5" [innerHTML]="post.content"></div>
         </div>
       </div>
 
@@ -66,7 +66,7 @@
     </div>
 
     <!-- Sidebar -->
-    <div class="col-lg-4">
+    <div class="col-lg-3">
  
 
       <!-- Recent Posts Widget -->
