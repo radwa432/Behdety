@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Site } from '../models/site';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SiteService {
-  private apiUrl = 'https://localhost:44334/api/Site';
+  private apiUrl = `${environment.apiUrl}/api/Site`;
 
   constructor(private http: HttpClient) { }
 

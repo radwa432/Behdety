@@ -1,45 +1,68 @@
+// tour.component.ts
 import { Component, OnInit } from '@angular/core';
-
-import {  SiteService } from '../services/site-2.service';
+import { TripService } from '../services/Trip/trip.service';
+import { TripGetDto } from '../models/trip.model';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { Site } from '../models/site';
+
 
 @Component({
   selector: 'app-tour',
-  imports: [RouterLink],
   templateUrl: './tour.component.html',
-  styleUrls:  ['./tour.component.css']
+  imports: [CommonModule],
+  styleUrls: ['./tour.component.css']
 })
 export class TourComponent implements OnInit {
-  sites: Site[] = [];
+  trips: TripGetDto[] = [];
+  currentPage = 1;
+  isLoading = true;
+  errorMessage: string | null = null;
 
-  constructor(private siteService: SiteService) {}
+  constructor(private tripService: TripService,private router:Router) { }
 
   ngOnInit(): void {
-    this.siteService.getSites(1).subscribe({
-      next: (data) => {
-        this.sites = data;
+    this.loadTrips();
+  }
+
+  loadTrips(): void {
+    this.isLoading = true;
+    this.errorMessage = null;
+    
+    this.tripService.getTrips(this.currentPage).subscribe({
+      next: (trips) => {
+        this.trips = trips;
+        this.isLoading = false;
       },
       error: (err) => {
-        console.error('Error fetching sites:', err);
+        console.error('Error loading trips:', err);
+        this.errorMessage = 'Failed to load trips. Please try again later.';
+        this.isLoading = false;
       }
     });
   }
-  tourPlans = [
-    { name: 'Historic Europe', description: 'Explore the rich history of Europe including Rome, Paris, and Athens over 12 days.' },
-    { name: 'Tropical Paradise', description: 'A 7-day journey through the stunning beaches of Bali and the Maldives.' },
-    { name: 'Wild Safari', description: 'Experience the wild beauty of Africa with guided safaris and local adventures.' },
-    { name: 'Cultural Asia', description: 'Dive into the culture of Japan, Korea, and China in this immersive 10-day tour.' },
-    { name: 'American Road Trip', description: 'Travel the iconic Route 66 and enjoy the American dream across 8 states.' }
-  ];
 
-  generateArray(rating: number): number[] {
-    return Array(Math.floor(rating));
+  getShortDescription(description: string): string {
+    if (!description) return 'No description available';
+    return description.length > 100 
+      ? description.substring(0, 100) + '...' 
+      : description;
   }
 
-  hasHalfStar(rating: number): boolean {
-    return rating % 1 !== 0;
+  getMainImage(trip: TripGetDto): string {
+    if (trip.tripImages && trip.tripImages.length > 0 && trip.tripImages[0].imageUrl) {
+      // Handle both relative and absolute URLs
+      const imageUrl = trip.tripImages[0].imageUrl.startsWith('http') 
+        ? trip.tripImages[0].imageUrl
+        : `/${trip.tripImages[0].imageUrl}`.replace('//', '/');
+      
+      return imageUrl;
+    }
+    return 'assets/images/1.jpg';
   }
 
+  navigateToOverview(trip: TripGetDto): void {
+    this.router.navigate(['/Overview', trip.tripId], {
+      state: { tripData: trip }
+    });
+  }
 }

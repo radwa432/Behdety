@@ -1,11 +1,13 @@
 import { BookService } from './../services/book.service';
 
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Component, computed, signal, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, computed, signal, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentService } from '../services/payment.service';
 import { BookingResponse, PaymentIntentResponse } from '../models/book';
+import { TripGetDto } from '../models/trip.model';
+import { TripService } from '../services/Trip/trip.service';
 
 
 @Component({
@@ -15,34 +17,80 @@ import { BookingResponse, PaymentIntentResponse } from '../models/book';
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css'
 })
-export class OverviewComponent implements AfterViewInit {
+export class OverviewComponent implements OnInit, AfterViewInit {
   @ViewChild('mainImageContainer') mainImageContainer!: ElementRef;
   mainImageHeight = 0;
-  bookingForm:FormGroup
+  bookingForm: FormGroup;
   currentImageIndex = 0;
-  showAllThumbnails = signal(false);
+  showAllThumbnails = false;
   maxVisibleThumbnails = 4;
-tourName:string = '2 Nights 3 Days White and Black Desert';
-constructor(
-  private bookService: BookService,
-  private router: Router,
-  private paymentService: PaymentService,
-) {
-  this.bookingForm = new FormGroup({
-    tourName: new FormControl({ value: this.tourName, disabled: true }, [Validators.required]),
-    startDate: new FormControl('', [Validators.required]),
-    endDate: new FormControl('', [Validators.required, this.endDateAfterStartDateValidator('startDate')]),
-    groupSize: new FormControl('', [Validators.required, Validators.min(1)]),
-    numberOfDays: new FormControl('', [Validators.required, Validators.min(1)]),
-    price: new FormControl('', [Validators.required, Validators.min(1)]),
-  });
 
-  // Calculate number of days when dates change
-  this.bookingForm.get('startDate')?.valueChanges.subscribe(() => this.calculateDays());
-  this.bookingForm.get('endDate')?.valueChanges.subscribe(() => this.calculateDays());
-}
+  currentTrip!: TripGetDto;
+  tourName: string = '';
+  money: number = 0;
+  images: { main: string, thumb: string }[] = [];
+  includedItems: string[] = [];
+  excludedItems: string[] = [];
+  tourPlans = [
+    { name: 'Day 1', description: 'Arrival and orientation' },
+    { name: 'Day 2', description: 'Main activities and exploration' },
+    { name: 'Day 3', description: 'Final experiences and departure' }
+  ];
 
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private bookService: BookService,
+    private paymentService: PaymentService,
+    private tripService: TripService
+  ) {
+    this.bookingForm = new FormGroup({
+      tourName: new FormControl({ value: this.tourName, disabled: true }, [Validators.required]),
+      startDate: new FormControl('', [Validators.required]),
+      endDate: new FormControl('', [Validators.required, this.endDateAfterStartDateValidator('startDate')]),
+      groupSize: new FormControl('', [Validators.required, Validators.min(1)]),
+      numberOfDays: new FormControl('', [Validators.required, Validators.min(1)]),
+      price: new FormControl({value:0,disabled:true}, [Validators.required, Validators.min(1)]),
+    });
 
+    this.bookingForm.get('startDate')?.valueChanges.subscribe(() => this.calculateDays());
+    this.bookingForm.get('endDate')?.valueChanges.subscribe(() => this.calculateDays());
+  }
+
+  ngOnInit(): void {
+    const tripData = history.state.tripData;
+    if (tripData) {
+      this.currentTrip = tripData;
+      this.initializeTripData();
+    } else {
+      const tripId = this.route.snapshot.paramMap.get('id');
+      if (tripId) {
+        this.tripService.getTripById(tripId).subscribe({
+          next: (trip) => {
+            this.currentTrip = trip;
+            this.initializeTripData();
+          },
+          error: (err) => {
+            console.error('Error loading trip:', err);
+            this.router.navigate(['/tours']);
+          }
+        });
+      }
+    }
+  }
+
+  initializeTripData(): void {
+    this.tourName = this.currentTrip.name;
+    this.bookingForm.patchValue({ tourName: this.tourName, price: this.currentTrip.money });
+    
+    this.images = this.currentTrip.tripImages?.map(img => ({
+      main: img.imageUrl,
+      thumb: img.imageUrl
+    })) || [];
+
+    this.includedItems = this.currentTrip.includedItems || [];
+    this.excludedItems = this.currentTrip.excludedItems || [];
+  }
 calculateDays() {
   const startDate = this.bookingForm.get('startDate')?.value;
   const endDate = this.bookingForm.get('endDate')?.value;
@@ -133,38 +181,38 @@ markFormGroupTouched(formGroup: FormGroup) {
 }
 
 
-  images = [
-    { main: 'assets/images/1.jpg', thumb: 'assets/images/1.jpg' },
-    { main: 'assets/images/tour.jpg', thumb: 'assets/images/tour.jpg' },
-    { main: 'assets/images/1.jpg', thumb: 'assets/images/1.jpg' },
-    { main: 'assets/images/1.jpg', thumb: 'assets/images/1.jpg' },
-    { main: 'assets/images/tour.jpg', thumb: 'assets/images/tour.jpg' },
-    { main: 'assets/images/1.jpg', thumb: 'assets/images/1.jpg' },
-    { main: 'assets/images/1.jpg', thumb: 'assets/images/1.jpg' },
-    { main: 'assets/images/tour.jpg', thumb: 'assets/images/tour.jpg' },
-    { main: 'assets/images/1.jpg', thumb: 'assets/images/1.jpg' },
+  // images = [
+  //   { main: 'assets/images/1.jpg', thumb: 'assets/images/1.jpg' },
+  //   { main: 'assets/images/tour.jpg', thumb: 'assets/images/tour.jpg' },
+  //   { main: 'assets/images/1.jpg', thumb: 'assets/images/1.jpg' },
+  //   { main: 'assets/images/1.jpg', thumb: 'assets/images/1.jpg' },
+  //   { main: 'assets/images/tour.jpg', thumb: 'assets/images/tour.jpg' },
+  //   { main: 'assets/images/1.jpg', thumb: 'assets/images/1.jpg' },
+  //   { main: 'assets/images/1.jpg', thumb: 'assets/images/1.jpg' },
+  //   { main: 'assets/images/tour.jpg', thumb: 'assets/images/tour.jpg' },
+  //   { main: 'assets/images/1.jpg', thumb: 'assets/images/1.jpg' },
 
-  ];
-  tourPlans = [
-    { name: 'Historic Europe', description: 'Explore the rich history of Europe including Rome, Paris, and Athens over 12 days.' },
-    { name: 'Tropical Paradise', description: 'A 7-day journey through the stunning beaches of Bali and the Maldives.' },
-    { name: 'Wild Safari', description: 'Experience the wild beauty of Africa with guided safaris and local adventures.' },
-    { name: 'Cultural Asia', description: 'Dive into the culture of Japan, Korea, and China in this immersive 10-day tour.' },
-    { name: 'American Road Trip', description: 'Travel the iconic Route 66 and enjoy the American dream across 8 states.' }
-  ];
+  // ];
+  // tourPlans = [
+  //   { name: 'Historic Europe', description: 'Explore the rich history of Europe including Rome, Paris, and Athens over 12 days.' },
+  //   { name: 'Tropical Paradise', description: 'A 7-day journey through the stunning beaches of Bali and the Maldives.' },
+  //   { name: 'Wild Safari', description: 'Experience the wild beauty of Africa with guided safaris and local adventures.' },
+  //   { name: 'Cultural Asia', description: 'Dive into the culture of Japan, Korea, and China in this immersive 10-day tour.' },
+  //   { name: 'American Road Trip', description: 'Travel the iconic Route 66 and enjoy the American dream across 8 states.' }
+  // ];
 
-  includedItems: string[] = [
-    'Pickup and drop-off service',
-    'Camping equipment',
-    'Meals during the tour',
-    'Experienced guide'
-  ];
+  // includedItems: string[] = [
+  //   'Pickup and drop-off service',
+  //   'Camping equipment',
+  //   'Meals during the tour',
+  //   'Experienced guide'
+  // ];
 
-  excludedItems: string[] = [
-    'Personal expenses',
-    'Tips',
-    'Any extra not mentioned in the itinerary'
-  ];
+  // excludedItems: string[] = [
+  //   'Personal expenses',
+  //   'Tips',
+  //   'Any extra not mentioned in the itinerary'
+  // ];
 
   ngAfterViewInit() {
     setTimeout(() => {
@@ -181,11 +229,11 @@ markFormGroupTouched(formGroup: FormGroup) {
     }
   }
 
-  visibleThumbnails = computed(() => {
-    return this.showAllThumbnails()
-      ? this.images
-      : this.images.slice(0, this.maxVisibleThumbnails);
-  });
+  // visibleThumbnails = computed(() => {
+  //   return this.showAllThumbnails()
+  //     ? this.images
+  //     : this.images.slice(0, this.maxVisibleThumbnails);
+  // });
 
   hiddenThumbnailsCount = computed(() => {
     return Math.max(0, this.images.length - this.maxVisibleThumbnails);
@@ -203,12 +251,12 @@ markFormGroupTouched(formGroup: FormGroup) {
     this.currentImageIndex = (this.currentImageIndex - 1 + this.images.length) % this.images.length;
   }
 
-  selectImage(index: number): void {
-    this.currentImageIndex = index;
-    if (!this.showAllThumbnails() && index >= this.maxVisibleThumbnails) {
-      this.showAllThumbnails.set(true);
-    }
-  }
+  // selectImage(index: number): void {
+  //   this.currentImageIndex = index;
+  //   if (!this.showAllThumbnails() && index >= this.maxVisibleThumbnails) {
+  //     this.showAllThumbnails.set(true);
+  //   }
+  // }
 
   private formatDate(date: string): string {
     // Format date to YYYY-MM-DD for API
@@ -245,5 +293,4 @@ markFormGroupTouched(formGroup: FormGroup) {
         : null;
     };
 
-  }
-}
+   }}
