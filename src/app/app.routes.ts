@@ -35,6 +35,8 @@ import { TripDashboardComponent } from './pages/trip-dashboard/trip-dashboard.co
 import { BookingManagementComponent } from './pages/booking-dashboard/booking-dashboard.component';
 import { BookingFormComponent } from './pages/bookingform-dashboard/bookingform-dashboard.component';
 import { DashboardComponent } from './pages/postdashboard/postdashboard.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -181,7 +183,8 @@ export const routes: Routes = [
 
   ,
 
-    
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
      
       
     ];
