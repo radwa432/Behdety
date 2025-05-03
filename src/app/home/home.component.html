@@ -71,61 +71,64 @@
   </div>
 </div>
   <!-- Sites -->
-<div class="container my-5">
-
-  <div class="container my-6">
-
-    <h2 class="text-center mb-4 mt-5" style="color: #F77500; ;">Sites</h2>
-
-    <div class="d-flex align-items-center position-relative px-3">
-      <!-- Left Scroll Button -->
-      <button class="btn btn-outline-primary me-2 "  (click)="scrollLeft('sitesScroll')">
-        &#8250;
-      </button>
-    
-      <!-- Scrollable Cards Container -->
-      <div
-        id="sitesScroll"
-        class="d-flex overflow-auto"
-        style="scroll-behavior: smooth; white-space: nowrap; flex-grow: 1; "
-      >
-        <a
-          *ngFor="let site of sites"
-          [routerLink]="['/site', site.id]"
-          class="text-decoration-none text-dark"
-        >
-          <div
-            class="card hover-touch-card me-3"
-            style="min-width: 280px; max-width: 280px;"
-          >
-            <div *ngIf="site.siteImages.length > 0">
-              <img
-                [src]="site.siteImages[0].image"
-                class="card-img-top"
-                alt="{{ site.name }}"
-                style="height: 180px; object-fit: cover;"
-              />
-            </div>
-    
-            <div class="card-body p-2">
-              <h6 class="card-title text-center mb-1">{{ site.name }}</h6>
-              <p
-                class="card-text text-center mb-0 text-truncate site-description"
-                [attr.title]="site.description"
-              >
-                {{ site.description }}
-              </p>
-            </div>
-          </div>
-        </a>
-      </div>
-    
-      <!-- Right Scroll Button -->
-      <button class="btn btn-outline-primary ms-2" (click)="scrollRight('sitesScroll')">
-        &#8250;
-      </button>
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
-    
+  </div>
+  
+  <div *ngIf="!isLoading && sites.length > 0" class="d-flex align-items-center position-relative px-3">
+    <!-- Left Scroll Button -->
+    <button class="btn btn-outline-primary me-2" (click)="scrollLeft('sitesScroll')">
+      &#8250;
+    </button>
+  
+    <!-- Scrollable Cards Container -->
+    <div
+      id="sitesScroll"
+      class="d-flex overflow-auto"
+      style="scroll-behavior: smooth; white-space: nowrap; flex-grow: 1;"
+    >
+      <a
+        *ngFor="let site of sites"
+        [routerLink]="['/site', site.id]"
+        class="text-decoration-none text-dark"
+      >
+        <div
+          class="card hover-touch-card me-3"
+          style="min-width: 280px; max-width: 280px;"
+        >
+          <div *ngIf="site.siteImages.length > 0">
+            <img
+              [src]="site.siteImages[0].image"
+              class="card-img-top"
+              alt="{{ site.name }}"
+              style="height: 180px; object-fit: cover;"
+              onerror="this.src='assets/images/1.jpg'"
+            />
+          </div>
+          <div class="card-body p-2">
+            <h6 class="card-title text-center mb-1">{{ site.name }}</h6>
+            <p
+              class="card-text text-center mb-0 text-truncate site-description"
+              [attr.title]="site.description"
+            >
+              {{ site.description }}
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  
+    <!-- Right Scroll Button -->
+    <button class="btn btn-outline-primary ms-2" (click)="scrollRight('sitesScroll')">
+      &#8250;
+    </button>
+  </div>
+  
+  <div *ngIf="!isLoading && sites.length === 0" class="text-center py-5">
+    <p>No sites available at the moment.</p>
+  </div>
 
 
     <!-- Features Section -->
@@ -174,12 +177,17 @@
 
 
 <!-- Governrates Section -->
+<<<<<<< HEAD
 <!-- Update the government section -->
 <h2 class="text-center mb-4 mt-5">Governrates</h2>
 
 <div class="d-flex align-items-center position-relative px-3 bs-btn-bg:#FFE0B2 bs-btn-border:#ff6d00 bs-btn-color:#ff6d00 ">
  
   <button class="btn btn-primary me-2 " (click)="scrollLeft('governratesScroll')">
+=======
+<div class="d-flex align-items-center position-relative px-3">
+  <button class="btn btn-primary me-2" (click)="scrollLeft('governratesScroll')">
+>>>>>>> 2f6ac0485ddf4c57cec0498e15a57a1e9fd0484e
     &#8249;
   </button>
 
@@ -199,7 +207,7 @@
         [alt]="gov.name"
         class="card-img-top"
         style="height: 150px; object-fit: cover;"
-        onerror="this.src='assets/images/default-government.jpg'"
+        onerror="this.src='assets/images/1.jpg'"
       />
       <div class="card-body text-center">
         <h5 class="card-title">{{ gov.name }}</h5>
@@ -250,7 +258,7 @@
   <h2 class="scroll-text">Book Now To Enjoy Gaining A New Experiences With Us</h2>
 </section>
 
-  </div></div>
+  
 <!-- article sections -->
 <div class="container my-5 py-5">
   

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Government } from '../../interface/government';
-
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +12,14 @@ export class GovernmentService {
 
   constructor(private http: HttpClient) {}
 
-  // Renamed from getAll() to getGovernments() for clarity
   getGovernments(): Observable<Government[]> {
-    return this.http.get<Government[]>(this.apiUrl);
+    return this.http.get<Government[]>(this.apiUrl).pipe(
+      map((governments: Government[]) => governments),
+      catchError(error => {
+        console.error('Error loading governments:', error);
+        return [];
+      })
+    );
   }
 
   createGovernment(formData: FormData): Observable<any> {

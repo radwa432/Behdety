@@ -1,4 +1,3 @@
-// site.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
@@ -15,7 +14,18 @@ export class SiteService {
 
   getSites(pageNumber: number): Observable<Site[]> {
     return this.http.get<Site[]>(`${this.apiUrl}?pagenumber=${pageNumber}`)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('API Error:', error);
+          let errorMessage = 'An unknown error occurred!';
+          if (error.error instanceof ErrorEvent) {
+            errorMessage = `Error: ${error.error.message}`;
+          } else {
+            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+          }
+          return throwError(() => new Error(errorMessage));
+        })
+      );
   }
 
   getSiteById(id: string): Observable<Site> {
@@ -30,7 +40,7 @@ export class SiteService {
 
   updateSite(formData: FormData): Observable<any> {
     return this.http.put(`${this.apiUrl}`, formData);
-}
+  }
 
   deleteSite(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`)

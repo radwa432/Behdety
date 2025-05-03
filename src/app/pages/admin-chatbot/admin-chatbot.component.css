@@ -1,0 +1,40 @@
+.card {
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .badge {
+    max-width: 80%;
+    display: inline-block;
+    white-space: pre-wrap;
+    word-break: break-word;
+    border-radius: 12px;
+  }
+  
+  /* Stylish scrollbar for WebKit (Chrome, Edge, Safari) */
+  .card-body::-webkit-scrollbar,
+  textarea::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .card-body::-webkit-scrollbar-track,
+  textarea::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+  
+  .card-body::-webkit-scrollbar-thumb,
+  textarea::-webkit-scrollbar-thumb {
+    background-color: #007bff; /* Bootstrap primary */
+    border-radius: 4px;
+    border: 2px solid #f1f1f1;
+  }
+  
+  /* Firefox scrollbar (limited styling) */
+  .card-body,
+  textarea {
+    scrollbar-width: thin;
+    scrollbar-color: #007bff #f1f1f1;
+  }
