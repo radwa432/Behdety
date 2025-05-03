@@ -1,0 +1,79 @@
+/* Main container */
+.d-flex.justify-content-center.align-items-center.min-vh-100 {
+    background-color: #FFF3E0; /* Very light orange background */
+  }
+  
+  /* Form container */
+  .container.p-4.bg-light.border.border-light-subtle.rounded-3.shadow-sm {
+    background-color: #FFE0B2 !important; /* Light orange */
+    border-color: #FFCC80 !important; /* Medium-light orange */
+  }
+  
+  /* Loading spinner */
+  .spinner-border.text-primary {
+    color: #E65100 !important; /* Dark orange */
+  }
+  
+  /* Loading text */
+  .text-center.py-4 p {
+    color: #BF360C; /* Dark orange-brown */
+  }
+  
+  /* Error message */
+  .alert-danger {
+    background-color: #FFCCBC; /* Light orange-red */
+    border-color: #FF8A65; /* Medium orange-red */
+    color: #BF360C; /* Dark orange-brown */
+  }
+  
+  /* Form title */
+  h2.text-center.mb-4 {
+    color: #E65100; /* Dark orange */
+  }
+  
+  /* Form labels */
+  .form-label {
+    color: #BF360C; /* Dark orange-brown */
+  }
+  
+  /* Form inputs */
+  .form-control {
+    border-color: #FFA000; /* Medium orange */
+    background-color: #FFF8E1; /* Very light orange */
+  }
+  
+  .form-control:focus {
+    border-color: #FF8F00; /* Bright orange */
+    box-shadow: 0 0 0 0.2rem rgba(255, 143, 0, 0.25); /* Orange focus shadow */
+  }
+  
+  /* Submit button */
+  .btn-primary {
+    background-color: #FF6D00; /* Vibrant orange */
+    border-color: #FF6D00;
+  }
+  
+  .btn-primary:hover {
+    background-color: #E65100; /* Darker orange */
+    border-color: #E65100;
+  }
+  
+  .btn-primary:disabled {
+    background-color: #FFCC80; /* Light orange */
+    border-color: #FFCC80;
+  }
+  
+  /* Sign up link */
+  .text-center.mt-3 a {
+    color: #FF6D00; /* Vibrant orange */
+  }
+  
+  .text-center.mt-3 a:hover {
+    color: #E65100; /* Darker orange */
+    text-decoration: underline;
+  }
+  
+  /* Error messages */
+  .form-text.text-danger {
+    color: #D84315 !important; /* Deep orange-red */
+  }

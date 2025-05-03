@@ -25,7 +25,7 @@
   </div>
 
   <div class="contact-form-section">
-    <h2>Send us a message</h2>
+    <h2 style="color:#d6551d ;">Send us a message</h2>
     <p>Contact us today! Our team is ready to help you with tour details, bookings, and any inquiries.</p>
     <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
       <input type="text" formControlName="name" placeholder="Name" />
@@ -36,9 +36,42 @@
     </form>
   </div>
 </div>
-
+  
 <!-- Footer -->
-<footer class="footer">
+<section class="contact-section py-5 mt-5">
+  <div class="container">
+    <div class="row align-items-center text-center text-md-start">
+      <!-- رقم الهاتف -->
+      <div class="col-md-4 mb-4 mb-md-0">
+        <p class="text-muted fw-bold mb-2">Don't wait any longer. Contact us!</p>
+        <div class="d-flex align-items-center justify-content-center justify-content-md-start">
+          <i class="fas fa-phone-alt fa-lg text-warning me-2"></i>
+          <strong class="fs-5 text-dark">(+20)1554854830</strong>
+        </div>
+      </div>
+
+      
+      <div class="col-md-4 mb-4 mb-md-0">
+        <div class="d-flex align-items-center justify-content-center justify-content-md-start">
+          <i class="fas fa-envelope fa-lg text-primary me-2"></i>
+          <strong class="fs-5 text-dark">Salesegyptvacationtours.com</strong>
+        </div>
+      </div>
+
+     
+      <div class="col-md-4 text-center text-md-end">
+        <p class="text-muted fw-bold text-left mb-2">Follow us</p>
+        <div class="d-flex justify-content-center justify-content-md-end gap-3">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <footer class="footer">
   <div class="footer-content">
     <a href="tel:+201554854830"><i class="fas fa-phone-alt"></i> (+20)1554854830</a>
     <a href="mailto:Sales&#64;egyptvacationtours.com"><i class="fas fa-envelope"></i> Sales&#64;egyptvacationtours.com</a>
@@ -49,4 +82,4 @@
 
     </div>
   </div>
-</footer>
+</footer> -->

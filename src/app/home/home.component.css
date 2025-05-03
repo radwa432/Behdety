@@ -1,4 +1,3 @@
-
 .hover-touch-card {
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
@@ -6,7 +5,7 @@
 .hover-touch-card:hover,
 .hover-touch-card:active {
   transform: translateY(-8px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(255, 165, 0, 0.3); /* Changed to orange shadow */
 }
 
 .carousel-wrapper {
@@ -21,7 +20,7 @@
   scroll-behavior: smooth;
   padding-bottom: 0.5rem;
   scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,0.3) transparent;
+  scrollbar-color: rgba(255, 165, 0, 0.3) transparent; /* Changed to orange */
   width: 100%;
 }
 
@@ -30,7 +29,7 @@
 }
 
 .horizontal-scroll::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(255, 165, 0, 0.3); /* Changed to orange */
   border-radius: 3px;
 }
 
@@ -43,12 +42,12 @@
 
 .card.small-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 16px rgba(255, 165, 0, 0.3); /* Changed to orange */
 }
 
 .scroll-btn {
   position: absolute;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(255, 165, 0, 0.7); /* Changed to orange */
   border: none;
   color: white;
   width: 30px;
@@ -74,10 +73,11 @@
   font-size: 2.5rem;
   font-weight: normal;
   margin-bottom: 1rem;
+  color: #FF8C00; /* Darker orange */
 }
 .site-description {
   font-size: 0.8rem;
-  color: #555;
+  color: #FFA500; /* Orange */
   max-width: 100%;
   overflow: hidden;
   white-space: nowrap;
@@ -87,10 +87,12 @@
 img:hover {
   transform: scale(1.02);
   transition: transform 0.3s ease-in-out;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.4); /* Added orange glow */
 }
 .card:hover {
   transform: translateY(-5px);
   transition: transform 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3); /* Changed to orange */
 }
 .scroll-text {
   opacity: 0;
@@ -98,7 +100,7 @@ img:hover {
   transition: all 1s ease-in-out;
   font-size: 3rem;
   font-weight: bold;
-  color: #a7771f;
+  color: #FF7F00; /* Dark orange */
 }
 
 .scroll-section.in-view .scroll-text {
@@ -120,7 +122,7 @@ img:hover {
 }
 
 
-/* articale section */
+
 
 
 
@@ -165,3 +167,114 @@ img:hover {
 }
 
 /* Responsive Design */
+
+#sitesScroll {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;    
+}
+
+#sitesScroll::-webkit-scrollbar {
+  display: none;             
+}
+
+#governratesScroll {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;     
+}
+
+#governratesScroll::-webkit-scrollbar {
+  display: none;            
+}
+
+
+  /* Sites Section - Orange Theme */
+  .container.my-5 {
+    background-color: #FFF8F1; /* Very light orange background */
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(247, 117, 0, 0.08);
+  }
+
+  h2.text-center {
+    color: #E65100 !important; /* Dark orange */
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.8rem;
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  h2.text-center:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #FF6D00, #FFAB40);
+  }
+
+  /* Scroll Buttons */
+  .btn-outline-primary {
+    color: #FF6D00;
+    border-color: #FF6D00;
+    background-color: rgba(255, 109, 0, 0.1);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-weight: bold;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #FF6D00;
+    color: white;
+    transform: scale(1.1);
+  }
+
+  /* Cards */
+  .hover-touch-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(247, 117, 0, 0.1);
+    background: white;
+  }
+
+  .hover-touch-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(247, 117, 0, 0.15);
+  }
+
+  .card-img-top {
+    border-bottom: 3px solid #FF9800;
+  }
+
+  .card-title {
+    color: #FF9800; /* Dark brown-orange */
+    font-weight: 600;
+    margin-top: 0.5rem;
+  }
+
+  .card-text {
+    color: #8D6E63; /* Medium brown-orange */
+    font-size: 0.9rem;
+  }
+
+  /* Scroll Container */
+  .d-flex.overflow-auto {
+    scrollbar-width: none;
+    padding: 12px 0;
+  }
+
+  .d-flex.overflow-auto::-webkit-scrollbar {
+    display: none;
+  }
+
+
+
+

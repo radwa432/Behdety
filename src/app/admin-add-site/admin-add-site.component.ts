@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   imports: [ReactiveFormsModule,CommonModule,ReactiveFormsModule],
   templateUrl: './admin-add-site.component.html',
   styleUrl: './admin-add-site.component.css',
+ 
 })
 export class AdminAddSiteComponent implements OnInit {
   siteForm!: FormGroup;

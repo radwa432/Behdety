@@ -15,16 +15,18 @@ export class ContactComponent {
 
   constructor(private fb: FormBuilder) {
     this.contactForm = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
-      phone: [''],
-      message: ['', Validators.required]
+      phone: ['', [Validators.pattern('^[0-9]{10,15}$')]],
+      message: ['', [Validators.required, Validators.minLength(10)]]
     });
   }
 
   onSubmit() {
     if (this.contactForm.valid) {
-      console.log(this.contactForm.value);
+      console.log('Form Submitted:', this.contactForm.value);
+    } else {
+      this.contactForm.markAllAsTouched(); // Mark all fields as touched to show validation errors
     }
   }
 }

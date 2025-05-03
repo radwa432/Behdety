@@ -1,4 +1,5 @@
-<header class="main-header" >
+<!-- header.component.html -->
+<header class="main-header">
   <div class="header-container">
     <!-- Logo -->
     <div class="logo-container">
@@ -6,6 +7,7 @@
         <img src="/assets/images/logo.jpg" alt="Egypt Vacation Tours Logo" class="logo-img">
       </a>
     </div>
+    
     <!-- Navigation Links -->
     <nav class="nav-links">
       <a routerLink="/" class="nav-link">HOME</a>
@@ -16,8 +18,24 @@
       <a routerLink="/contact" class="nav-link">CONTACT US</a>
     </nav>
 
-    <!-- Explore Button -->
-    <button routerLink="/login"  class="explore-btn">Login</button>
+    <!-- User Section -->
+    <div class="user-section">
+      <ng-container *ngIf="currentUser$ | async as user; else loginButton">
+        <div class="user-circle-container">
+          <button class="user-circle" (click)="toggleUserDropdown()">
+            {{ getUserInitial(user) }}
+          </button>
+          <div class="user-dropdown" *ngIf="isUserDropdownOpen">
+            <div class="user-email">{{ user.email }}</div>
+            <button class="logout-btn" (click)="logout()">Logout</button>
+          </div>
+        </div>
+      </ng-container>
+      
+      <ng-template #loginButton>
+        <button routerLink="/login" class="explore-btn">Login</button>
+      </ng-template>
+    </div>
 
     <!-- Mobile Menu Toggle -->
     <button class="mobile-menu-btn" (click)="toggleMenu()">
@@ -35,6 +53,11 @@
     <a routerLink="/faqs" class="mobile-nav-link" (click)="toggleMenu()">FAQs</a>
     <a routerLink="/blog" class="mobile-nav-link" (click)="toggleMenu()">BLOG</a>
     <a routerLink="/contact" class="mobile-nav-link" (click)="toggleMenu()">CONTACT US</a>
-    <button class="mobile-explore-btn" (click)="toggleMenu()">Explore Now</button>
+    <ng-container *ngIf="currentUser$ | async as user; else mobileLoginButton">
+      <button class="mobile-logout-btn" (click)="logout(); toggleMenu()">Logout</button>
+    </ng-container>
+    <ng-template #mobileLoginButton>
+      <button routerLink="/login" class="mobile-explore-btn" (click)="toggleMenu()">Login</button>
+    </ng-template>
   </div>
 </header>

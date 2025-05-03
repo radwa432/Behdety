@@ -19,7 +19,7 @@
 <!-- tour sections -->
 <div class="container  my-5 py-5" style="width: 80%;">
   
-  <h2 class="display-5 fw-bold mb-5 text-center" style="color: #202F59; font-size: 55px; line-height: 60px;">Popular Tours</h2>
+  <h2 class="display-5 fw-bold mb-5 text-center" style="color: #F77500; font-size: 55px; line-height: 60px;">Popular Tours</h2>
   
   <div class="row g-4 ">
     <div class="col-md-4" *ngFor="let tour of trips">
@@ -49,7 +49,7 @@
               </span>
             </div>
             
-            <h4 class="card-title fw-bold mb-3" style="color: #333;">
+            <h4 class="card-title fw-bold mb-3" style="color: #dc834e;">
               {{ tour.name }}
             </h4>
           
@@ -70,64 +70,70 @@
     </div>
   </div>
 </div>
+  <!-- Sites -->
 <div class="container my-5">
 
   <div class="container my-6">
 
-    <h2 class="text-center mb-4 mt-5">Sites</h2>
+    <h2 class="text-center mb-4 mt-5" style="color: #F77500; ;">Sites</h2>
 
     <div class="d-flex align-items-center position-relative px-3">
       <!-- Left Scroll Button -->
-      <button class="btn btn-outline-primary me-2" (click)="scrollLeft('sitesScroll')">
-        &#8249;
+      <button class="btn btn-outline-primary me-2 "  (click)="scrollLeft('sitesScroll')">
+        &#8250;
       </button>
-
+    
       <!-- Scrollable Cards Container -->
       <div
         id="sitesScroll"
         class="d-flex overflow-auto"
-        style="scroll-behavior: smooth; white-space: nowrap; flex-grow: 1;"
+        style="scroll-behavior: smooth; white-space: nowrap; flex-grow: 1; "
       >
-        <div
+        <a
           *ngFor="let site of sites"
-          class="card hover-touch-card me-3"
-          style="min-width: 280px; max-width: 280px;"
+          [routerLink]="['/site', site.id]"
+          class="text-decoration-none text-dark"
         >
-          <img
-            [src]="site.siteImages"
-            class="card-img-top"
-            alt="{{ site['name'] }}"
-            style="height: 180px; object-fit: cover;"
-          />
-          <div class="card-body p-2">
-            <h6 class="card-title text-center mb-1">{{ site['name'] }}</h6>
-            <p
-            class="card-text text-center mb-0 text-truncate site-description"
-            [attr.title]="site['description']"
+          <div
+            class="card hover-touch-card me-3"
+            style="min-width: 280px; max-width: 280px;"
           >
-            {{ site['description'] }}
-          </p>          
-            <div *ngFor="let site of sites">
-              <a *ngIf="site?.id" [routerLink]="['/site', site.id]">
-              </a>
+            <div *ngIf="site.siteImages.length > 0">
+              <img
+                [src]="site.siteImages[0].image"
+                class="card-img-top"
+                alt="{{ site.name }}"
+                style="height: 180px; object-fit: cover;"
+              />
             </div>
-
+    
+            <div class="card-body p-2">
+              <h6 class="card-title text-center mb-1">{{ site.name }}</h6>
+              <p
+                class="card-text text-center mb-0 text-truncate site-description"
+                [attr.title]="site.description"
+              >
+                {{ site.description }}
+              </p>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
+    
       <!-- Right Scroll Button -->
       <button class="btn btn-outline-primary ms-2" (click)="scrollRight('sitesScroll')">
         &#8250;
       </button>
     </div>
+    
 
 
     <!-- Features Section -->
 <section class="container my-5 py-5">
   <div class="row text-center">
     <div class="col">
-      <h3 class="mb-4">Our Features</h3>
-      <p class="lead text-muted">
+      <h3 class="mb-4" style="color: #F77500;">Our Features</h3>
+      <p class="lead text-muted" >
         Enjoy your own trip with us while discovering new places
       </p>
 
@@ -171,7 +177,7 @@
 <!-- Update the government section -->
 <h2 class="text-center mb-4 mt-5">Governrates</h2>
 
-<div class="d-flex align-items-center position-relative px-3">
+<div class="d-flex align-items-center position-relative px-3 bs-btn-bg:#fff bs-btn-border:#f0541d ">
   <button class="btn btn-primary me-2" (click)="scrollLeft('governratesScroll')">
     &#8249;
   </button>
@@ -227,8 +233,8 @@
           <p class="card-text text-muted fs-5">
             Discover breathtaking destinations, curated itineraries, and memorable moments with our top-rated tours. Let us guide your next adventure!
           </p>
-          <a [routerLink]="['/Overview']" routerLinkActive="router-link-active" class="deco">
-            Explore <i class="fa-solid fa-arrow-right"></i>
+          <a [routerLink]="['/Overview']" routerLinkActive="router-link-active" class="deco" style="color: #F77500;">
+            Explore <i class="fa-solid fa-arrow-right" style="color: #F77500;"></i>
           </a> 
         </div>
       </div>
@@ -240,7 +246,7 @@
   class="scroll-section text-center my-2 py-5"
   style="min-height: 70vh; display: flex; align-items: center; justify-content: center;"
 >
-  <h2 class="scroll-text">Book Now To Enjoy Your Gain A New Experiences With Us</h2>
+  <h2 class="scroll-text">Book Now To Enjoy Gaining A New Experiences With Us</h2>
 </section>
 
   </div></div>

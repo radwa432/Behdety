@@ -189,3 +189,77 @@
     display: block;
   }
 }
+/* User section styles */
+.user-section {
+  position: relative;
+}
+
+.user-circle-container {
+  position: relative;
+}
+
+.user-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #202F59;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.user-circle:hover {
+  background-color: #F77500;
+}
+
+.user-dropdown {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  min-width: 200px;
+  z-index: 1000;
+}
+
+.user-email {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.logout-btn {
+  background-color: #F77500;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 500;
+}
+
+.logout-btn:hover {
+  background-color: #e06600;
+}
+
+/* Mobile logout button */
+.mobile-logout-btn {
+  background-color: #F77500;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  margin-top: 15px;
+  width: 100%;
+  font-size: 16px;
+}

@@ -19,7 +19,7 @@
 
 /* Contact Info Card */
 .contact-card {
-  background: #fff;
+  background: #FFEBCC;
   padding: 30px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   min-width: 300px;
@@ -85,103 +85,7 @@
   background-color: #d6551d;
 }
 
-/* Footer */
-.footer {
-  background-color: #f8f8f8;
-  padding: 30px 0;
-  border-top: 1px solid #e5e5e5;
-}
 
-.footer-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  flex-wrap: wrap;
-}
-
-/* Contact Info */
-.contact-info {
-  display: flex;
-  gap: 30px;
-  order: 1;
-}
-
-/* Social Icons */
-.social-icons {
-  display: flex;
-  gap: 15px;
-  order: 2;
-}
-
-.social-icons a {
-  font-size: 1.5rem;
-  color: #ff8c00;
-  transition: all 0.3s ease;
-}
-
-.social-icons a:hover {
-  color: #e67300;
-  transform: translateY(-3px);
-}
-
-/* Copyright */
-.copyright {
-  order: 3;
-  color: #666;
-  font-size: 0.9rem;
-  margin-left: auto;
-}
-
-/* Contact Items - Updated with orange hover */
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-}
-
-.contact-item:hover {
-  transform: translateY(-2px);
-}
-
-.contact-item i {
-  font-size: 1.2rem;
-  transition: color 0.3s ease;
-}
-
-.phone-link i {
-  color: #ff8c00;
-}
-
-.email-link i {
-  color: #e67300;
-}
-
-.phone-link, .email-link {
-  color: #333;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  transition: color 0.3s ease;
-}
-
-/* Hover effects - both text and icon turn orange */
-.phone-link:hover,
-.phone-link:hover i {
-  color: #ff8c00;
-}
-
-.email-link:hover,
-.email-link:hover i {
-  color: #e67300;
-}
-.footer-content a:hover {
-  color: #f26522;
-}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -206,5 +110,98 @@
     margin-left: 0;
     margin-top: 15px;
   }
+  .contact-section {
+    background-color: #e4d6cb;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #fffffffa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00204a;
+    font-size: 18px;
+   
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-decoration: none;
+  }
+  
+  .social-icon:hover {
+    background-color: #00204a;
+    color: #fff;
+  }
+  
 
+}
+.contact-form-section input,
+.contact-form-section textarea {
+  background-color: #FFEBCC; /* لون مشمشي */
+  box-shadow: 0 0 8px 2px rgba(255, 165, 0, 0.6); /* شادو برتقالي */
+  border: 1px solid #FFA500; /* حدود برتقالية */
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.contact-form-section button {
+  background-color: #FFA500; /* زر برتقالي */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.contact-form-section button:hover {
+  background-color: #FF8C00; /* تغيير لون الزر عند التمرير */
+}
+/* Footer */
+.contact-section {
+  background-color: #FFF2E6; /* خلفية فاتحة بدرجات البرتقالي */
+  color: #333;
+  ;
+}
+
+.contact-section .text-muted {
+  color: #FF8C00 !important; /* تعديل اللون الرمادي إلى البرتقالي الداكن */
+}
+
+.contact-section .text-dark {
+  color: #FF5722; /* تغيير النصوص الداكنة إلى لون برتقالي دافئ */
+}
+
+.contact-section .social-icon {
+  background-color: #FFA500; /* لون خلفية الأيقونات برتقالي */
+  color: white; /* لون الأيقونات أبيض */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.contact-section .social-icon:hover {
+  background-color: #FF7F32; /* تأثير التمرير بلون برتقالي داكن */
+  color: white;
+}
+
+.contact-section .fas, .contact-section .fab {
+  font-size: 20px;
+}
+
+/* Icons for phone and email */
+.contact-section .fa-phone-alt {
+  color: #FF5722; /* اللون البرتقالي الداكن للهاتف */
+}
+
+.contact-section .fa-envelope {
+  color: #FF7043; /* اللون البرتقالي المائل للوردي للبريد الإلكتروني */
 }
