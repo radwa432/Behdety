@@ -71,13 +71,13 @@ export class DashboardComponent implements OnInit {
   }
 
   viewPost(id: number) {
-    this.router.navigate(['dashboard/viewpost', id]);
+    this.router.navigate(['/admin-main/dashboard/viewpost', id]);
   }
   editPost(id: number) {
-    this.router.navigate(['edit-post', id]);
+    this.router.navigate(['/admin-main/edit-post', id]);
   }
 
   createPost() {
-    this.router.navigate(['dashboard/posts/create']);
+    this.router.navigate(['/admin-main/create-post']);
   }
 }

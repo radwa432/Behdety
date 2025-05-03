@@ -3,10 +3,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Author, BlogPost } from '../models/blog-post.model';
 import { Category } from '../models/blog-post.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class BlogService {
-  private apiUrl = 'https://localhost:44334/api';
+  private apiUrl = `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 
