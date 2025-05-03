@@ -120,6 +120,47 @@ img:hover {
 }
 
 
+/* articale section */
 
 
 
+/* Hover Effects */
+.shadow-hover {
+ 
+  border: 1px solid rgba(221, 221, 221, 0.5);
+}
+
+.shadow-hover:hover {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border-color: #dc834e;
+}
+
+/* Icon Transition */
+.transition-icon {
+ 
+}
+
+.shadow-hover:hover .transition-icon {
+  
+}
+
+/* Link Hover Effect */
+.hover-effect {
+
+}
+
+.hover-effect:hover {
+  color: #c56d3f !important;
+}
+
+/* Badge Styling */
+.badge {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(4px);
+}
+.container {
+  max-width:90%;
+
+}
+/* Responsive Design */
