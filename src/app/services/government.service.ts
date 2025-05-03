@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Government } from '../interface/government';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GovernmentService {
-    private apiUrl = 'https://localhost:44334/api/government';
+    private apiUrl = `${environment.apiUrl}/api/government`;
 
   constructor(private http: HttpClient) {
 

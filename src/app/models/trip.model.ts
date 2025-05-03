@@ -1,20 +1,24 @@
-// trip.model.ts
+// trip-get-dto.model.ts
 export interface TripGetDto {
   tripId: string;
   name: string;
   description: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;  // Changed from Date to string
+  endDate: string;    // Changed from Date to string
   duration: number;
   money: number;
   availablePeople: number;
   maxPeople: number;
-  tripRating: number;
-  userNumbersRating: number;
-  isDeleted: boolean;
-  outOfDate: boolean;
   includedItems: string[];
   excludedItems: string[];
+  sites: string[];
+  tripImages: TripImageDto[];
+}
+
+export interface TripImageDto {
+  id: number;
+  tripId: string;
+  imageUrl: string;
 }
 
 export interface TripCreateDto {
@@ -49,4 +53,17 @@ export interface TripUpdateDto {
   includedItems?: string[];
   excludedItems?: string[];
   sites?: string[];
+}
+export interface Trip {
+  TripId: string;
+  Name: string;
+  Description: string;
+
+  TripImage : Trip[];
+}
+
+export interface TripImage {
+  id: number;
+  TripId: string;
+  ImageUrl : string;
 }

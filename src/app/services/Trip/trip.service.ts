@@ -1,52 +1,49 @@
-// trip.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
-import { TripGetDto, TripCreateDto, TripUpdateDto } from '../../models/trip.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { TripGetDto } from '../../models/trip.model';
+import { environment } from '../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class TripService {
-  private apiUrl = 'https://localhost:44334/api/Trip';
+  private apiUrl = `${environment.apiUrl}/api/Trip`;
 
   constructor(private http: HttpClient) { }
 
   getTrips(pageNumber: number): Observable<TripGetDto[]> {
-    return this.http.get<TripGetDto[]>(`${this.apiUrl}?pagenumber=${pageNumber}`)
-      .pipe(catchError(this.handleError));
+    return this.http.get<TripGetDto[]>(`${this.apiUrl}?pagenumber=${pageNumber}`);
   }
 
-  getTripById(id: string): Observable<TripGetDto> {
-    return this.http.get<TripGetDto>(`${this.apiUrl}/single/${id}`)
-      .pipe(catchError(this.handleError));
+  createTrip(formData: FormData): Observable<any> {
+    return this.http.post(this.apiUrl, formData).pipe(
+      catchError(error => {
+        console.error('Create error:', error);
+        throw error;
+      })
+    );
   }
 
-  createTrip(trip: TripCreateDto): Observable<any> {
-    return this.http.post(`${this.apiUrl}`, trip)
-      .pipe(catchError(this.handleError));
+  updateTrip(id: string, formData: FormData): Observable<any> {
+    return this.http.put(`${this.apiUrl}`, formData).pipe(
+      catchError(error => {
+        console.error('Update error:', error);
+        throw error;
+      })
+    );
   }
-
-  updateTrip(trip: TripUpdateDto): Observable<any> {
-    return this.http.put(`${this.apiUrl}`, trip)
-      .pipe(catchError(this.handleError));
-  }
-
+getTripById(id: string): Observable<TripGetDto> {
+  return this.http.get<TripGetDto>(`${this.apiUrl}/${id}`).pipe(
+    catchError(error => {
+      console.error('Error fetching trip:', error);
+      throw error;
+    })
+  );
+}
   deleteTrip(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`)
-      .pipe(catchError(this.handleError));
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    console.error('API Error:', error);
-    let errorMessage = 'An unknown error occurred!';
-    if (error.error instanceof ErrorEvent) {
-      // Client-side error
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // Server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(() => new Error(errorMessage));
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

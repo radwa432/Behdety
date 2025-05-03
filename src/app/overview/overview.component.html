@@ -1,8 +1,6 @@
 <div class="overview-container">
-  <h1 class="m-4"  style="color: #d35400;">2 Nights & 3 Days White and Black Desert Tour</h1>
+  <h1 class="m-4">2 Nights & 3 Days White and Black Desert Tour</h1>
   <div class="row gallery-section gx-2">
-
-    <!-- Main Image (3/4 width) -->
     <div class="col-lg-9 col-md-8 main-image-col">
       <div class="main-image-wrapper" #mainImageContainer>
         <img [src]="currentImage.main" class="img-fluid main-image" alt="Main image">
@@ -17,111 +15,98 @@
       </div>
     </div>
 
-    <!-- Thumbnails (1/4 width) matching main image height -->
     <div class="col-lg-3 col-md-4 thumbnails-col">
       <div class="thumbnails-wrapper" [style.height.px]="mainImageHeight">
-        @for (image of visibleThumbnails(); track image; let i = $index; let last = $last) {
-          <div class="thumbnail-item"
-               [class.active]="images.indexOf(image) === currentImageIndex"
-               (click)="selectImage(images.indexOf(image))">
-            <img [src]="image.thumb" class="thumbnail-img" alt="Thumbnail">
-            @if (last && hiddenThumbnailsCount() > 0 && !showAllThumbnails()) {
-              <div class="more-overlay">+{{hiddenThumbnailsCount()}}</div>
-            }
+        <div *ngFor="let image of images.slice(0, showAllThumbnails ? images.length : maxVisibleThumbnails); let i = index"
+             class="thumbnail-item"
+             [class.active]="i === currentImageIndex"
+            >
+          <img [src]="image.thumb" class="thumbnail-img" alt="Thumbnail">
+          <div *ngIf="!showAllThumbnails && i === maxVisibleThumbnails - 1 && images.length > maxVisibleThumbnails" 
+               class="more-overlay">
+            +{{images.length - maxVisibleThumbnails}}
           </div>
-        }
+        </div>
       </div>
-
-
-
-    </div>
-
-  </div>
-<!-- Overview Info - Orange Titles with Black Text -->
-<div class="overview-content mb-5">
-  <div class="row gx-4 gy-3">
-    <div class="col-md-2 col-sm-6">
-      <p class="mb-0"><i class="bi bi-currency-dollar me-2" style="color: #FF6D00;"></i><span style="color: #E65100;">Price varies by group size.</span><br><i class="fa-solid fa-tag" style="color: #FF9800;"></i> <span style="color: #000000;">From {{10 | currency}}</span></p>
-    </div>
-    <div class="col-md-2 col-sm-6">
-      <p class="mb-0"><i class="bi bi-calendar me-2" style="color: #FF8F00;"></i><span style="color: #F57C00;">Duration</span><br><i class="fa-regular fa-clock" style="color: #FFB300;"></i> <span style="color: #000000;">3 Days</span></p>
-    </div>
-    <div class="col-md-2 col-sm-6">
-      <p class="mb-0"><i class="bi bi-person-fill me-2" style="color: #FF6D00;"></i><span style="color: #E65100;">Max People</span><br><i class="fa-solid fa-users" style="color: #FF9800;"></i> <span style="color: #000000;">17</span></p>
-    </div>
-    <div class="col-md-2 col-sm-6">
-      <p class="mb-0"><i class="bi bi-clock me-2" style="color: #FF8F00;"></i><span style="color: #F57C00;">Tour Type</span><br><i class="fa-solid fa-user" style="color: #FFB300;"></i> <span style="color: #000000;">Private</span></p>
-    </div>
-    <div class="col-md-2 col-sm-6">
-      <p class="mb-0"><i class="bi bi-globe me-2" style="color: #FF6D00;"></i><span style="color: #E65100;">Location</span><br><i class="fa-solid fa-location-dot" style="color: #FF9800;"></i> <span style="color: #000000;">Egypt</span></p>
-    </div>
-    <div class="col-md-2 col-sm-6">
-      <p class="mb-0"><i class="bi bi-star me-2" style="color: #FF8F00;"></i><span style="color: #F57C00;">Reviews</span><br><i class="fa-regular fa-comment-dots" style="color: #FFB300;"></i> <span style="color: #000000;">No reviews yet</span></p>
     </div>
   </div>
-</div>
-  <!-- Overview and Highlights - Orange Theme -->
-<div class="row gx-4 gy-4 orange-theme-section">
-  <div class="col-md-8">
-    <h2 class="mb-5" style="color: #E65100;">Overview</h2>
-    <h4 class="fw-bold mb-3" style="color: #F57C00;">{{tourName}}</h4>
-    <p class="overview-text mb-4" style="color: #5D4037;">
-      With Egypt Vacation Tours team, you will be able to enjoy Bahariya Oasis and discover the White Desert, the Black Desert, and the Crystal Mountains in 3 days. Enjoy Western Desert Safari packages of Egypt Vacation Tours.
-    </p>
+  <!-- Overview Info -->
+  <div class="overview-content mb-5">
+    <div class="row gx-4 gy-3">
+      <div class="col-md-2 col-sm-6">
+        <p class="mb-0"><i class="bi bi-currency-dollar me-2"></i>Price varies by group size.<br>From {{10 | currency}}</p>
+      </div>
+      <div class="col-md-2 col-sm-6">
+        <p class="mb-0"><i class="bi bi-calendar me-2"></i>Duration<br><i class="fa-regular fa-clock"></i> 3 Days</p>
+      </div>
+      <div class="col-md-2 col-sm-6">
+        <p class="mb-0"><i class="bi bi-person-fill me-2"></i>Max People<br><i class="fa-solid fa-users"></i> 17</p>
+      </div>
+      <div class="col-md-2 col-sm-6">
+        <p class="mb-0"><i class="bi bi-clock me-2"></i>Tour Type<br><i class="fa-solid fa-user"></i> Private</p>
+      </div>
+      <div class="col-md-2 col-sm-6">
+        <p class="mb-0"><i class="bi bi-globe me-2"></i>Location<br><i class="fa-solid fa-location-dot"></i></p>
+      </div>
+      <div class="col-md-2 col-sm-6">
+        <p class="mb-0"><i class="bi bi-star me-2"></i>Reviews<br>No reviews yet</p>
+      </div>
+    </div>
+  </div>
 
-    <h3 class="mb-3" style="color: #E65100;">Highlights</h3>
-    <ul class="list-group list-group-flush mb-4 highlight-list">
-      <li class="list-group-item" style="border-left: 3px solid #FF6D00;">
-        <i class="fa-solid fa-circle-small me-2" style="color: #FF6D00;"></i>Explore the Black Desert and the White Desert.
-      </li>
-      <li class="list-group-item" style="border-left: 3px solid #FF8F00;">
-        <i class="fa-solid fa-circle-small me-2" style="color: #FF8F00;"></i>Visit the Crystal Mountain.
-      </li>
-      <li class="list-group-item" style="border-left: 3px solid #FF9800;">
-        <i class="fa-solid fa-circle-small me-2" style="color: #FF9800;"></i>Enjoy a night in the desert.
-      </li>
-      <li class="list-group-item" style="border-left: 3px solid #FFB300;">
-        <i class="fa-solid fa-circle-small me-2" style="color: #FFB300;"></i>Experience the local culture.
-      </li>
-      <li class="list-group-item" style="border-left: 3px solid #FFA000;">
-        <i class="fa-solid fa-circle-small me-2" style="color: #FFA000;"></i>Enjoy a delicious Bedouin dinner.
-      </li>
-    </ul>
+  <!-- Overview and Highlights -->
+  <div class="row gx-4 gy-4">
+    <div class="col-md-8">
+      <h2 class="mb-5">Overview</h2>
+      <h4 class="fw-bold mb-3">{{tourName}}</h4>
+      <p class="overview-text mb-4">With Egypt Vacation Tours team, you will be able to enjoy Bahariya Oasis and discover the White Desert, the Black Desert, and the Crystal Mountains in 3 days. Enjoy Western Desert Safari packages of Egypt Vacation Tours.</p>
 
-    <h3 class="mb-3" style="color: #E65100;">Included/Excluded</h3>
-    <ul class="list-unstyled">
-      @for (item of includedItems; track item) {
-        <li class="d-flex align-items-center mb-2">
-          <i class="fa-regular fa-circle-check me-2" style="color: #4CAF50;"></i><span style="color: #5D4037;">{{item}}</span>
-        </li>
-      }
-      @for (item of excludedItems; track item) {
-        <li class="d-flex align-items-center mb-2">
-          <i class="fa-regular fa-circle-xmark me-2" style="color: #F44336;"></i><span style="color: #5D4037;">{{item}}</span>
-        </li>
-      }
-    </ul>
+      <h3 class="mb-3">Highlights</h3>
+      <ul class="list-group list-group-flush mb-4">
+        <li class="list-group-item">Explore the Black Desert and the White Desert.</li>
+        <li class="list-group-item">Visit the Crystal Mountain.</li>
+        <li class="list-group-item">Enjoy a night in the desert.</li>
+        <li class="list-group-item">Experience the local culture.</li>
+        <li class="list-group-item">Enjoy a delicious Bedouin dinner.</li>
+      </ul>
 
-    <div class="my-4">
-      <h2 class="text-center fw-bold mb-3" style="color: #E65100;">Tour Plans</h2>
-      <div class="accordion" id="tourPlanAccordion">
-        @for (plan of tourPlans; let i = $index; track i) {
-          <div class="accordion-item" style="border: 1px solid #FFB74D;">
-            <h2 class="accordion-header" [id]="'planHeading' + i">
-              <button class="accordion-button collapsed" type="button" style="background-color: #FFF3E0; color: #E65100;" data-bs-toggle="collapse"
-                      [attr.data-bs-target]="'#planCollapse' + i" aria-expanded="false"
-                      [attr.aria-controls]="'planCollapse' + i">
-                {{ plan.name }}
-              </button>
-            </h2>
-            <div [id]="'planCollapse' + i" class="accordion-collapse collapse"
-                 [attr.aria-labelledby]="'planHeading' + i" data-bs-parent="#tourPlanAccordion">
-              <div class="accordion-body fs-5" style="background-color: #FFF8E1; color: #5D4037;">
-                {{ plan.description }}
+      <h3 class="mb-3">Included/Excluded</h3>
+      <ul class="list-unstyled">
+        @for (item of includedItems; track item) {
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-check me-2"></i><span>{{item}}</span>
+          </li>
+        }
+        @for (item of excludedItems; track item) {
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-circle-xmark me-2"></i><span>{{item}}</span>
+          </li>
+        }
+
+      </ul>
+
+      <div class="my-4">
+        <h2 class="text-center fw-bold text-primary mb-3">Tour Plans</h2>
+        <div class="accordion" id="tourPlanAccordion">
+          @for (plan of tourPlans; let i = $index; track i) {
+            <div class="accordion-item">
+              <h2 class="accordion-header" [id]="'planHeading' + i">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        [attr.data-bs-target]="'#planCollapse' + i" aria-expanded="false"
+                        [attr.aria-controls]="'planCollapse' + i">
+                  {{ plan.name }}
+                </button>
+              </h2>
+              <div [id]="'planCollapse' + i" class="accordion-collapse collapse"
+                   [attr.aria-labelledby]="'planHeading' + i" data-bs-parent="#tourPlanAccordion">
+                <div class="accordion-body fs-5">
+                  {{ plan.description }}
+                </div>
               </div>
             </div>
-          </div>
-        }
+          }
+
+        </div>
       </div>
     </div>
   </div>

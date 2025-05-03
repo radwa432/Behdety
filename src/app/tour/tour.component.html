@@ -1,3 +1,4 @@
+<!-- tour.component.html -->
 <div class="position-relative vh-100">
   <!-- Image Gallery -->
   <div id="tourGallery" class="carousel slide w-100 h-100" data-bs-ride="carousel">
@@ -34,103 +35,115 @@
     <!-- Tours Count -->
     <div class="container-fluid mt-4">
       <div class="row">
+        <!-- Tours Count -->
         <div class="col-12">
           <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="m-0">{{ sites.length }} tours available</h4>
+            <h4 class="m-0">{{ trips.length }} tours available</h4>
           </div>
         </div>
-
- <!-- Main Content Area -->
-<div class="col-lg-9 order-lg-1 order-2">
-  <hr class="m-5" style="height: 1px; background-color: #007bff; border: none;">
-  <div class="row row-cols-1 g-4">
-    @for (site of sites; track site.id) {
-      <div class="col">
-        <div class="card shadow-sm">
-          <div class="row g-0">
-            <div class="col-md-5">
-        <img
-        [src]="site.siteImages[0]?.image || 'assets/images/default.jpg'"
-        class="img-fluid rounded-start w-100 object-fit-cover"
-        style="height: 100%; max-height: 250px; object-fit: cover;"
-        alt="Tour image"
-      />
-
+    
+        <!-- Main Content Area -->
+        <div class="col-lg-9 order-lg-1 order-2">
+          <hr class="m-5" style="height: 1px; background-color: #007bff; border: none;">
+          
+          <!-- Loading Indicator -->
+          <div *ngIf="isLoading" class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
             </div>
-            <div class="col-md-7">
-              <div class="card-body d-flex flex-column">
-                <div class="d-flex justify-content-between align-items-start">
-                  <h3 class="card-title mb-3">{{ site.name }}</h3>
-                  <span class="badge bg-success fs-6">Featured</span>
-                </div>
-                <div class="mb-3">
-                  <p class="card-text">{{ site.description }}</p>
-                </div>
-                <div class="mt-auto">
-                  <a [routerLink]="['/Overview']" routerLinkActive="router-link-active" class="deco">
-                    Explore <i class="fa-solid fa-arrow-right"></i>
-                  </a>
+          </div>
+          
+          <!-- Error Message -->
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+          
+          <div class="row row-cols-1 g-4">
+            <div *ngFor="let trip of trips" class="col">
+              <div class="card shadow-sm">
+                <div class="row g-0">
+                  <div class="col-md-5">
+                    <img
+                      [src]="getMainImage(trip)"
+                      class="img-fluid rounded-start w-100"
+                      style="height: 250px; object-fit: cover;"
+                      [alt]="trip.name"
+                      onerror="this.src='assets/images/default.jpg'"
+                    />
+                  </div>
+                  <div class="col-md-7">
+                    <div class="card-body d-flex flex-column h-100">
+                      <div class="d-flex justify-content-between align-items-start">
+                        <h3 class="card-title mb-3">{{ trip.name }}</h3>
+                        <span class="badge bg-success fs-6">Featured</span>
+                      </div>
+                      <div class="mb-3">
+                        <p class="card-text">{{ getShortDescription(trip.description) }}</p>
+                      </div>
+                      <div class="mt-auto">
+                        <a (click)="navigateToOverview(trip)" class="btn btn-primary">
+                          Explore <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    }
-  </div>
-</div>
+    
+        <!-- Search Sidebar -->
+        <div class="col-lg-3 order-lg-2 order-1 mb-4 mb-lg-0">
+          <div class="sticky-top" style="top: 20px;">
+            <div class="card shadow-sm border-0">
+              <div class="card-body p-4">
+                <h5 class="card-title mb-4 text-center">Search Tours</h5>
+                <form class="search-form">
+                  <!-- Destination Dropdown -->
+                  <div class="mb-3">
+                    <label class="form-label">Destination</label>
+                    <select class="form-select">
+                      <option selected>Choose destination</option>
+                      <option>Paris, France</option>
+                      <option>Rome, Italy</option>
+                      <option>Tokyo, Japan</option>
+                    </select>
+                  </div>
 
+                  <!-- Tour Type Dropdown -->
+                  <div class="mb-3">
+                    <label class="form-label">Tour Type</label>
+                    <select class="form-select">
+                      <option selected>Select tour type</option>
+                      <option>Adventure</option>
+                      <option>Cultural</option>
+                      <option>Beach</option>
+                    </select>
+                  </div>
 
+                  <!-- Date Picker -->
+                  <div class="mb-4">
+                    <label class="form-label">Travel Date</label>
+                    <input type="date" class="form-control">
+                  </div>
 
-    <!-- Search Sidebar (unchanged) -->
-    <div class="col-lg-3 order-lg-2 order-1 mb-4 mb-lg-0" style="box-shadow:gray; z-index: 1000;">
-      <div class="sticky-top" style="top: 20px;">
-        <div class="card shadow-sm border-0">
-          <div class="card-body p-4">
-            <h5 class="card-title mb-4 text-center">Search Tours</h5>
-            <form class="search-form">
-              <!-- Destination Dropdown -->
-              <div class="mb-3">
-                <label class="form-label">Destination</label>
-                <select class="form-select">
-                  <option selected>Choose destination</option>
-                  <option>Paris, France</option>
-                  <option>Rome, Italy</option>
-                  <option>Tokyo, Japan</option>
-                </select>
+                  <!-- Price Range -->
+                  <div class="mb-4">
+                    <label class="form-label">Price Range</label>
+                    <input type="range" class="form-range" min="0" max="5000" step="100">
+                    <div class="d-flex justify-content-between">
+                      <small>$0</small>
+                      <small>$5000</small>
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-search me-2"></i> Search Tours
+                  </button>
+                </form>
               </div>
-
-              <!-- Tour Type Dropdown -->
-              <div class="mb-3">
-                <label class="form-label">Tour Type</label>
-                <select class="form-select">
-                  <option selected>Select tour type</option>
-                  <option>Adventure</option>
-                  <option>Cultural</option>
-                  <option>Beach</option>
-                </select>
-              </div>
-
-              <!-- Date Picker -->
-              <div class="mb-4">
-                <label class="form-label">Travel Date</label>
-                <input type="date" class="form-control">
-              </div>
-
-              <!-- Price Range -->
-              <div class="mb-4">
-                <label class="form-label">Price Range</label>
-                <input type="range" class="form-range" min="0" max="5000" step="100">
-                <div class="d-flex justify-content-between">
-                  <small>$0</small>
-                  <small>$5000</small>
-                </div>
-              </div>
-
-              <button type="submit" class="btn btn-primary w-100">
-                <i class="fas fa-search me-2"></i> Search Tours
-              </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>

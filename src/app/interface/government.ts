@@ -1,8 +1,7 @@
 import { Site } from "./site";
 
 export interface Government {
-  governmentId: number;
+  id: number;
   name: string;
-  image: string;
-  sites?: Site[];
+  imageUrl: string;
 }

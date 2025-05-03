@@ -12,6 +12,64 @@
 
   <img src="assets/images/home.jpg.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Home cover image">
 </div>
+
+
+
+
+<!-- tour sections -->
+<div class="container  my-5 py-5" style="width: 80%;">
+  
+  <h2 class="display-5 fw-bold mb-5 text-center" style="color: #202F59; font-size: 55px; line-height: 60px;">Popular Tours</h2>
+  
+  <div class="row g-4 ">
+    <div class="col-md-4" *ngFor="let tour of trips">
+      <div class="card blog-card h-100 border-0 shadow-hover">
+        <a [routerLink]="['/Overview', tour.tripId]" class="text-decoration-none text-dark">
+          <div class="card-img-container position-relative">
+            <img
+              [src]="getMainImage(tour)"
+              class="card-img-top rounded-4 object-fit-cover"
+              alt="{{ tour.name }}"
+              onerror="this.src='assets/images/default.jpg'"
+              style="height: 320px;"
+            />
+          
+          </div>
+          
+          <div class="card-body p-4">
+            <div class="post-meta d-flex flex-wrap gap-3 mb-3">
+              <span class="d-flex align-items-center" style="color: #F77500;">
+                <i class="far fa-calendar-alt mx-1"></i>              
+                {{ tour.duration }}
+              </span>
+             
+              <span class="d-flex align-items-center" style="color: #F77500;">
+                <i class="fa-solid fa-person mx-1"></i>                
+                {{ tour.maxPeople }}
+              </span>
+            </div>
+            
+            <h4 class="card-title fw-bold mb-3" style="color: #333;">
+              {{ tour.name }}
+            </h4>
+          
+          </div>
+          <hr class="card-title fw-bold mb-3" style="color: #333;">
+          <div class="d-flex align-items-center  hover-effect" style="color: #ffffff; margin-left: 14px;">
+            <span class="fw-bold badge me-2 fs-6"style="background-color: #F77500; color: white;"> {{tour.money}} <i class="fa-solid fa-dollar-sign"></i></span>
+            
+          </div>
+          <div class="card-footer bg-transparent border-0 py-3">
+            <div class="d-flex align-items-center hover-effect" style="color: #dc834e;">
+              <span class="fw-bold me-2">Explore</span>
+              <i class="fas fa-arrow-right transition-icon"></i>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container my-5">
 
   <div class="container my-6">
@@ -110,40 +168,38 @@
 
 
 <!-- Governrates Section -->
+<!-- Update the government section -->
 <h2 class="text-center mb-4 mt-5">Governrates</h2>
 
 <div class="d-flex align-items-center position-relative px-3">
-  <!-- Left scroll button -->
   <button class="btn btn-primary me-2" (click)="scrollLeft('governratesScroll')">
     &#8249;
   </button>
 
-  <!-- Scrollable card container -->
   <div
     id="governratesScroll"
     class="d-flex overflow-auto"
     style="scroll-behavior: smooth; white-space: nowrap; gap: 1rem; flex-grow: 1;"
   >
-  <div
-  *ngFor="let government of government"
-  class="card p-2"
-  style="min-width: 200px; cursor: pointer;"
-  (click)="goToGovernment(government.governmentId)"
-
->
+    <div
+      *ngFor="let gov of government"
+      class="card p-2"
+      style="min-width: 200px; cursor: pointer;"
+      (click)="goToGovernment(gov.id)"
+    >
       <img
-        [src]="government.image"
-        alt="{{ government.name }}"
+        [src]="gov.imageUrl"
+        [alt]="gov.name"
         class="card-img-top"
         style="height: 150px; object-fit: cover;"
+        onerror="this.src='assets/images/default-government.jpg'"
       />
       <div class="card-body text-center">
-        <h5 class="card-title">{{ government.name }}</h5>
+        <h5 class="card-title">{{ gov.name }}</h5>
       </div>
     </div>
   </div>
 
-  <!-- Right scroll button -->
   <button class="btn btn-primary ms-2" (click)="scrollRight('governratesScroll')">
     &#8250;
   </button>
@@ -187,3 +243,67 @@
   <h2 class="scroll-text">Book Now To Enjoy Your Gain A New Experiences With Us</h2>
 </section>
 
+  </div></div>
+<!-- article sections -->
+<div class="container my-5 py-5">
+  
+    <h2 class="display-5 fw-bold mb-4 text-center" style="color: #202F59; font-size: 55px; line-height: 60px;">Articles & Tips</h2>
+    <p class="text-muted  text-center "style="font-size:17px;line-height:23px ;margin-bottom:30px">Discuss the seasons and weather conditions in Egypt, offering advice on the ideal times to 
+      visit for different types of tours (e.g., Nile cruises, desert trips, or historical site visits)</p>
+    
+    <div class="row g-4 ">
+      <div class="col-md-3" *ngFor="let post of blogPosts">
+        <div class="card blog-card h-100 border-0 shadow-hover">
+          <a [routerLink]="['/post', post.id]" class="text-decoration-none text-dark">
+            <div class="card-img-container position-relative">
+              <img
+                [src]="post.imageUrl"
+                class="card-img-top rounded-4 object-fit-cover"
+                alt="{{ post.title }}"
+                style="height: 320px;"
+              />
+            
+            </div>
+            
+            <div class="card-body p-4">
+              <div class="post-meta d-flex flex-wrap gap-3 mb-3">
+                <span class="badge px-3 py-2" style="background-color: #F77500; color: white;">
+                  {{ post.blogCategoryName }}
+                </span>
+                <span class="d-flex align-items-center" style="color: #F77500;">
+                  <i class="fas fa-user me-2"></i>
+                  <a [routerLink]="['/author', post.authorId]" 
+                     class="text-decoration-none" 
+                     style="color: #F77500;">
+                    {{ post.authorName }}
+                  </a>
+                </span><br>
+                <span class="d-flex align-items-center" style="color: #F77500;">
+                  <i class="far fa-calendar-alt me-2"></i>
+                  {{ post.createdAt | date: 'mediumDate' }}
+                </span>
+              </div>
+              
+              <h4 class="card-title fw-bold mb-3" style="color: #333;">
+                {{ post.title }}
+              </h4>
+            </div>
+            
+            <div class="card-footer bg-transparent border-0 py-3">
+              <div class="d-flex align-items-center hover-effect" style="color: #dc834e;">
+                <span class="fw-bold me-2">Read More</span>
+                <i class="fas fa-arrow-right transition-icon"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+ 
+</div>
+
+
+
+
+
+  <app-contact></app-contact>
