@@ -14,11 +14,6 @@
             <i class="fas fa-route me-2"></i>Trips
           </a>
         </li>
-        <li class="nav-item mb-2">
-          <a class="nav-link text-white" href="#">
-            <i class="fas fa-cog me-2"></i>Settings
-          </a>
-        </li>
       </ul>
     </div>
   </div>
@@ -27,7 +22,6 @@
   <div class="main-content">
     <div class="container-fluid pt-4">
       <div class="card border-0 shadow-lg">
-        <!-- Card Header -->
         <div class="card-header bg-primary text-white py-3">
           <div class="d-flex justify-content-between align-items-center">
             <h2 class="mb-0">
@@ -39,7 +33,6 @@
           </div>
         </div>
 
-        <!-- Card Body -->
         <div class="card-body">
           <!-- Trip Form -->
           <div class="card mb-4 border-primary">
@@ -50,21 +43,21 @@
               </h5>
             </div>
             <div class="card-body">
-              <form [formGroup]="tripForm" (ngSubmit)="submitForm()">
+              <form [formGroup]="tripForm" (ngSubmit)="submitForm()" enctype="multipart/form-data">
                 <div class="row g-3">
                   <!-- Name Field -->
                   <div class="col-md-6">
-                    <label class="form-label fw-semibold">Trip Name</label>
+                    <label class="form-label fw-semibold">Trip Name*</label>
                     <input
                       type="text"
                       formControlName="name"
                       class="form-control"
                       placeholder="Enter trip name"
-                      [class.is-invalid]="tripForm.get('name')?.invalid && (tripForm.get('name')?.touched || tripForm.get('name')?.dirty)">
-                    <div *ngIf="tripForm.get('name')?.invalid && (tripForm.get('name')?.touched || tripForm.get('name')?.dirty)"
+                      [class.is-invalid]="tripForm.get('name')?.invalid && tripForm.get('name')?.touched">
+                    <div *ngIf="tripForm.get('name')?.invalid && tripForm.get('name')?.touched"
                         class="invalid-feedback">
-                      <div *ngIf="tripForm.get('name')?.errors?.['required']">Trip name is required</div>
-                      <div *ngIf="tripForm.get('name')?.errors?.['minlength']">Minimum 3 characters required</div>
+                      <div *ngIf="tripForm.get('name')?.errors?.['required']">Name is required</div>
+                      <div *ngIf="tripForm.get('name')?.errors?.['minlength']">Minimum 3 characters</div>
                     </div>
                   </div>
 
@@ -74,32 +67,31 @@
                     <textarea
                       formControlName="description"
                       class="form-control"
-                      placeholder="Enter trip description"
-                      [class.is-invalid]="tripForm.get('description')?.invalid && (tripForm.get('description')?.touched || tripForm.get('description')?.dirty)"></textarea>
+                      placeholder="Enter trip description"></textarea>
                   </div>
 
                   <!-- Dates -->
                   <div class="col-md-6">
-                    <label class="form-label fw-semibold">Start Date</label>
+                    <label class="form-label fw-semibold">Start Date*</label>
                     <input
                       type="date"
                       formControlName="startDate"
                       class="form-control"
-                      [class.is-invalid]="tripForm.get('startDate')?.invalid && (tripForm.get('startDate')?.touched || tripForm.get('startDate')?.dirty)">
-                    <div *ngIf="tripForm.get('startDate')?.invalid && (tripForm.get('startDate')?.touched || tripForm.get('startDate')?.dirty)"
+                      [class.is-invalid]="tripForm.get('startDate')?.invalid && tripForm.get('startDate')?.touched">
+                    <div *ngIf="tripForm.get('startDate')?.invalid && tripForm.get('startDate')?.touched"
                         class="invalid-feedback">
                       Start date is required
                     </div>
                   </div>
 
                   <div class="col-md-6">
-                    <label class="form-label fw-semibold">End Date</label>
+                    <label class="form-label fw-semibold">End Date*</label>
                     <input
                       type="date"
                       formControlName="endDate"
                       class="form-control"
-                      [class.is-invalid]="tripForm.get('endDate')?.invalid && (tripForm.get('endDate')?.touched || tripForm.get('endDate')?.dirty)">
-                    <div *ngIf="tripForm.get('endDate')?.invalid && (tripForm.get('endDate')?.touched || tripForm.get('endDate')?.dirty)"
+                      [class.is-invalid]="tripForm.get('endDate')?.invalid && tripForm.get('endDate')?.touched">
+                    <div *ngIf="tripForm.get('endDate')?.invalid && tripForm.get('endDate')?.touched"
                         class="invalid-feedback">
                       End date is required
                     </div>
@@ -107,42 +99,42 @@
 
                   <!-- Pricing and Capacity -->
                   <div class="col-md-4">
-                    <label class="form-label fw-semibold">Price ($)</label>
+                    <label class="form-label fw-semibold">Price ($)*</label>
                     <input
                       type="number"
                       formControlName="money"
                       class="form-control"
                       min="0"
-                      [class.is-invalid]="tripForm.get('money')?.invalid && (tripForm.get('money')?.touched || tripForm.get('money')?.dirty)">
-                    <div *ngIf="tripForm.get('money')?.invalid && (tripForm.get('money')?.touched || tripForm.get('money')?.dirty)"
+                      [class.is-invalid]="tripForm.get('money')?.invalid && tripForm.get('money')?.touched">
+                    <div *ngIf="tripForm.get('money')?.invalid && tripForm.get('money')?.touched"
                         class="invalid-feedback">
                       Valid price is required
                     </div>
                   </div>
 
                   <div class="col-md-4">
-                    <label class="form-label fw-semibold">Available Spots</label>
+                    <label class="form-label fw-semibold">Available Spots*</label>
                     <input
                       type="number"
                       formControlName="availablePeople"
                       class="form-control"
                       min="0"
-                      [class.is-invalid]="tripForm.get('availablePeople')?.invalid && (tripForm.get('availablePeople')?.touched || tripForm.get('availablePeople')?.dirty)">
-                    <div *ngIf="tripForm.get('availablePeople')?.invalid && (tripForm.get('availablePeople')?.touched || tripForm.get('availablePeople')?.dirty)"
+                      [class.is-invalid]="tripForm.get('availablePeople')?.invalid && tripForm.get('availablePeople')?.touched">
+                    <div *ngIf="tripForm.get('availablePeople')?.invalid && tripForm.get('availablePeople')?.touched"
                         class="invalid-feedback">
                       Valid number is required
                     </div>
                   </div>
 
                   <div class="col-md-4">
-                    <label class="form-label fw-semibold">Max Capacity</label>
+                    <label class="form-label fw-semibold">Max Capacity*</label>
                     <input
                       type="number"
                       formControlName="maxPeople"
                       class="form-control"
                       min="1"
-                      [class.is-invalid]="tripForm.get('maxPeople')?.invalid && (tripForm.get('maxPeople')?.touched || tripForm.get('maxPeople')?.dirty)">
-                    <div *ngIf="tripForm.get('maxPeople')?.invalid && (tripForm.get('maxPeople')?.touched || tripForm.get('maxPeople')?.dirty)"
+                      [class.is-invalid]="tripForm.get('maxPeople')?.invalid && tripForm.get('maxPeople')?.touched">
+                    <div *ngIf="tripForm.get('maxPeople')?.invalid && tripForm.get('maxPeople')?.touched"
                         class="invalid-feedback">
                       Minimum 1 required
                     </div>
@@ -164,6 +156,34 @@
                       class="form-control"
                       placeholder="Tips, Personal expenses"></textarea>
                   </div>
+
+                  <!-- Image Upload -->
+                  <div class="col-12">
+                    <label class="form-label fw-semibold">
+      Trip Images {{editingTripId ? '(Add new images)' : '(At least one required)'}}
+    </label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      (change)="onFileSelected($event)"
+                      multiple
+                      accept="image/*">
+                    
+                    <!-- Image Previews -->
+                    <div class="d-flex flex-wrap gap-3 mt-3">
+                      <div *ngFor="let image of previewImages; let i = index" 
+                           class="position-relative" 
+                           style="width: 120px; height: 120px;">
+                        <img [src]="image" class="img-thumbnail w-100 h-100 object-fit-cover">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1"
+                          (click)="previewImages.splice(i, 1); selectedImages.splice(i, 1)">
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <!-- Form Actions -->
@@ -171,19 +191,24 @@
                   <button
                     type="submit"
                     class="btn btn-primary px-4"
-                    [disabled]="tripForm.invalid">
+                    [disabled]="tripForm.invalid || (!editingTripId && selectedImages.length === 0)">
                     <i class="fas" [class.fa-save]="editingTripId" [class.fa-plus]="!editingTripId"></i>
                     {{ editingTripId ? 'Update' : 'Add' }}
                   </button>
                   <button
                     *ngIf="editingTripId"
                     type="button"
-                    (click)="cancelEdit()"
+                    (click)="resetForm()"
                     class="btn btn-outline-secondary px-4">
                     <i class="fas fa-times me-2"></i>Cancel
                   </button>
                 </div>
               </form>
+              
+              <!-- Error Message -->
+              <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+                {{ errorMessage }}
+              </div>
             </div>
           </div>
 
@@ -207,8 +232,8 @@
             <table class="table table-hover align-middle mb-0">
               <thead class="table-light">
                 <tr>
-                  <th class="fw-semibold py-3">ID</th>
                   <th class="fw-semibold py-3">Trip</th>
+                  <th class="fw-semibold py-3">Images</th>
                   <th class="fw-semibold py-3">Dates</th>
                   <th class="fw-semibold py-3">Price</th>
                   <th class="fw-semibold py-3">Availability</th>
@@ -216,12 +241,22 @@
                 </tr>
               </thead>
               <tbody>
-                @for (trip of paginatedTrips; track trip.tripId) {
-                <tr>
-                  <td class="fw-medium text-muted">#{{ trip.tripId }}</td>
+                <tr *ngFor="let trip of paginatedTrips">
                   <td class="fw-semibold">{{ trip.name }}</td>
                   <td>
-                    {{ trip.startDate | date:'shortDate' }} -
+                    <div *ngIf="trip.tripImages && trip.tripImages.length > 0" class="d-flex">
+                      <img [src]="trip.tripImages[0].imageUrl" 
+                           class="rounded-circle" 
+                           style="width: 40px; height: 40px; object-fit: cover;"
+                           alt="Trip image">
+                      <span *ngIf="trip.tripImages.length > 1" class="ms-1 badge bg-primary rounded-pill">
+                        +{{ trip.tripImages.length - 1 }}
+                      </span>
+                    </div>
+                    <span *ngIf="!trip.tripImages || trip.tripImages.length === 0" class="text-muted">No images</span>
+                  </td>
+                  <td>
+                    {{ trip.startDate | date:'shortDate' }} - 
                     {{ trip.endDate | date:'shortDate' }}
                   </td>
                   <td>${{ trip.money | number:'1.2-2' }}</td>
@@ -248,43 +283,43 @@
                     </div>
                   </td>
                 </tr>
-                }
               </tbody>
             </table>
           </div>
 
           <!-- Pagination -->
-          @if (totalPages() > 1) {
-          <nav class="mt-4">
-            <ul class="pagination justify-content-center mb-0">
-              <li class="page-item" [class.disabled]="currentPage === 1">
-                <button
-                  class="page-link"
-                  (click)="currentPage = currentPage - 1; updatePaginatedTrips()"
-                  [disabled]="currentPage === 1">
-                  <i class="fas fa-chevron-left"></i>
-                </button>
-              </li>
-
-              @for (page of totalPagesArray(); track page) {
-              <li class="page-item" [class.active]="page === currentPage">
-                <button class="page-link" (click)="currentPage = page; updatePaginatedTrips()">
-                  {{ page }}
-                </button>
-              </li>
-              }
-
-              <li class="page-item" [class.disabled]="currentPage === totalPages()">
-                <button
-                  class="page-link"
-                  (click)="currentPage = currentPage + 1; updatePaginatedTrips()"
-                  [disabled]="currentPage === totalPages()">
-                  <i class="fas fa-chevron-right"></i>
-                </button>
-              </li>
-            </ul>
-          </nav>
-          }
+    <!-- Pagination -->
+<div *ngIf="totalPages() > 1" class="mt-4">
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center mb-0">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button
+          class="page-link"
+          (click)="currentPage = currentPage - 1; updatePaginatedTrips()"
+          [disabled]="currentPage === 1">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </li>
+      
+      <li *ngFor="let page of getPaginationPages()" 
+          class="page-item" 
+          [class.active]="page === currentPage">
+        <button class="page-link" (click)="currentPage = page; updatePaginatedTrips()">
+          {{ page }}
+        </button>
+      </li>
+      
+      <li class="page-item" [class.disabled]="currentPage === totalPages()">
+        <button
+          class="page-link"
+          (click)="currentPage = currentPage + 1; updatePaginatedTrips()"
+          [disabled]="currentPage === totalPages()">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>
         </div>
       </div>
     </div>
