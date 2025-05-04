@@ -1,5 +1,5 @@
 <div class="overview-container">
-  <h1 class="m-4">{{ currentTrip.name }}</h1>
+  <h1 class="m-4" style="color:#FF7F00 ;">{{ currentTrip.name }}</h1>
   
   <!-- Image Gallery -->
   <div class="row gallery-section gx-2">
@@ -33,27 +33,63 @@
     </div>
   </div>
 
-  <!-- Trip Info -->
   <div class="overview-content mb-5">
     <div class="row gx-4 gy-3">
+     
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-currency-dollar me-2"></i>Price<br>From {{ currentTrip.money | currency }}</p>
+        <div class="trip-info-item p-3">
+          <i class="fas fa-money-bill-wave orange-icon"></i>
+          <div class="info-text">
+            <span class="info-label d-block" style="color: #e07b15;">Price</span>
+            <span class="info-value">From {{ currentTrip.money | currency }}</span>
+          </div>
+        </div>
       </div>
+      
+      
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-calendar me-2"></i>Duration<br>{{ currentTrip.duration }} Days</p>
+        <div class="trip-info-item p-3">
+          <i class="far fa-calendar-alt orange-icon"></i>
+          <div class="info-text">
+            <span class="info-label d-block " style="color: #e07b15;">Duration</span>
+            <span class="info-value">{{ currentTrip.duration }} Days</span>
+          </div>
+        </div>
       </div>
+      
+      
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-person-fill me-2"></i>Max People<br>{{ currentTrip.maxPeople }}</p>
+        <div class="trip-info-item p-3">
+          <i class="fas fa-users orange-icon"></i>
+          <div class="info-text">
+            <span class="info-label d-block" style="color: #e07b15;">Max People</span>
+            <span class="info-value">{{ currentTrip.maxPeople }}</span>
+          </div>
+        </div>
       </div>
+      
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-clock me-2"></i>Start Date<br>{{ currentTrip.startDate | date }}</p>
+        <div class="trip-info-item p-3">
+          <i class="fas fa-calendar-day orange-icon"></i>
+          <div class="info-text">
+            <span class="info-label d-block" style="color: #e07b15;">Start Date</span>
+            <span class="info-value">{{ currentTrip.startDate | date }}</span>
+          </div>
+        </div>
       </div>
+      
+      
       <div class="col-md-2 col-sm-6">
-        <p class="mb-0"><i class="bi bi-clock me-2"></i>End Date<br>{{ currentTrip.endDate | date }}</p>
+        <div class="trip-info-item p-3">
+          <i class="fas fa-calendar-check orange-icon"></i>
+          <div class="info-text">
+            <span class="info-label d-block" style="color: #e07b15;">End Date</span>
+            <span class="info-value">{{ currentTrip.endDate | date }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
   <div class="row gx-4 gy-4">
     <div class="col-md-8">
       <h2 class="mb-5">Overview</h2>
@@ -77,7 +113,7 @@
       </div>
 
       <div class="my-4">
-        <h2 class="text-center fw-bold text-primary mb-3">Tour Plans</h2>
+        <h2 class="text-center fw-bold text-orange mb-3" >Tour Plans</h2>
         <div class="accordion" id="tourPlanAccordion">
           <div *ngFor="let plan of tourPlans; let i = index" class="accordion-item">
             <h2 class="accordion-header" [id]="'planHeading' + i">
@@ -100,120 +136,95 @@
 
     <!-- Booking Form -->
     <div class="col-md-4">
-      <div class="shadow-sm p-4 border rounded">
-        <h3 class="mb-4">Book This Tour</h3>
-        <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
-          <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text"  id="name" formControlName="tourName" class="form-control"   required>
-            @if(bookingForm.controls["tourName"].invalid && bookingForm.controls["tourName"].touched)
-            {
-               @if(bookingForm.controls["tourName"].errors?.['required'])
-               {
-                 <div class="text-danger">Tour name is required.</div>
-               }
-            }
-          </div>
-
-          <!-- Dates Side by Side -->
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="startDate" class="form-label">Start Date</label>
-              <input type="date"  id="startDate" formControlName="startDate" class="form-control" required>
-              @if(bookingForm.controls["startDate"].invalid && bookingForm.controls["startDate"].touched)
-              {
-                 @if(bookingForm.controls["startDate"].errors?.['required'])
-                 {
-                   <div class="text-danger">Start date is required.</div>
-                 }
-              }
-            </div>
-            <div class="col-md-6">
-              <label for="endDate" class="form-label">End Date</label>
-              <input
-                type="date"
-                id="endDate"
-                formControlName="endDate"
-                class="form-control"
-                required
-              >
-
-              @if (bookingForm.controls["endDate"].invalid && bookingForm.controls["endDate"].touched) {
-                @if (bookingForm.controls["endDate"].errors?.['required']) {
-                  <div class="text-danger">End date is required.</div>
-                }
-                @if (bookingForm.controls["endDate"].errors?.['endDateBeforeStart']) {
-                  <div class="text-danger">End date must be after start date.</div>
-                }
-              }
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="groupSize" class="form-label">Group Size</label>
-            <input type="number" id="groupSize" formControlName="groupSize" class="form-control" required min="1">
-            @if(bookingForm.controls["groupSize"].invalid && bookingForm.controls["groupSize"].touched)
-            {
-               @if(bookingForm.controls["groupSize"].errors?.['required'])
-               {
-                 <div class="text-danger">Group size is required.</div>
-               }
-               @if(bookingForm.controls["groupSize"].errors?.['min'])
-               {
-
-                 <div class="text-danger">Invalid Number.</div>
-               }
-
-
-
-            }
-          </div>
-
-          <div class="mb-3">
-            <label for="numberOfDays" class="form-label">Number of Days</label>
-            <input type="number" id="numberOfDays" formControlName="numberOfDays" class="form-control" required min="1">
-             @if(bookingForm.controls["numberOfDays"].invalid && bookingForm.controls["numberOfDays"].touched)
-             {
-                @if(bookingForm.controls["numberOfDays"].errors?.['required'])
-                {
-                  <div class="text-danger">Number of days is required.</div>
-                }
-                @if(bookingForm.controls["numberOfDays"].errors?.['min'])
-                {
-
-                  <div class="text-danger"> Invalid Number.</div>
-                }
-
-
-
-             }
-          </div>
-
-          <div class="mb-3">
-            <label for="price" class="form-label">Price</label>
-            <input type="number" id="price" formControlName="price" class="form-control" required min="1">
-            @if(bookingForm.controls["price"].invalid && bookingForm.controls["price"].touched)
-            {
-               @if(bookingForm.controls["price"].errors?.['required'])
-               {
-                 <div class="text-danger">Price is required.</div>
-               }
-               @if(bookingForm.controls["price"].errors?.['min'])
-               {
-
-                 <div class="text-danger">  Invalid Number.</div>
-               }
-
-
-
-            }
-          </div>
-<div class="mb-3">
-                 <button type="submit" class="btn btn-primary w-100">Submit</button>
-          </div>
-        </form>
-
+  <div class="shadow-sm p-4 border rounded" style="background-color: #FFF5E6; border-color: #FFA500 !important;">
+    <h3 class="mb-4 text-center" style="color: #FF8C00;">Book This Tour</h3>
+    <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="name" class="form-label" style="color: #E67E22;">Name</label>
+        <input type="text" id="name" formControlName="tourName" class="form-control" 
+               style="border-color: #FFA500;" required>
+        @if(bookingForm.controls["tourName"].invalid && bookingForm.controls["tourName"].touched) {
+          @if(bookingForm.controls["tourName"].errors?.['required']) {
+            <div class="text-danger">Tour name is required.</div>
+          }
+        }
       </div>
-    </div>
+
+      <!-- Dates Side by Side -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="startDate" class="form-label" style="color: #E67E22;">Start Date</label>
+          <input type="date" id="startDate" formControlName="startDate" class="form-control" 
+                 style="border-color: #FFA500;" required>
+          @if(bookingForm.controls["startDate"].invalid && bookingForm.controls["startDate"].touched) {
+            @if(bookingForm.controls["startDate"].errors?.['required']) {
+              <div class="text-danger">Start date is required.</div>
+            }
+          }
+        </div>
+        <div class="col-md-6">
+          <label for="endDate" class="form-label" style="color: #E67E22;">End Date</label>
+          <input type="date" id="endDate" formControlName="endDate" class="form-control" 
+                 style="border-color: #FFA500;" required>
+          @if (bookingForm.controls["endDate"].invalid && bookingForm.controls["endDate"].touched) {
+            @if (bookingForm.controls["endDate"].errors?.['required']) {
+              <div class="text-danger">End date is required.</div>
+            }
+            @if (bookingForm.controls["endDate"].errors?.['endDateBeforeStart']) {
+              <div class="text-danger">End date must be after start date.</div>
+            }
+          }
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="groupSize" class="form-label" style="color: #E67E22;">Group Size</label>
+        <input type="number" id="groupSize" formControlName="groupSize" class="form-control" 
+               style="border-color: #FFA500;" required min="1">
+        @if(bookingForm.controls["groupSize"].invalid && bookingForm.controls["groupSize"].touched) {
+          @if(bookingForm.controls["groupSize"].errors?.['required']) {
+            <div class="text-danger">Group size is required.</div>
+          }
+          @if(bookingForm.controls["groupSize"].errors?.['min']) {
+            <div class="text-danger">Invalid Number.</div>
+          }
+        }
+      </div>
+
+      <div class="mb-3">
+        <label for="numberOfDays" class="form-label" style="color: #E67E22;">Number of Days</label>
+        <input type="number" id="numberOfDays" formControlName="numberOfDays" class="form-control" 
+               style="border-color: #FFA500;" required min="1">
+        @if(bookingForm.controls["numberOfDays"].invalid && bookingForm.controls["numberOfDays"].touched) {
+          @if(bookingForm.controls["numberOfDays"].errors?.['required']) {
+            <div class="text-danger">Number of days is required.</div>
+          }
+          @if(bookingForm.controls["numberOfDays"].errors?.['min']) {
+            <div class="text-danger">Invalid Number.</div>
+          }
+        }
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label" style="color: #E67E22;">Price</label>
+        <input type="number" id="price" formControlName="price" class="form-control" 
+               style="border-color: #FFA500;" required min="1">
+        @if(bookingForm.controls["price"].invalid && bookingForm.controls["price"].touched) {
+          @if(bookingForm.controls["price"].errors?.['required']) {
+            <div class="text-danger">Price is required.</div>
+          }
+          @if(bookingForm.controls["price"].errors?.['min']) {
+            <div class="text-danger">Invalid Number.</div>
+          }
+        }
+      </div>
+
+      <div class="mb-3">
+        <button type="submit" class="btn w-100" 
+                style="background-color: #FF8C00; color: white; border: none; font-weight: bold;">
+          Submit
+        </button>
+      </div>
+    </form>
   </div>
 </div>
