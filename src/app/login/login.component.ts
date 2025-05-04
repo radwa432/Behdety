@@ -1,18 +1,18 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth-service.service';
-import { RouterLink } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
 
@@ -24,7 +24,22 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-
+  ngOnInit() {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      try {
+        const decoded: any = jwtDecode(token);
+        const role = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+        if (role === 'Admin') {
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.router.navigate(['/home']);
+        }
+      } catch (error) {
+        localStorage.removeItem('access_token');
+      }
+    }
+  }
 
   onSubmit() {
     if (this.loginForm.invalid) return;
@@ -40,8 +55,20 @@ export class LoginComponent {
     this.authService.login(credentials).subscribe({
       next: (response) => {
         this.isLoading = false;
-       //localStorage.setItem('token', response.token);
-        this.router.navigate(['/home']); // Navigate to dashboard or home
+        localStorage.setItem('access_token', response.token);
+
+        try {
+          const decoded: any = jwtDecode(response.token);
+          const role = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+
+          if (role === 'Admin') {
+            this.router.navigate(['/admin-main/home']);
+          } else {
+            this.router.navigate(['/home']);
+          }
+        } catch (error) {
+          this.errorMessage = 'Invalid token received.';
+        }
       },
       error: (err) => {
         this.isLoading = false;
@@ -49,4 +76,4 @@ export class LoginComponent {
       }
     });
   }
-}
+} 

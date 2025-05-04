@@ -39,12 +39,10 @@ import { AdminGuard } from './admin-guard/admin-guard.component';
 import { SiteDetailsComponent } from './site-details/site-details.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { AdminChatbotComponent } from './pages/admin-chatbot/admin-chatbot.component';
 
 
 
-
-
-/*import { AdminChatbotComponent } from './admin-chatbot/admin-chatbot.component';*/
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -87,8 +85,8 @@ export const routes: Routes = [
   {
     path: 'admin-main',
     loadComponent: () => import('./admin-main/admin-main.component').then(m => m.AdminMainComponent),
-    /*canActivate: [AdminGuard],
-    canActivateChild: [AdminGuard],*/
+    canActivate: [AdminGuard],
+    canActivateChild: [AdminGuard],
     children: [
       { path: 'home', component: AdminHomeComponent },
       { path: 'trips/add', component: AdminAddTripComponent },
@@ -172,7 +170,8 @@ export const routes: Routes = [
         path:'dashboard/Account',
         component: AccountDashboardComponent,
         title: 'Account Dashboard'
-      }
+      },
+      {path: 'dashboard/chat', component: AdminChatbotComponent}
 
     ]
   },
