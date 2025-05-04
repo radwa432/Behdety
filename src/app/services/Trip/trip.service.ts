@@ -23,8 +23,8 @@ export class TripService {
     );
   }
 
-  updateTrip(id: string, formData: FormData): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, formData).pipe(
+  updateTrip(formData: FormData): Observable<any> {
+    return this.http.put(this.apiUrl, formData).pipe(  // No ID in URL
       catchError(this.handleError)
     );
   }
@@ -41,17 +41,29 @@ export class TripService {
     );
   }
 
+  private getAuthToken(): string {
+    // Replace with the actual logic to retrieve the auth token
+    return localStorage.getItem('authToken') || '';
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {
-      errorMessage = `Error: ${error.error.message}`;
+      errorMessage = `Client-side error: ${error.error.message}`;
     } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-      if (error.error && typeof error.error === 'object') {
-        errorMessage += `\nDetails: ${JSON.stringify(error.error)}`;
+      errorMessage = `Server Error (${error.status}): `;
+      if (error.error) {
+        try {
+          const serverError = typeof error.error === 'string' 
+            ? JSON.parse(error.error) 
+            : error.error;
+          errorMessage += serverError.message || error.message;
+        } catch (e) {
+          errorMessage += error.message;
+        }
       }
     }
-    console.error(errorMessage);
+    console.error('Full error:', error);
     return throwError(() => new Error(errorMessage));
   }
 }

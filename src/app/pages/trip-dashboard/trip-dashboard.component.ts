@@ -80,16 +80,16 @@ export class TripDashboardComponent implements OnInit {
       this.showError('Please fill all required fields correctly');
       return;
     }
-
+  
     const formValue = this.tripForm.value;
     const formData = new FormData();
-
+  
     // Generate a unique TripId for new trips
-    if (!this.editingTripId) {
-      const tripId = uuidv4(); // Using UUID for more reliable IDs
-      formData.append('TripId', tripId);
-    }
-
+    const tripId = this.editingTripId || uuidv4();
+    
+    // Append TripId for both create and update
+    formData.append('TripId', tripId);
+  
     // Append all basic fields
     formData.append('Name', formValue.name);
     formData.append('Description', formValue.description || '');
@@ -109,15 +109,19 @@ export class TripDashboardComponent implements OnInit {
     
     formData.append('IncludedItems', JSON.stringify(includedItems));
     formData.append('ExcludedItems', JSON.stringify(excludedItems));
-
-    // Append images if any are selected
-    this.selectedImages.forEach((image) => {
-      formData.append('TripImages', image, image.name);
+  
+    // Append images if any are selected - use 'TripImages' for create and 'Images' for update
+    const imageFieldName = this.editingTripId ? 'Images' : 'TripImages';
+    this.selectedImages.forEach((image, index) => {
+      formData.append(imageFieldName, image, image.name || `image-${index}`);
     });
-
+  
+    // Debug: Log FormData contents
+    this.logFormData(formData);
+  
     if (this.editingTripId) {
-      // Update existing trip
-      this.tripService.updateTrip(this.editingTripId, formData).subscribe({
+      // Update existing trip - send to base endpoint without ID in URL
+      this.tripService.updateTrip(formData).subscribe({
         next: () => {
           this.showSuccess('Trip updated successfully');
           this.loadTrips();
@@ -141,6 +145,14 @@ export class TripDashboardComponent implements OnInit {
       });
     }
   }
+  
+  private logFormData(formData: FormData): void {
+    console.log('--- FormData Contents ---');
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
+    console.log('-------------------------');
+  }
 
   editTrip(trip: TripGetDto): void {
     this.editingTripId = trip.tripId;
@@ -153,9 +165,12 @@ export class TripDashboardComponent implements OnInit {
       money: trip.money,
       availablePeople: trip.availablePeople,
       maxPeople: trip.maxPeople,
-      includedItems: trip.includedItems?.join('\n'),  
-      excludedItems: trip.excludedItems?.join('\n')   
+      includedItems: trip.includedItems?.join('\n') || '',  
+      excludedItems: trip.excludedItems?.join('\n') || ''   
     });
+    
+    // Scroll to form for better UX
+    document.getElementById('trip-form')?.scrollIntoView({ behavior: 'smooth' });
   }
 
   deleteTrip(id: string): void {
@@ -252,6 +267,8 @@ export class TripDashboardComponent implements OnInit {
   totalPages(): number {
     return Math.ceil(this.filteredTrips.length / this.itemsPerPage);
   }
+
+ 
 
   getPaginationPages(): number[] {
     const pages = [];
