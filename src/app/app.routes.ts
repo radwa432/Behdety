@@ -34,13 +34,19 @@ import { AccountDashboardComponent } from './pages/account-dashboard/account-das
 import { BookingManagementComponent } from './pages/booking-dashboard/booking-dashboard.component';
 import { BookingFormComponent } from './pages/bookingform-dashboard/bookingform-dashboard.component';
 import { DashboardComponent } from './pages/postdashboard/postdashboard.component';
+
+import { AdminGuard } from './admin-guard/admin-guard.component';
 import { SiteDetailsComponent } from './site-details/site-details.component';
-
-
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { AdminChatbotComponent } from './pages/admin-chatbot/admin-chatbot.component';
+
+
+
+
+
 //import { AdminChatbotComponent } from './pages/admin-chatbot/admin-chatbot.component';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -78,19 +84,12 @@ export const routes: Routes = [
 
 
 
-
-
-
-  //dashboard routes
-
-
-
-
-
   //dashboard routes
   {
     path: 'admin-main',
     loadComponent: () => import('./admin-main/admin-main.component').then(m => m.AdminMainComponent),
+    canActivate: [AdminGuard],
+    canActivateChild: [AdminGuard],
     children: [
       { path: 'home', component: AdminHomeComponent },
       { path: 'trips/add', component: AdminAddTripComponent },
@@ -175,7 +174,8 @@ export const routes: Routes = [
         path:'dashboard/Account',
         component: AccountDashboardComponent,
         title: 'Account Dashboard'
-      }
+      },
+      {path: 'dashboard/chat', component: AdminChatbotComponent}
 
     ]
   },
@@ -219,7 +219,9 @@ export const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
 
- 
+
+  {path: 'dashboard/chat', component: AdminHomeComponent}
+
      
       
 ];
@@ -228,8 +230,7 @@ export const routes: Routes = [
     
   
 
- 
- 
+
   
  
   

@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 import { tap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtService } from '../service/jwt.service';
-
+import { Router } from '@angular/router';
 interface User {
   email: string;
   firstName: string;
@@ -56,7 +56,7 @@ export class AuthService {
 
   private jwtHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient, private jwtService: JwtService) {
+  constructor(private http: HttpClient, private jwtService: JwtService,private router: Router) {
     this.initializeUser();
      // Check initial auth state (e.g., from localStorage)
      this.isAuthenticated = !!localStorage.getItem('authToken');
@@ -95,8 +95,11 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    this.currentUserSubject.next(null);
+    /*localStorage.removeItem('token');
+    this.currentUserSubject.next(null);*/
+    localStorage.removeItem('access_token');
+    this.router.navigate(['/login']);
+    this.currentUserSubject.next(null)
   }
 
 

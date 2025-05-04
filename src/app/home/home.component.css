@@ -166,6 +166,8 @@ img:hover {
 
 }
 
+/* Responsive Design */
+
 #sitesScroll {
   -ms-overflow-style: none; 
   scrollbar-width: none;    
@@ -275,4 +277,4 @@ img:hover {
 
 
 
-  
+
