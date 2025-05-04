@@ -44,6 +44,9 @@ import { AdminChatbotComponent } from './pages/admin-chatbot/admin-chatbot.compo
 
 
 
+
+//import { AdminChatbotComponent } from './pages/admin-chatbot/admin-chatbot.component';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -101,6 +104,7 @@ export const routes: Routes = [
           { path: 'edit/:id', component: BookingFormComponent }
         ]
       },
+      {path: 'dashboard/chat', component: AdminChatbotComponent},
       {
         path: 'dashboard/posts',
         component: DashboardComponent,
@@ -214,7 +218,10 @@ export const routes: Routes = [
 
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
+
+
   {path: 'dashboard/chat', component: AdminHomeComponent}
+
      
       
 ];

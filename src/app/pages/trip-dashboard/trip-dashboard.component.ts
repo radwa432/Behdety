@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-
 import { Router } from '@angular/router';
 import { TripGetDto } from '../../models/trip.model';
 import { TripService } from '../../services/Trip/trip.service';
 import { CommonModule } from '@angular/common';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-trip-dashboard',
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './trip-dashboard.component.html',
   styleUrls: ['./trip-dashboard.component.css']
 })
@@ -43,25 +44,6 @@ export class TripDashboardComponent implements OnInit {
       excludedItems: ['']
     });
   }
-  getPaginationPages(): number[] {
-    const pages = [];
-    const total = this.totalPages();
-    
-    // Always show current page
-    pages.push(this.currentPage);
-    
-    // Show previous page if exists
-    if (this.currentPage > 1) {
-      pages.unshift(this.currentPage - 1);
-    }
-    
-    // Show next page if exists
-    if (this.currentPage < total) {
-      pages.push(this.currentPage + 1);
-    }
-    
-    return pages;
-  }
 
   ngOnInit(): void {
     this.loadTrips();
@@ -92,63 +74,71 @@ export class TripDashboardComponent implements OnInit {
     });
   }
 
-  async submitForm(): Promise<void> {
-    try {
-      if (this.tripForm.invalid) {
-        this.markFormGroupTouched(this.tripForm);
-        throw new Error('Please fill all required fields correctly');
-      }
-  
-      const formValue = this.tripForm.value;
-      const formData = new FormData();
-  
-      // Append all basic fields
-      formData.append('TripId', this.editingTripId || this.generateId());
-      formData.append('Name', formValue.name);
-      formData.append('Description', formValue.description || '');
-      formData.append('StartDate', new Date(formValue.startDate).toISOString());
-      formData.append('EndDate', new Date(formValue.endDate).toISOString());
-      formData.append('Duration', this.calculateDuration(formValue.startDate, formValue.endDate).toString());
-      formData.append('Money', formValue.money.toString());
-      formData.append('AvailablePeople', formValue.availablePeople.toString());
-      formData.append('MaxPeople', formValue.maxPeople.toString());
-      
-      // Process included/excluded items with newlines
-      formData.append('IncludedItems', JSON.stringify(
-        formValue.includedItems?.split('\n').map((i: string) => i.trim()).filter(Boolean) || []
-      ));
-      formData.append('ExcludedItems', JSON.stringify(
-        formValue.excludedItems?.split('\n').map((i: string) => i.trim()).filter(Boolean) || []
-      ));
-  
-      // Append images
-      if (this.selectedImages?.length) {
-        this.selectedImages.forEach((image) => {
-          formData.append('Images', image, image.name);
-        });
-      }
-  
-      if (this.editingTripId) {
-        // Update existing trip
-        await this.tripService.updateTrip(this.editingTripId, formData).toPromise();
-        this.showSuccess('Trip updated successfully');
-      } else {
-        // Create new trip
-        await this.tripService.createTrip(formData).toPromise();
-        this.showSuccess('Trip created successfully');
-      }
-  
-      this.loadTrips();
-      this.resetForm();
-      
-    } catch (error) {
-      console.error('Submission error:', error);
-      this.showError(
-        (error as any)?.error?.message ||
-        (error as any)?.error ||
-        (error as any)?.message ||
-        'Failed to save trip. Please check your data.'
-      );
+  submitForm(): void {
+    if (this.tripForm.invalid) {
+      this.markFormGroupTouched(this.tripForm);
+      this.showError('Please fill all required fields correctly');
+      return;
+    }
+
+    const formValue = this.tripForm.value;
+    const formData = new FormData();
+
+    // Generate a unique TripId for new trips
+    if (!this.editingTripId) {
+      const tripId = uuidv4(); // Using UUID for more reliable IDs
+      formData.append('TripId', tripId);
+    }
+
+    // Append all basic fields
+    formData.append('Name', formValue.name);
+    formData.append('Description', formValue.description || '');
+    formData.append('StartDate', new Date(formValue.startDate).toISOString());
+    formData.append('EndDate', new Date(formValue.endDate).toISOString());
+    formData.append('Money', formValue.money.toString());
+    formData.append('AvailablePeople', formValue.availablePeople.toString());
+    formData.append('MaxPeople', formValue.maxPeople.toString());
+    
+    // Process included/excluded items
+    const includedItems = formValue.includedItems?.split('\n')
+      .map((i: string) => i.trim())
+      .filter(Boolean) || [];
+    const excludedItems = formValue.excludedItems?.split('\n')
+      .map((i: string) => i.trim())
+      .filter(Boolean) || [];
+    
+    formData.append('IncludedItems', JSON.stringify(includedItems));
+    formData.append('ExcludedItems', JSON.stringify(excludedItems));
+
+    // Append images if any are selected
+    this.selectedImages.forEach((image) => {
+      formData.append('TripImages', image, image.name);
+    });
+
+    if (this.editingTripId) {
+      // Update existing trip
+      this.tripService.updateTrip(this.editingTripId, formData).subscribe({
+        next: () => {
+          this.showSuccess('Trip updated successfully');
+          this.loadTrips();
+          this.resetForm();
+        },
+        error: (error) => {
+          this.handleSubmissionError(error);
+        }
+      });
+    } else {
+      // Create new trip
+      this.tripService.createTrip(formData).subscribe({
+        next: () => {
+          this.showSuccess('Trip created successfully');
+          this.loadTrips();
+          this.resetForm();
+        },
+        error: (error) => {
+          this.handleSubmissionError(error);
+        }
+      });
     }
   }
 
@@ -182,19 +172,8 @@ export class TripDashboardComponent implements OnInit {
     }
   }
 
-  // Helper methods
-  private generateId(): string {
-    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-  }
-
-  private calculateDuration(startDate: string, endDate: string): number {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    return Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
-  }
-
   private formatDateForInput(date: Date): string {
-    return new Date(date).toISOString().split('T')[0];
+    return date.toISOString().split('T')[0];
   }
 
   private markFormGroupTouched(formGroup: FormGroup) {
@@ -206,7 +185,7 @@ export class TripDashboardComponent implements OnInit {
     });
   }
 
-   resetForm(): void {
+  resetForm(): void {
     this.tripForm.reset({
       name: '',
       description: '',
@@ -229,8 +208,25 @@ export class TripDashboardComponent implements OnInit {
   }
 
   private showSuccess(message: string): void {
-    // You can implement a toast notification here
-    console.log(message);
+    alert(message);
+  }
+
+  private handleSubmissionError(error: any): void {
+    let errorMessage = 'Failed to save trip. Please check your data.';
+    
+    if (error.error) {
+      if (typeof error.error === 'string') {
+        errorMessage = error.error;
+      } else if (error.error.errors) {
+        const errorList = Object.values(error.error.errors).flat();
+        errorMessage = errorList.join('\n');
+      } else if (error.error.message) {
+        errorMessage = error.error.message;
+      }
+    }
+    
+    this.showError(errorMessage);
+    console.error('Submission error:', error);
   }
 
   // Pagination and search methods
@@ -241,7 +237,7 @@ export class TripDashboardComponent implements OnInit {
       const term = this.searchTerm.toLowerCase();
       this.filteredTrips = this.trips.filter(trip =>
         trip.name.toLowerCase().includes(term) ||
-        trip.description?.toLowerCase().includes(term)
+        (trip.description && trip.description.toLowerCase().includes(term))
       );
     }
     this.currentPage = 1;
@@ -255,5 +251,22 @@ export class TripDashboardComponent implements OnInit {
 
   totalPages(): number {
     return Math.ceil(this.filteredTrips.length / this.itemsPerPage);
+  }
+
+  getPaginationPages(): number[] {
+    const pages = [];
+    const total = this.totalPages();
+    
+    pages.push(this.currentPage);
+    
+    if (this.currentPage > 1) {
+      pages.unshift(this.currentPage - 1);
+    }
+    
+    if (this.currentPage < total) {
+      pages.push(this.currentPage + 1);
+    }
+    
+    return pages;
   }
 }

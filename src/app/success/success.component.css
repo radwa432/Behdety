@@ -20,3 +20,71 @@
 .home-link:hover {
   text-decoration: underline;
 }
+/* Orange Success Theme */
+.success-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(255, 152, 0, 0.15);
+  background-color: #FFF8F1; /* Very light orange background */
+  border: 1px solid #FFCC80; /* Light orange border */
+}
+
+.success-container h2 {
+  color: #E65100; /* Dark orange */
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.success-container h2:after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, #FF6D00, #FFAB40);
+  border-radius: 3px;
+}
+
+.success-container p {
+  color: #5D4037; /* Dark brown-orange */
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.home-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.75rem;
+  background-color: #FF6D00; /* Vibrant orange */
+  color: white !important;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(255, 109, 0, 0.2);
+}
+
+.home-link:hover {
+  background-color: #E65100; /* Darker orange */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 109, 0, 0.3);
+  text-decoration: none;
+}
+
+/* Session ID styling */
+.success-container p:last-child {
+  color: #8D6E63; /* Medium brown-orange */
+  font-family: monospace;
+  background-color: #FFE0B2; /* Pale orange */
+  padding: 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 1rem;
+}
