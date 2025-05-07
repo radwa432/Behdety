@@ -1,3 +1,4 @@
+import { BookDetailDto } from './../models/book';
 import { BookService } from './../services/book.service';
 
 import { CommonModule, CurrencyPipe } from '@angular/common';
@@ -81,7 +82,7 @@ export class OverviewComponent implements OnInit, AfterViewInit {
 
   initializeTripData(): void {
     this.tourName = this.currentTrip.name;
-    this.bookingForm.patchValue({ tourName: this.tourName, price: this.currentTrip.money });
+    this.bookingForm.patchValue({ tourName: this.tourName, price: (this.currentTrip.money) });
     
     this.images = this.currentTrip.tripImages?.map(img => ({
       main: img.imageUrl,
